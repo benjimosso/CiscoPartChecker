@@ -38,13 +38,13 @@ export default function SearchBar({ ciscoData, CiscoId, setCiscoId, fetchDataFor
             onChange={(e) => handleSubmit(e)}
             type="search"
             placeholder="Type here"
-            className="w-full p-4 rounded-full bg-slate-800 text-white"
+            className="w-full p-4 rounded-full bg-slate-600 text-white"
           />
         </div>
 
         {activeSearch.length > 0 && (
           <div
-            className="absolute top-16 p-4 bg-slate-800 text-white w-full rounded-xl left-1/2
+            className="absolute top-16 p-4 bg-slate-600 text-white w-full rounded-xl left-1/2
       -translate-x-1/2 flex flex-col gap-2"
           >
             {activeSearch.map((s, i) => (
