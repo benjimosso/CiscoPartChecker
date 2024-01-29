@@ -2,13 +2,13 @@ import Link from "next/link";
 
 export default function SingleItem({ single }) {
   return (
-    <>
+    <div className="">
       {single.CiscoPN && (
-        <div className="flex ">
+        <div className="flex justify-center ">
           <p className=" font-bold mt-16 text-2xl">{single.CiscoPN}</p>
         </div>
       )}
-      <div className="mt-1 p-6 grid grid-cols-2 gap-5 border-4 border-indigo-200">
+      <div className="mt-1 p-6 grid grid-cols-2 gap-5 max-w-[900px] border-4 border-indigo-200">
         {single.Description && (
           <div className="flex">
             <h1 className="font-bold">Description: </h1>
@@ -105,6 +105,6 @@ export default function SingleItem({ single }) {
           </div>
         )}
       </div>
-    </>
+    </div>
   );
 }

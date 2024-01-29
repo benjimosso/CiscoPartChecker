@@ -1,4 +1,5 @@
 "use client";
+import NavBar from "./components/NavBar";
 import SearchBar from "./components/SearchBar";
 import SingleItem from "./components/SingleItem";
 import { useState, useEffect } from "react";
@@ -27,7 +28,9 @@ export default function Home() {
   };
 
   return (
-    <main className="flex min-h-screen flex-col items-center p-24">
+    <main className="grid grid-cols-9 min-h-screen">
+      <NavBar/>
+      <div className="col-span-8">
       {data && (
         <SearchBar
           ciscoData={data}
@@ -40,6 +43,7 @@ export default function Home() {
       {ciscoSingle !== null && (
         <SingleItem single={ciscoSingle}/>
       )}
+      </div>
     </main>
   );
 }

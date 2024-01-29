@@ -2,10 +2,17 @@
 import { cData } from "@/_data/data";
 import { useState, useEffect } from "react";
 import SingleItem from "./SingleItem";
+import Image from "next/image";
+import logo from "../assets/images/logodhd.webp";
 
-export default function SearchBar({ ciscoData, CiscoId, setCiscoId, fetchDataForId }) {
+export default function SearchBar({
+  ciscoData,
+  CiscoId,
+  setCiscoId,
+  fetchDataForId,
+}) {
   const [activeSearch, setActiveSearch] = useState([]);
-  
+
   const handleSubmit = (e) => {
     if (e.target.value === "") {
       setActiveSearch([]);
@@ -32,7 +39,10 @@ export default function SearchBar({ ciscoData, CiscoId, setCiscoId, fetchDataFor
 
   return (
     <>
-      <form className="w-[500px] relative">
+      <div className="">
+        <Image src={logo} alt="dhd logo" width={200} height={200} />
+      </div>
+      <form className="w-[500px] relative pt-8 ">
         <div className="relative">
           <input
             onChange={(e) => handleSubmit(e)}
