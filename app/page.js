@@ -30,7 +30,7 @@ export default function Home() {
   return (
     <main className="grid grid-cols-9 min-h-screen">
       <NavBar/>
-      <div className="col-span-8">
+      <div className="col-span-8 items-end">
       {data && (
         <SearchBar
           ciscoData={data}

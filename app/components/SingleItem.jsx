@@ -1,14 +1,15 @@
 import Link from "next/link";
 
 export default function SingleItem({ single }) {
+  
   return (
-    <div className="">
+    <div className="flex flex-col items-center">
       {single.CiscoPN && (
-        <div className="flex justify-center ">
+        <div className=" ">
           <p className=" font-bold mt-16 text-2xl">{single.CiscoPN}</p>
         </div>
       )}
-      <div className="mt-1 p-6 grid grid-cols-2 gap-5 max-w-[900px] border-4 border-indigo-200">
+      <div className="mt-1 p-6 grid grid-cols-2 gap-10 max-w-[900px] border-4 border-indigo-200">
         {single.Description && (
           <div className="flex">
             <h1 className="font-bold">Description: </h1>

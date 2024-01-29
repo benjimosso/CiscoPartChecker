@@ -38,23 +38,22 @@ export default function SearchBar({
   };
 
   return (
-    <>
-      <div className="">
-        <Image src={logo} alt="dhd logo" width={200} height={200} />
-      </div>
+    <div className="flex flex-col items-center">
+        <Image className="pt-7 pb-0" src={logo} alt="dhd logo" width={100} height={100} />
+
       <form className="w-[500px] relative pt-8 ">
         <div className="relative">
           <input
             onChange={(e) => handleSubmit(e)}
             type="search"
             placeholder="Type here"
-            className="w-full p-4 rounded-full bg-slate-600 text-white"
+            className="w-full p-4 rounded-full bg-slate-200 text-black "
           />
         </div>
 
         {activeSearch.length > 0 && (
           <div
-            className="absolute top-16 p-4 bg-slate-600 text-white w-full rounded-xl left-1/2
+            className="absolute top-24 p-4 bg-slate-300 text-black w-full rounded-xl left-1/2
       -translate-x-1/2 flex flex-col gap-2"
           >
             {activeSearch.map((s, i) => (
@@ -69,6 +68,6 @@ export default function SearchBar({
           </div>
         )}
       </form>
-    </>
+    </div>
   );
 }
