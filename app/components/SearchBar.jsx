@@ -1,7 +1,5 @@
 "use client";
-import { cData } from "@/_data/data";
 import { useState, useEffect } from "react";
-import SingleItem from "./SingleItem";
 import Image from "next/image";
 import logo from "../assets/images/logodhd.webp";
 
@@ -12,8 +10,10 @@ export default function SearchBar({
   fetchDataForId,
 }) {
   const [activeSearch, setActiveSearch] = useState([]);
+  const [placeholder, setPlaceholder] = useState("");
 
   const handleSubmit = (e) => {
+    setPlaceholder(e.target.value);
     if (e.target.value === "") {
       setActiveSearch([]);
       return false;
@@ -22,7 +22,7 @@ export default function SearchBar({
       ciscoData
         .map((c) => c.CiscoPN)
         .filter((c) => c.includes(e.target.value))
-        .slice(0, 10)
+        .slice(0, 8)
     );
   };
 
@@ -33,13 +33,20 @@ export default function SearchBar({
         setCiscoId(c.id);
         setActiveSearch([]);
         fetchDataForId(c.id);
+        setPlaceholder(c.CiscoPN);
       }
     });
   };
 
   return (
     <div className="flex flex-col items-center">
-        <Image className="pt-7 pb-0" src={logo} alt="dhd logo" width={100} height={100} />
+      <Image
+        className="pt-7 pb-0"
+        src={logo}
+        alt="dhd logo"
+        width={100}
+        height={100}
+      />
 
       <form className="w-[500px] relative pt-8 ">
         <div className="relative">
@@ -47,15 +54,13 @@ export default function SearchBar({
             onChange={(e) => handleSubmit(e)}
             type="search"
             placeholder="Type here"
-            className="w-full p-4 rounded-full bg-slate-200 text-black "
+            className="w-full p-4 rounded-full bg-slate-300 text-black border border-slate-300 focus:outline-none focus:ring-2 focus:ring-indigo-400 focus:border-transparent"
+            value={placeholder}
           />
         </div>
 
         {activeSearch.length > 0 && (
-          <div
-            className="absolute top-24 p-4 bg-slate-300 text-black w-full rounded-xl left-1/2
-      -translate-x-1/2 flex flex-col gap-2"
-          >
+          <div className="absolute top-24 p-4 bg-slate-300 text-black w-full rounded-xl left-1/2-translate-x-1/2 flex flex-col gap-2">
             {activeSearch.map((s, i) => (
               <button
                 onClick={(e) => handleClick(e, s)}
