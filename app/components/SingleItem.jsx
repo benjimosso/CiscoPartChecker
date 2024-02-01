@@ -1,7 +1,6 @@
 import Link from "next/link";
 
 export default function SingleItem({ single }) {
-  
   return (
     <div className="flex flex-col items-center">
       {single.CiscoPN && (
