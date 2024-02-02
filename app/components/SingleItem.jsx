@@ -1,4 +1,5 @@
 import Link from "next/link";
+import Images from "./Images";
 
 export default function SingleItem({ single }) {
   return (
@@ -8,6 +9,9 @@ export default function SingleItem({ single }) {
           <p className=" font-bold mt-16 text-2xl">{single.CiscoPN}</p>
         </div>
       )}
+      <div>
+      {single.images && <Images images={single.images} />}
+
       <div className="mt-1 p-6 grid grid-cols-2 gap-10 max-w-[900px] border-4 border-indigo-200">
         {single.Description && (
           <div className="flex">
@@ -104,6 +108,7 @@ export default function SingleItem({ single }) {
             <p className="justify-end pl-2">{single.Weight} LBS</p>
           </div>
         )}
+      </div>
       </div>
     </div>
   );

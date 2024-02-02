@@ -7456,7 +7456,12 @@
       "DIMS": "17.5 x 19.2 x 1.75",
       "Weight": 17.6,
       "id": 670,
-      "Other": "AC OR DC option"
+      "Other": "AC OR DC option",
+      "images": [
+        "https://www.it4trade.com/out/pictures/master/product/1/ws_c3850_12x48u_s_1(2).jpeg",
+        "https://res.cloudinary.com/dmwxtja1g/image/upload/c_lpad,dpr_1.0,f_auto,q_80/v1/media/catalog/product/c/i/cisco_ws-c3850-12x48u-e_36x_1gb_12x_10gb_rj-45_rear_zoom_1_2.jpg?_i=AB",
+        "https://www.tempestns.com/wp-content/uploads/2020/05/cisco-C3850-12X48u.jpg"
+      ]
     },
     {
       "CiscoPN": "WS-C385012X48U-S-WS",
