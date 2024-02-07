@@ -21,7 +21,7 @@ export default function SearchBar({
     setActiveSearch(
       ciscoData
         .map((c) => c.CiscoPN)
-        .filter((c) => c.includes(e.target.value))
+        .filter((c) => c.includes(e.target.value.toUpperCase()))
         .slice(0, 8)
     );
   };

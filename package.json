@@ -4,6 +4,7 @@
   "private": true,
   "scripts": {
     "dev": "next dev",
+    "local": "concurrently \"npm run dev\" \"json-server -p 4000 -w --host 192.168.20.89 _data/db.json\"",
     "build": "next build",
     "start": "next start",
     "lint": "next lint"
