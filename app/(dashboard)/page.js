@@ -3,6 +3,8 @@ import SearchBar from "../components/SearchBar";
 import SingleItem from "../components/SingleItem";
 import { useState, useEffect } from "react";
 
+
+
 export default function Home() {
   const [CiscoId, setCiscoId] = useState(null);
   const [data, setData] = useState([]);
@@ -26,7 +28,7 @@ export default function Home() {
   };
 
   return (
-    <main className="">
+    <main className="h-full w-full">
       {data && (
         <SearchBar
           ciscoData={data}
@@ -37,6 +39,7 @@ export default function Home() {
       )}
 
       {ciscoSingle !== null && <SingleItem single={ciscoSingle} />}
+      
     </main>
   );
 }
