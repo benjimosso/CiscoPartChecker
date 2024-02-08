@@ -1,7 +1,7 @@
 "use client";
 import { useState, useEffect } from "react";
 import Image from "next/image";
-import logo from "../assets/images/logodhd.webp";
+import logo from "../assets/images/logo.png";
 
 export default function SearchBar({
   ciscoData,
@@ -39,7 +39,7 @@ export default function SearchBar({
   };
 
   return (
-    <div className="flex flex-col items-center ">
+    <div className="flex flex-col items-center">
       <Image
         className="pt-7 pb-0"
         src={logo}
@@ -60,7 +60,7 @@ export default function SearchBar({
         </div>
 
         {activeSearch.length > 0 && (
-          <div className="absolute top-24 p-4 bg-slate-300 text-black w-full rounded-xl left-1/2-translate-x-1/2 flex flex-col gap-2">
+          <div className="absolute top-24 p-4 bg-slate-300 text-black w-full rounded-xl left-1/2-translate-x-1/2 flex flex-col gap-2 overflow-scroll">
             {activeSearch.map((s, i) => (
               <button
                 onClick={(e) => handleClick(e, s)}

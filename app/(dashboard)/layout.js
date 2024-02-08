@@ -4,7 +4,7 @@ import Footer from "../components/Footer";
 
 export default function DashboardLayout({ children }) {
   return (
-    <div className="">
+    <div className="flex flex-col h-screen">
       <Navbar />
       {children}
       <Footer />
