@@ -39,7 +39,7 @@ export default function SearchBar({
   };
 
   return (
-    <div className="flex flex-col items-center">
+    <div className="flex flex-col items-center ">
       <Image
         className="pt-7 pb-0"
         src={logo}

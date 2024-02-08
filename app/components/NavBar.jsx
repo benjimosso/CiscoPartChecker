@@ -8,18 +8,18 @@ export default function NavBar() {
       <ul className="flex justify-between items-center">
         <li>
           <Link href="/">
-            <a className="flex items-center">
+            <div className="flex items-center">
               <IoMdHome />
               <span className="pl-2">Home</span>
-            </a>
+            </div>
           </Link>
         </li>
         <li>
           <Link href="/about">
-            <a className="flex items-center">
+            <div className="flex items-center">
               <IoMdInformationCircle />
               <span className="pl-2">About</span>
-            </a>
+            </div>
           </Link>
         </li>
       </ul>

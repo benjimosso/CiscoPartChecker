@@ -3,7 +3,7 @@ import Images from "./Images";
 
 export default function SingleItem({ single }) {
   return (
-    <div className="flex flex-col items-center">
+    <div className="flex flex-col items-center pb-8">
       {single.CiscoPN && (
         <div className=" ">
           <p className=" font-bold mt-16 text-2xl">{single.CiscoPN}</p>

@@ -28,7 +28,7 @@ export default function Home() {
   };
 
   return (
-    <main className="h-full w-full">
+    <main className="">
       {data && (
         <SearchBar
           ciscoData={data}
