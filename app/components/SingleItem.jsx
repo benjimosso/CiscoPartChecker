@@ -2,6 +2,11 @@ import Link from "next/link";
 import Images from "./Images";
 
 export default function SingleItem({ single }) {
+
+  // Object.keys(single).map((item) => {
+  //   console.log(item, single[item])
+  // }) OPTION TO RENDER THINGS IN A LOOP
+
   return (
     <div className="flex flex-col items-center pb-8">
       {single.CiscoPN && (

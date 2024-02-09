@@ -49,7 +49,7 @@ export default function SearchBar({
       />
 
       <form className="w-[500px] relative pt-8 ">
-        <div className="relative">
+        <div className="">
           <input
             onChange={(e) => handleSubmit(e)}
             type="search"
@@ -60,7 +60,7 @@ export default function SearchBar({
         </div>
 
         {activeSearch.length > 0 && (
-          <div className="absolute top-24 p-4 bg-slate-300 text-black w-full rounded-xl left-1/2-translate-x-1/2 flex flex-col gap-2 overflow-scroll">
+          <div className=" mt-1 p-4 bg-slate-300 text-black w-full rounded-xl left-1/2-translate-x-1/2 flex flex-col gap-2 overflow-auto">
             {activeSearch.map((s, i) => (
               <button
                 onClick={(e) => handleClick(e, s)}
