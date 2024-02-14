@@ -21,8 +21,8 @@ export default function Home() {
 
   const fetchDataForId = async (id) => {
     console.log("Fetching data for CiscoID: ", id);
-    // const response = await fetch(`http://localhost:4000/Cisco/${id}`);
-    const response = await fetch(`http://192.168.20.89:4000/Cisco/${id}`);
+    const response = await fetch(`http://localhost:4000/Cisco/${id}`);
+    // const response = await fetch(`http://192.168.20.89:4000/Cisco/${id}`);
     const single = await response.json();
     setCiscoSingle(single);
   };
