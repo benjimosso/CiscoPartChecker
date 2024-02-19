@@ -30,9 +30,9 @@ export default function SearchBar({
     e.preventDefault();
     ciscoData.forEach((c) => {
       if (c.CiscoPN === s) {
-        setCiscoId(c.id);
+        setCiscoId(c.ID);
         setActiveSearch([]);
-        fetchDataForId(c.id);
+        fetchDataForId(c.ID);
         setPlaceholder(c.CiscoPN);
       }
     });
