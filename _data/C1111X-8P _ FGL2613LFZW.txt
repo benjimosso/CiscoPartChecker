@@ -1,0 +1,768 @@
+
+Router#ter len 0
+Router#admin/admin   
+% Bad IP address or host name% Unknown command or computer name, or unable to find computer address
+Router#
+Router#
+Router#sh ver  
+Cisco IOS XE Software, Version 17.06.05
+Cisco IOS Software [Bengaluru], ISR Software (ARMV8EL_LINUX_IOSD-UNIVERSALK9-M), Version 17.6.5, RELEASE SOFTWARE (fc2)
+Technical Support: http://www.cisco.com/techsupport
+Copyright (c) 1986-2023 by Cisco Systems, Inc.
+Compiled Wed 25-Jan-23 15:15 by mcpre
+
+
+Cisco IOS-XE software, Copyright (c) 2005-2023 by cisco Systems, Inc.
+All rights reserved.  Certain components of Cisco IOS-XE software are
+licensed under the GNU General Public License ("GPL") Version 2.0.  The
+software code licensed under GPL Version 2.0 is free software that comes
+with ABSOLUTELY NO WARRANTY.  You can redistribute and/or modify such
+GPL code under the terms of GPL Version 2.0.  For more details, see the
+documentation or "License Notice" file accompanying the IOS-XE software,
+or the applicable URL provided on the flyer accompanying the IOS-XE
+software.
+
+
+ROM: (c)
+
+Router uptime is 24 minutes
+Uptime for this control processor is 25 minutes
+System returned to ROM by Reload Command
+System image file is "bootflash:c1100-universalk9.17.06.05.SPA.bin"
+Last reload reason: Reload Command
+
+
+
+This product contains cryptographic features and is subject to United
+States and local country laws governing import, export, transfer and
+use. Delivery of Cisco cryptographic products does not imply
+third-party authority to import, export, distribute or use encryption.
+Importers, exporters, distributors and users are responsible for
+compliance with U.S. and local country laws. By using this product you
+agree to comply with applicable laws and regulations. If you are unable
+to comply with U.S. and local laws, return this product immediately.
+
+A summary of U.S. laws governing Cisco cryptographic products may be found at:
+http://www.cisco.com/wwl/export/crypto/tool/stqrg.html
+
+If you require further assistance please contact us by sending email to
+export@cisco.com.
+
+
+
+Suite License Information for Module:'esg' 
+
+--------------------------------------------------------------------------------
+Suite                 Suite Current         Type           Suite Next reboot     
+--------------------------------------------------------------------------------
+FoundationSuiteK9     None                  Smart License  None                  
+securityk9
+appxk9
+
+
+Technology Package License Information: 
+
+-----------------------------------------------------------------
+Technology    Technology-package           Technology-package
+              Current       Type           Next reboot  
+------------------------------------------------------------------
+appxk9           None             Smart License    None
+uck9             None             Smart License    None
+securityk9       None             Smart License    None
+ipbase           ipbasek9         Smart License    ipbasek9
+
+The current throughput level is unthrottled 
+
+
+Smart Licensing Status: Registration Not Applicable/Not Applicable
+
+cisco C1111X-8P (1RU) processor with 1971301K/6147K bytes of memory.
+Processor board ID FGL2613LFZW
+Router operating mode: Autonomous
+1 Virtual Ethernet interface
+10 Gigabit Ethernet interfaces
+32768K bytes of non-volatile configuration memory.
+8388608K bytes of physical memory.
+6819839K bytes of flash memory at bootflash:.
+7735266K bytes of USB flash at usb0:.
+
+Configuration register is 0x2102
+
+Router#   
+Router#  sh start  
+startup-config is not present
+Router#   
+Router#  sh inv   
+
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+INFO: Please use "show license UDI" to get serial number for licensing.
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+NAME: "Chassis", DESCR: "Cisco C1111X-8P Chassis"
+PID: C1111X-8P         , VID: V01  , SN: FGL2613LFZW
+
+NAME: "Power Supply Module 0", DESCR: "External Power Supply Module"
+PID: PWR-12V           , VID: V01  , SN:            
+
+NAME: "module 0", DESCR: "Cisco C1111X-8P Built-In NIM controller"
+PID: C1111X-8P         , VID:      , SN:            
+
+NAME: "NIM subslot 0/0", DESCR: "Front Panel 2 port Gigabitethernet Module"
+PID: C1111X-2x1GE      , VID: V01  , SN:            
+
+NAME: "NIM subslot 0/1", DESCR: "C1111X-ES-8"
+PID: C1111X-ES-8       , VID: V01  , SN:            
+
+NAME: "module R0", DESCR: "Cisco C1111X-8P Route Processor"
+PID: C1111X-8P         , VID: V01  , SN: FOC26110J0N
+
+NAME: "module F0", DESCR: "Cisco C1111X-8P Forwarding Processor"
+PID: C1111X-8P         , VID:      , SN:            
+
+
+Router#   
+Router#   sh diagn res slot all   
+
+Current bootup diagnostic level: minimal
+
+slot R0: C1111X-8P  SerialNo : FOC26110J0N
+
+  Overall Diagnostic Result for slot R0 : PASS
+  Diagnostic level at card bootup: minimal
+
+  Test results: (. = Pass, F = Fail, U = Untested)
+
+    1) TestErrorCounterMonitor ---------> .
+
+
+Diagnostic[slot F0]: Diagnostic is not available.
+
+Diagnostic[slot 0]: Diagnostic is not available.
+
+Router#   
+Router#   sh platform   
+Chassis type: C1111X-8P
+
+Slot      Type                State                 Insert time (ago) 
+--------- ------------------- --------------------- ----------------- 
+0         C1111X-8P           ok                    00:25:08      
+ 0/0      C1111X-2x1GE        ok                    00:24:03      
+ 0/1      C1111X-ES-8         ok                    00:24:03      
+R0        C1111X-8P           ok, active            00:25:08      
+F0        C1111X-8P           ok, active            00:25:08      
+P0        PWR-12V             ok                    00:24:34      
+
+Slot      CPLD Version        Firmware Version                        
+--------- ------------------- --------------------------------------- 
+0         18092702            17.6.1                              
+R0        18092702            17.6.1                              
+F0        18092702            17.6.1                              
+
+Router#   
+Router#    sh hw-module subslot all oir   
+Module                  Model                Operational Status
+----------------------- -------------------- ------------------------
+subslot 0/0             C1111X-2x1GE         ok
+subslot 0/1             C1111X-ES-8          ok
+
+Router#   
+Router#    
+Router#   sh env all   
+Sensor List:  Environmental Monitoring 
+ Sensor                  Location        State           Reading         
+ Temp: Int1              R0              Normal          35 Celsius
+ Temp: Int2              R0              Normal          27 Celsius
+ Temp: Int3              R0              Normal          30 Celsius
+ Temp: Int4              R0              Normal          30 Celsius
+ Temp: CPU               R0              Normal          26 Celsius
+
+
+Router#   
+Router#     
+Router#   sh log   
+Syslog logging: enabled (0 messages dropped, 3 messages rate-limited, 0 flushes, 0 overruns, xml disabled, filtering disabled)
+
+No Active Message Discriminator.
+
+
+
+No Inactive Message Discriminator.
+
+
+    Console logging: level debugging, 30 messages logged, xml disabled,
+                     filtering disabled
+    Monitor logging: level debugging, 0 messages logged, xml disabled,
+                     filtering disabled
+    Buffer logging:  level debugging, 117 messages logged, xml disabled,
+                    filtering disabled
+    Exception Logging: size (4096 bytes)
+    Count and timestamp logging messages: disabled
+    Persistent logging: disabled
+
+No active filter modules.
+
+    Trap logging: level informational, 114 message lines logged
+        Logging Source-Interface:       VRF Name:
+    TLS Profiles: 
+
+Log Buffer (102400 bytes):
+
+*Feb 14 21:59:31.576: %ISR_THROUGHPUT-6-CRYPTO: Crypto level has been set to 50000 kbps
+*Feb 14 21:59:32.137: %IOSXE_RP_NV-3-NV_ACCESS_FAIL: Initial read of NVRAM contents failed
+*Feb 14 21:59:32.599: %IOSXE_RP_NV-3-BACKUP_NV_ACCESS_FAIL: Initial read of backup NVRAM contents failed
+*Feb 14 21:59:33.358: %IOSD_INFRA-6-IFS_DEVICE_OIR: Device usb0 added
+*Feb 14 21:59:33.853: %SMART_LIC-6-AGENT_ENABLED: Smart Agent for Licensing is enabled 
+*Feb 14 21:59:34.105: %SMART_LIC-6-EXPORT_CONTROLLED: Usage of export controlled features is not allowedESG-PM-ACL:[subsys-init] Init ESG-ACL subsystem starting
+
+*Feb 14 21:59:36.833: ESG-PM-ACL:[subsys-init] Init ESG-ACL platform API reg 
+
+*Feb 14 21:59:36.834: ESG-PM-ACL:[subsys-init] Init ESG-ACL subsystem ended
+
+*Feb 14 21:59:36.834: 
+*Feb 14 21:59:40.130: %SPANTREE-5-EXTENDED_SYSID: Extended SysId enabled for type vlan
+*Feb 14 21:59:40.367: %CRYPTO_ENGINE-5-CSDL_COMPLIANCE_ENFORCED: Cisco PSB security compliance is being enforced
+*Feb 14 21:59:40.367: %CRYPTO_ENGINE-5-CSDL_COMPLIANCE_EXCEPTION_ADDED: Cisco PSB security compliance exception has been added by this platform for use of RSA Key Size
+*Feb 14 21:59:40.526: %CRYPTO_ENGINE-5-CSDL_COMPLIANCE_EXCEPTION_ADDED: Cisco PSB security compliance exception has been added by Syslog Traps for use of MD5
+*Feb 14 21:59:40.526: %CRYPTO_ENGINE-5-CSDL_COMPLIANCE_EXCEPTION_ADDED: Cisco PSB security compliance exception has been added by Syslog Traps for use of DES
+*Feb 14 21:59:40.526: %CRYPTO_ENGINE-5-CSDL_COMPLIANCE_EXCEPTION_ADDED: Cisco PSB security compliance exception has been added by Syslog Traps for use of 3DES
+*Feb 14 21:59:40.844: %LINK-3-UPDOWN: Interface Lsmpi0, changed state to up
+*Feb 14 21:59:40.870: %LINK-3-UPDOWN: Interface EOBC0, changed state to up
+*Feb 14 21:59:40.871: %LINK-3-UPDOWN: Interface LIIN0, changed state to up
+*Feb 14 21:59:40.927: %CRYPTO_ENGINE-5-CSDL_COMPLIANCE_EXCEPTION_ADDED: Cisco PSB security compliance exception has been added by encrypt proc for use of 3DES
+*Feb 14 21:59:40.927: %CRYPTO_ENGINE-5-CSDL_COMPLIANCE_EXCEPTION_ADDED: Cisco PSB security compliance exception has been added by encrypt proc for use of MD5
+*Feb 14 21:59:40.927: %CRYPTO_ENGINE-5-CSDL_COMPLIANCE_EXCEPTION_ADDED: Cisco PSB security compliance exception has been added by encrypt proc for use of DES
+*Feb 14 21:59:40.964: %PNP-6-PNP_DISCOVERY_STARTED: PnP Discovery started
+*Feb 14 21:59:40.965: %PNP-6-PNP_GOOD_UDI_UPDATE: Good UDI [PID:C1111X-8P,VID:,SN:FGL2613LFZW] identified via (platform-registry)
+*Feb 14 21:59:40.965: %PNP-6-PNP_CDP_UPDATE: Device UDI [PID:C1111X-8P,VID:,SN:FGL2613LFZW] identified for CDP
+*Feb 14 21:58:58.516: %BOOT-5-OPMODE_LOG: R0/0: binos: System booted in AUTONOMOUS mode
+*Feb 14 21:59:34.631: %CMLIB-6-THROUGHPUT_VALUE: R0/0: cmand: Throughput license found, throughput set to 50000 kbps
+*Feb 14 21:59:41.813: %LINEPROTO-5-UPDOWN: Line protocol on Interface Vlan1, changed state to down
+*Feb 14 21:59:41.830: %SYS-5-CONFIG_P: Configured programmatically by process PnP Agent Discovery from console as vty0
+*Feb 14 21:59:41.984: %LINEPROTO-5-UPDOWN: Line protocol on Interface Lsmpi0, changed state to up
+*Feb 14 21:59:41.985: %LINEPROTO-5-UPDOWN: Line protocol on Interface EOBC0, changed state to up
+*Feb 14 21:59:41.985: %LINEPROTO-5-UPDOWN: Line protocol on Interface LIIN0, changed state to up
+*Feb 14 21:59:42.238: %AAAA-4-CLI_DEPRECATED: WARNING: Command has been added to the configuration using a type 0 password. However, recommended to migrate to strong type-6 encryption
+*Feb 14 21:59:42.464: %SYS-5-CONFIG_P: Configured programmatically by process PnP Agent Discovery from console as vty0
+*Feb 14 21:59:44.403: %ONEP_BASE-6-SS_ENABLED: ONEP: Service set Base was enabled by Default
+*Feb 14 21:59:45.881: %SYS-7-NVRAM_INIT_WAIT_TIME: Waited 0 seconds for NVRAM to be available
+*Feb 14 21:59:46.086: %IOSXE_OIR-6-REMSPA: SPA removed from subslot 0/0, interfaces disabled
+*Feb 14 21:59:46.086: %IOSXE_OIR-6-REMSPA: SPA removed from subslot 0/1, interfaces disabled
+*Feb 14 21:59:46.103: %SPA_OIR-6-OFFLINECARD: SPA (C1111X-2x1GE) offline in subslot 0/0
+*Feb 14 21:59:46.116: %SPA_OIR-6-OFFLINECARD: SPA (C1111X-ES-8) offline in subslot 0/1
+*Feb 14 21:59:46.183: %IOSXE_OIR-6-INSCARD: Card (fp) inserted in slot F0
+*Feb 14 21:59:46.183: %IOSXE_OIR-6-ONLINECARD: Card (fp) online in slot F0
+*Feb 14 21:59:46.215: %IOSXE_OIR-6-INSCARD: Card (cc) inserted in slot 0
+*Feb 14 21:59:46.215: %IOSXE_OIR-6-ONLINECARD: Card (cc) online in slot 0
+*Feb 14 21:59:46.447: %IOSXE_OIR-6-INSSPA: SPA inserted in subslot 0/0
+*Feb 14 21:59:46.448: %IOSXE_OIR-6-INSSPA: SPA inserted in subslot 0/1
+*Feb 14 21:59:47.109: %IOXN_APP-6-PRE_INIT_DAY0_GS_INFO: Day0 Guestshell pre-initilization API is being invoked
+
+*Feb 14 21:59:47.661: %UICFGEXP-6-SERVER_NOTIFIED_START: R0/0: psd: Server iox has been notified to start
+*Feb 14 21:59:51.513: %LINK-3-UPDOWN: Interface GigabitEthernet0/1/0, changed state to down
+*Feb 14 21:59:51.521: %LINK-3-UPDOWN: Interface GigabitEthernet0/1/1, changed state to down
+*Feb 14 21:59:51.526: %LINK-3-UPDOWN: Interface GigabitEthernet0/1/2, changed state to down
+*Feb 14 21:59:51.529: %LINK-3-UPDOWN: Interface GigabitEthernet0/1/3, changed state to down
+*Feb 14 21:59:51.531: %LINK-3-UPDOWN: Interface GigabitEthernet0/1/4, changed state to down
+*Feb 14 21:59:51.534: %LINK-3-UPDOWN: Interface GigabitEthernet0/1/5, changed state to down
+*Feb 14 21:59:51.536: %LINK-3-UPDOWN: Interface GigabitEthernet0/1/6, changed state to down
+*Feb 14 21:59:51.543: %LINK-3-UPDOWN: Interface GigabitEthernet0/1/7, changed state to down
+*Feb 14 21:59:52.512: %LINEPROTO-5-UPDOWN: Line protocol on Interface GigabitEthernet0/1/0, changed state to down
+*Feb 14 21:59:52.520: %LINEPROTO-5-UPDOWN: Line protocol on Interface GigabitEthernet0/1/1, changed state to down
+*Feb 14 21:59:52.528: %LINEPROTO-5-UPDOWN: Line protocol on Interface GigabitEthernet0/1/2, changed state to down
+*Feb 14 21:59:52.529: %LINEPROTO-5-UPDOWN: Line protocol on Interface GigabitEthernet0/1/3, changed state to down
+*Feb 14 21:59:52.532: %LINEPROTO-5-UPDOWN: Line protocol on Interface GigabitEthernet0/1/4, changed state to down
+*Feb 14 21:59:52.532: %LINEPROTO-5-UPDOWN: Line protocol on Interface GigabitEthernet0/1/5, changed state to down
+*Feb 14 21:59:52.535: %LINEPROTO-5-UPDOWN: Line protocol on Interface GigabitEthernet0/1/6, changed state to down
+*Feb 14 21:59:52.543: %LINEPROTO-5-UPDOWN: Line protocol on Interface GigabitEthernet0/1/7, changed state to down
+*Feb 14 21:59:54.228: %SPA_OIR-6-ONLINECARD: SPA (C1111X-ES-8) online in subslot 0/1
+*Feb 14 21:59:54.245: %IOSXE_RP_ALARM-6-INFO: ASSERT CRITICAL GigabitEthernet0/1/0 Physical Port Link Down 
+*Feb 14 21:59:54.245: %IOSXE_RP_ALARM-6-INFO: ASSERT CRITICAL GigabitEthernet0/1/1 Physical Port Link Down 
+*Feb 14 21:59:54.245: %IOSXE_RP_ALARM-6-INFO: ASSERT CRITICAL GigabitEthernet0/1/2 Physical Port Link Down 
+*Feb 14 21:59:54.245: %IOSXE_RP_ALARM-6-INFO: ASSERT CRITICAL GigabitEthernet0/1/3 Physical Port Link Down 
+*Feb 14 21:59:54.245: %IOSXE_RP_ALARM-6-INFO: ASSERT CRITICAL GigabitEthernet0/1/4 Physical Port Link Down 
+*Feb 14 21:59:54.246: %IOSXE_RP_ALARM-6-INFO: ASSERT CRITICAL GigabitEthernet0/1/5 Physical Port Link Down 
+*Feb 14 21:59:54.246: %IOSXE_RP_ALARM-6-INFO: ASSERT CRITICAL GigabitEthernet0/1/6 Physical Port Link Down 
+*Feb 14 21:59:54.246: %IOSXE_RP_ALARM-6-INFO: ASSERT CRITICAL GigabitEthernet0/1/7 Physical Port Link Down 
+*Feb 14 21:59:55.616: %SPA_OIR-6-ONLINECARD: SPA (C1111X-2x1GE) online in subslot 0/0
+*Feb 14 21:59:56.286: %SYS-5-CONFIG_P: Configured programmatically by process EPM CREATE DEFAULT CWA URL ACL from console as console
+*Feb 14 21:59:57.823: %LINK-3-UPDOWN: Interface Vlan1, changed state to down
+*Feb 14 21:59:58.891: %PNP-6-PNP_BEST_UDI_UPDATE: Best UDI [PID:C1111X-8P,VID:V01,SN:FGL2613LFZW] identified via (entity-mibs)
+*Feb 14 22:00:06.126: %SYS-5-RESTART: System restarted --
+Cisco IOS Software [Bengaluru], ISR Software (ARMV8EL_LINUX_IOSD-UNIVERSALK9-M), Version 17.6.5, RELEASE SOFTWARE (fc2)
+Technical Support: http://www.cisco.com/techsupport
+Copyright (c) 1986-2023 by Cisco Systems, Inc.
+Compiled Wed 25-Jan-23 15:15 by mcpre
+*Feb 14 22:00:08.117: %SYS-6-BOOTTIME: Time taken to reboot after reload =  230 seconds
+*Feb 14 22:00:18.130: %SYS-5-CONFIG_P: Configured programmatically by process DHCP Autoinstall from console as vty0
+*Feb 14 22:00:26.889: %PKI-6-TRUSTPOINT_CREATE: Trustpoint: CISCO_IDEVID_SUDI created succesfully
+*Feb 14 22:00:26.911: %CRYPTO_ENGINE-5-KEY_ADDITION: A key named CISCO_IDEVID_SUDI has been generated or imported by pki-sudi
+*Feb 14 22:00:26.950: %PKI-6-TRUSTPOINT_CREATE: Trustpoint: CISCO_IDEVID_SUDI0 created succesfully
+*Feb 14 22:00:26.964: %PKI-2-NON_AUTHORITATIVE_CLOCK: PKI functions can not be initialized until an authoritative time source, like NTP, can be obtained.
+*Feb 14 22:00:26.969: %PKI-6-TRUSTPOINT_CREATE: Trustpoint: TP-self-signed-313209277 created succesfully
+*Feb 14 22:00:29.484: %SYS-5-USERLOG_NOTICE: Message from tty0(user id: ): Device in day0 workflow, some non user-configured options may be enabled by default
+*Feb 14 22:00:29.541: %SYS-5-CONFIG_P: Configured programmatically by process Setup from console as vty0
+*Feb 14 22:00:30.937: %IOXN_APP-6-PRE_INIT_DAY0_GS_INFO: Day0 Guestshell pre-initilization API is being invoked
+
+*Feb 14 22:00:31.484: %LINK-5-CHANGED: Interface GigabitEthernet0/0/0, changed state to administratively down
+*Feb 14 22:00:31.487: %LINK-5-CHANGED: Interface GigabitEthernet0/0/1, changed state to administratively down
+*Feb 14 22:00:31.880: %CRYPTO_ENGINE-5-KEY_ADDITION: A key named TP-self-signed-313209277 has been generated or imported by crypto-engine
+*Feb 14 22:00:31.884: %SSH-5-ENABLED: SSH 1.99 has been enabled
+*Feb 14 22:00:32.039: %PKI-4-NOCONFIGAUTOSAVE: Configuration was modified.  Issue "write memory" to save new IOS PKI configuration
+*Feb 14 22:00:34.888: %CRYPTO_ENGINE-5-KEY_ADDITION: A key named TP-self-signed-313209277.server has been generated or imported by crypto-engine
+*Feb 14 22:00:37.128: %PKI-6-TRUSTPOINT_CREATE: Trustpoint: SLA-TrustPoint created succesfully
+*Feb 14 22:00:37.132: %PKI-4-NOCONFIGAUTOSAVE: Configuration was modified.  Issue "write memory" to save new IOS PKI configuration
+*Feb 14 22:00:37.148: %CALL_HOME-6-CALL_HOME_ENABLED: Call-home is enabled by Smart Agent for Licensing.
+*Feb 14 22:00:40.990: %SYS-5-CONFIG_P: Configured programmatically by process PnP Agent Discovery from console as vty0
+*Feb 14 22:00:43.045: %SYS-5-CONFIG_P: Configured programmatically by process PnP Agent Discovery from console as vty0
+*Feb 14 22:00:43.143: %SYS-5-CONFIG_P: Configured programmatically by process PnP Agent Discovery from console as console
+*Feb 14 22:00:43.143: %PNP-6-PNP_SAVING_TECH_SUMMARY: Saving PnP tech summary (/pnp-tech/pnp-tech-discovery-summary)... Please wait. Do not interrupt.
+*Feb 14 22:00:43.358: %SYS-5-CONFIG_P: Configured programmatically by process PnP Agent Discovery from console as vty0
+*Feb 14 22:00:43.419: %SYS-5-CONFIG_P: Configured programmatically by process PnP Agent Discovery from console as vty0
+*Feb 14 22:00:43.544: %PNP-6-PNP_SUDI_UPDATE: Device SUDI [PID:C1111X-8P,SN:FGL2613LFZW] identified
+*Feb 14 22:00:43.809: %SYS-5-CONFIG_P: Configured programmatically by process PnP Agent Discovery from console as vty0
+*Feb 14 22:00:43.912: %PNP-6-PNP_TECH_SUMMARY_SAVED_OK: PnP tech summary (/pnp-tech/pnp-tech-discovery-summary) saved successfully (elapsed time: 0 seconds).
+*Feb 14 22:00:43.912: %PNP-6-PNP_DISCOVERY_STOPPED: PnP Discovery stopped (Config Wizard)
+*Feb 14 22:00:48.392: %IOSXE-6-PLATFORM: R0/0: IOx:  App verification successful
+*Feb 14 22:01:00.939: %IOXN_APP-6-PRE_INIT_DAY0_GS_INFO: Day0 Guestshell de-initilization API is being invoked
+
+*Feb 14 22:01:08.498: %SYS-5-CONFIG_I: Configured from console by console
+*Feb 14 22:01:46.686: %IM-6-IOX_ENABLEMENT: R0/0: ioxman: IOX is ready.
+*Feb 14 22:01:49.397: %IOXN_APP-6-PRE_INIT_DAY0_GS_INFO: Day0 Guestshell destroyed
+
+*Feb 14 22:01:49.953: %UICFGEXP-6-SERVER_NOTIFIED_STOP: R0/0: psd: Server iox has been notified to stop
+*Feb 14 22:01:54.288: %IOXN_APP-6-IOX_START_STOP_REQ: Got IOX DOWN COMPLETE event, invoking registered callback(s)
+
+*Feb 14 22:13:10.187: %SYS-6-TTY_EXPIRE_TIMER: (exec timer expired, tty 0 (0.0.0.0)), user 
+Router#    
+Router#
+Router#
+Router#
+Router#   
+Router#       dir all   
+Directory of system:/
+
+3       dr-x                0                    <no date>  vfile
+1       -rw-             6027                    <no date>  running-config
+4       dr-x                0                    <no date>  memory
+2       -r--                0                    <no date>  default-running-config
+
+No space information available
+Directory of tmpsys:/
+
+9       drw-                0                    <no date>  macro_scripts
+1       dr-x                0                    <no date>  lib
+7       drw-                0                    <no date>  eem_temp
+35      -rw-                0                    <no date>  eem_rpc_9
+33      -rw-                0                    <no date>  eem_rpc_8
+31      -rw-                0                    <no date>  eem_rpc_7
+29      -rw-                0                    <no date>  eem_rpc_6
+27      -rw-                0                    <no date>  eem_rpc_5
+25      -rw-                0                    <no date>  eem_rpc_4
+23      -rw-                0                    <no date>  eem_rpc_3
+21      -rw-                0                    <no date>  eem_rpc_2
+47      -rw-                0                    <no date>  eem_rpc_15
+45      -rw-                0                    <no date>  eem_rpc_14
+43      -rw-                0                    <no date>  eem_rpc_13
+41      -rw-                0                    <no date>  eem_rpc_12
+39      -rw-                0                    <no date>  eem_rpc_11
+37      -rw-                0                    <no date>  eem_rpc_10
+19      -rw-                0                    <no date>  eem_rpc_1
+17      -rw-                0                    <no date>  eem_rpc_0
+8       drw-                0                    <no date>  eem_pub
+4       drw-                0                    <no date>  eem_policy
+36      -rw-                0                    <no date>  eem_pnt_9
+34      -rw-                0                    <no date>  eem_pnt_8
+32      -rw-                0                    <no date>  eem_pnt_7
+30      -rw-                0                    <no date>  eem_pnt_6
+28      -rw-                0                    <no date>  eem_pnt_5
+26      -rw-                0                    <no date>  eem_pnt_4
+24      -rw-                0                    <no date>  eem_pnt_3
+22      -rw-                0                    <no date>  eem_pnt_2
+48      -rw-                0                    <no date>  eem_pnt_15
+46      -rw-                0                    <no date>  eem_pnt_14
+44      -rw-                0                    <no date>  eem_pnt_13
+42      -rw-                0                    <no date>  eem_pnt_12
+40      -rw-                0                    <no date>  eem_pnt_11
+38      -rw-                0                    <no date>  eem_pnt_10
+20      -rw-                0                    <no date>  eem_pnt_1
+18      -rw-                0                    <no date>  eem_pnt_0
+5       drw-                0                    <no date>  eem_lib_user
+6       drw-                0                    <no date>  eem_lib_system
+73      drw-                0                    <no date>  call-home
+
+No space information available
+Directory of bootflash:/
+
+153217  drwx            16384  Feb 14 2024 22:23:15 +00:00  tracelogs
+72577   drwx             4096  Feb 14 2024 22:00:48 +00:00  .installer
+322561  drwx             4096  Feb 14 2024 22:00:43 +00:00  pnp-tech
+21      -rw-              215  Feb 14 2024 22:00:24 +00:00  .iox_dir_list
+395137  drwx             4096  Feb 14 2024 22:00:19 +00:00  iox_host_data_share
+282241  drwx             4096  Feb 14 2024 22:00:06 +00:00  license_evlog
+266113  drwx             4096  Feb 14 2024 21:59:59 +00:00  guest-share
+249985  drwx             4096  Feb 14 2024 21:59:42 +00:00  pnp-info
+16      -rw-               30  Feb 14 2024 21:59:38 +00:00  throughput_monitor_params
+370945  drwx             4096  Feb 14 2024 21:59:37 +00:00  .prst_sync
+15      -rw-           134899  Feb 14 2024 21:59:22 +00:00  memleak.tcl
+290305  drwx             4096  Feb 14 2024 21:59:11 +00:00  .dbpersist
+20      -rw-             1923  Feb 14 2024 21:59:06 +00:00  trustidrootx3_ca_092024.ca
+19      -rw-            20109  Feb 14 2024 21:59:06 +00:00  ios_core.p7b
+18      -rw-              272  Feb 14 2024 21:58:59 +00:00  mode_event_log
+17      -rw-        706577188  Feb 14 2024 21:55:36 +00:00  c1100-universalk9.17.06.05.SPA.bin
+13      -rw-            86230  Feb 14 2024 21:46:29 +00:00  pnp-tech-discovery-summary
+12      -rw-               35  Feb 14 2024 21:46:17 +00:00  pnp-tech-time
+209665  drwx             4096  Mar 25 2022 18:32:17 +00:00  core
+169345  drwx             4096  Mar 25 2022 18:31:56 +00:00  onep
+338689  drwx             4096  Mar 25 2022 18:31:53 +00:00  .attrib
+298369  drwx             4096  Mar 25 2022 18:31:29 +00:00  virtual-instance
+379009  drwx             4096  Mar 25 2022 18:31:18 +00:00  .rollback_timer
+14      -rw-        542525852  Mar 25 2022 18:25:07 +00:00  c1100-universalk9.16.12.04.SPA.bin
+11      drwx            16384  Mar 25 2022 18:22:11 +00:00  lost+found
+
+6928297984 bytes total (5323771904 bytes free)
+Directory of usb0:/
+
+9       drwx             4096  Feb 14 2024 19:11:24 +00:00  ASR920
+22      -rwx          2156775  Feb 13 2024 12:28:38 +00:00  PERCCLI_7.211.0_Linux.tar.gz
+14      -rwx           138369   Jan 5 2024 20:28:28 +00:00  TEST T440.html
+20      drwx             4096  Dec 11 2023 18:27:12 +00:00  2023-12-11-18_27_13-MXQ90100Z4-hvt_files
+18      drwx             4096  Nov 29 2023 05:24:38 +00:00  2023-11-29-05_24_39-MXQ91703N1-hvt_files
+19      drwx             4096  Nov 28 2023 17:53:28 +00:00  2023-11-28-17_53_28-MXQ90402V9-hvt_files
+17      -rwx             1173  Nov 27 2023 13:48:22 +00:00  FLM22400367_20231123002815929.lic
+16      -rwx             1173  Nov 27 2023 13:48:22 +00:00  FDO215116WZ_20231123002850849.lic
+15      -rwx             1370  Nov 20 2023 08:17:56 +00:00  BOOTEX.LOG
+12      -rwx          1749536  Nov 17 2023 14:25:44 +00:00  hdsentinel-020-x64.zip
+8       -rwx              102  Nov 17 2023 13:49:16 +00:00  fdconfig.sys
+7       -rwx               21  Nov 17 2023 13:49:14 +00:00  autoexec.bat
+6       -rwx           214720  Nov 17 2023 13:49:14 +00:00  hdsdos.exe
+5       -rwx            66945  Nov 17 2023 13:49:14 +00:00  command.com
+4       -rwx            45341  Nov 17 2023 13:49:14 +00:00  kernel.sys
+3       drwx             4096  Nov 17 2023 13:49:14 +00:00  System Volume Information
+21      -rwx        706577188  Sep 28 2023 12:37:52 +00:00  c1100-universalk9.17.06.05.SPA.bin
+13      -rwx         10231808   Jan 1 1980 00:00:00 +00:00  FSCK0002.REC
+11      -rwx            24576   Jan 1 1980 00:00:00 +00:00  FSCK0001.REC
+10      -rwx            86016   Jan 1 1980 00:00:00 +00:00  FSCK0000.REC
+
+7904133120 bytes total (6363963392 bytes free)
+Directory of webui:/
+
+51720   -rw-              573  Feb 14 2024 21:58:46 +00:00  IntVlan.odm
+52833   -rwx             1581  Feb 14 2024 21:58:46 +00:00  aaa.odm
+52834   -rwx             3742  Feb 14 2024 21:58:46 +00:00  aaaForAccounting.odm
+52835   -rw-              719  Feb 14 2024 21:58:46 +00:00  aaaForAttributeList.odm
+52836   -rw-             2077  Feb 14 2024 21:58:46 +00:00  aaaForAuthentication.odm
+52837   -rw-             3730  Feb 14 2024 21:58:46 +00:00  aaaForAuthorization.odm
+52838   -rw-              694  Feb 14 2024 21:58:46 +00:00  aaaForLdapGroup.odm
+52839   -rw-             1773  Feb 14 2024 21:58:46 +00:00  aaaForLdapServer.odm
+52840   -rw-             1178  Feb 14 2024 21:58:46 +00:00  aaaForRadiusGroup.odm
+52841   -rwx             2033  Feb 14 2024 21:58:46 +00:00  aaaForRadiusServers.odm
+52842   -rw-              640  Feb 14 2024 21:58:46 +00:00  aaaForServer.odm
+52843   -rw-             1057  Feb 14 2024 21:58:46 +00:00  aaaForTacacServer.odm
+52844   -rw-             1850  Feb 14 2024 21:58:46 +00:00  aaaForTacacsServers.odm
+52845   -rw-              976  Feb 14 2024 21:58:46 +00:00  aaaForUsers.odm
+52846   -rw-             1883  Feb 14 2024 21:58:46 +00:00  aaaPasswordPolicy.odm
+52847   -rwx             1555  Feb 14 2024 21:58:46 +00:00  aaaforServers.odm
+52848   -rw-             1105  Feb 14 2024 21:58:46 +00:00  alarmProfiles.odm
+52849   -rwx              753  Feb 14 2024 21:58:46 +00:00  apAuthList.odm
+52850   -rw-              895  Feb 14 2024 21:58:46 +00:00  apCount.odm
+52851   -rw-             1444  Feb 14 2024 21:58:46 +00:00  cdpNeighborDetail.odm
+52852   -rw-              953  Feb 14 2024 21:58:46 +00:00  cdpTraffic.odm
+52853   -rw-              826  Feb 14 2024 21:58:46 +00:00  certificate.odm
+52854   -rw-              511  Feb 14 2024 21:58:46 +00:00  checkCloud.odm
+52855   -rw-             1762  Feb 14 2024 21:58:46 +00:00  cmeNumbers.odm
+52856   -rw-             1806  Feb 14 2024 21:58:46 +00:00  cmePhones.odm
+52857   -rw-              869  Feb 14 2024 21:58:46 +00:00  community.odm
+52858   -rw-             1146  Feb 14 2024 21:58:46 +00:00  configSyslog.odm
+52859   -rw-             7121  Feb 14 2024 21:58:46 +00:00  connectionHistory.odm
+52860   -rw-              769  Feb 14 2024 21:58:46 +00:00  controller.odm
+52861   -rw-              574  Feb 14 2024 21:58:46 +00:00  cryptoTrustPoints.odm
+52862   -rw-             1539  Feb 14 2024 21:58:46 +00:00  cubeDialPeer.odm
+52863   -rw-              578  Feb 14 2024 21:58:46 +00:00  dgProcessFED.odm
+52864   -rw-              622  Feb 14 2024 21:58:46 +00:00  dgProcessFmanFP.odm
+52865   -rw-              609  Feb 14 2024 21:58:46 +00:00  dgProcessFmanRP.odm
+52866   -rw-              578  Feb 14 2024 21:58:46 +00:00  dgProcessIOSd.odm
+52867   -rw-              578  Feb 14 2024 21:58:46 +00:00  dgProcessSMD.odm
+52868   -rw-              544  Feb 14 2024 21:58:46 +00:00  dgProcessWireless.odm
+52869   -rw-             1959  Feb 14 2024 21:58:46 +00:00  dhcp.odm
+52870   -rw-              975  Feb 14 2024 21:58:46 +00:00  dhcpUtilization.odm
+52871   -rw-             1338  Feb 14 2024 21:58:46 +00:00  dhcpipv6.odm
+52872   -rw-              532  Feb 14 2024 21:58:46 +00:00  dirFlash.odm
+52873   -rw-              468  Feb 14 2024 21:58:46 +00:00  dot1xGlobal.odm
+52874   -rw-              756  Feb 14 2024 21:58:46 +00:00  dslRunConf.odm
+52875   -rw-              419  Feb 14 2024 21:58:46 +00:00  eventEnvironemt.odm
+52876   -rw-              379  Feb 14 2024 21:58:46 +00:00  fcsThreshold.odm
+52877   -rw-              433  Feb 14 2024 21:58:46 +00:00  flashFiles.odm
+52878   -rw-              960  Feb 14 2024 21:58:46 +00:00  flowExporter.odm
+52879   -rw-              851  Feb 14 2024 21:58:46 +00:00  general.odm
+52880   -rw-              578  Feb 14 2024 21:58:46 +00:00  getDmvpnTunnelStatus.odm
+52881   -rw-              559  Feb 14 2024 21:58:46 +00:00  getInterfaceIpAddress.odm
+52882   -rw-              823  Feb 14 2024 21:58:46 +00:00  getSubInterfaceVlanInfo.odm
+52883   -rw-             2349  Feb 14 2024 21:58:46 +00:00  getTunnelDetails.odm
+52884   -rw-              718  Feb 14 2024 21:58:46 +00:00  getTunnelStatus.odm
+52885   -rw-             1467  Feb 14 2024 21:58:46 +00:00  getWirelessProfileAll.odm
+52886   -rw-              831  Feb 14 2024 21:58:46 +00:00  getWirelessProfileSummary.odm
+52887   -rw-              951  Feb 14 2024 21:58:46 +00:00  host.odm
+52888   -rw-             1999  Feb 14 2024 21:58:46 +00:00  http.odm
+52889   -rw-              817  Feb 14 2024 21:58:46 +00:00  inventory.odm
+52890   -rw-            20109  Feb 14 2024 21:58:46 +00:00  ios_core.p7b
+52891   -rw-             1866  Feb 14 2024 21:58:46 +00:00  ipv4StaticRoutes.odm
+52892   -rw-             2031  Feb 14 2024 21:58:46 +00:00  ipv4StaticRoutesWithVrf.odm
+52893   -rw-             2453  Feb 14 2024 21:58:46 +00:00  ipv6StaticRoutes.odm
+52894   -rw-             2643  Feb 14 2024 21:58:46 +00:00  ipv6StaticRoutesWithVrf.odm
+52895   -rw-              506  Feb 14 2024 21:58:46 +00:00  ldapAttributes.odm
+52896   -rw-              597  Feb 14 2024 21:58:46 +00:00  leastOutstanding.odm
+52897   -rw-              429  Feb 14 2024 21:58:46 +00:00  listApplicationGroupValues.odm
+52898   -rw-              411  Feb 14 2024 21:58:46 +00:00  listCategoryValues.odm
+52899   -rw-              655  Feb 14 2024 21:58:46 +00:00  listProtocolValues.odm
+52900   -rw-              419  Feb 14 2024 21:58:46 +00:00  listSubCategoryValues.odm
+52901   -rw-              785  Feb 14 2024 21:58:46 +00:00  managementInterface.odm
+52902   -rw-              803  Feb 14 2024 21:58:46 +00:00  monSwitch.odm
+52903   -rw-              716  Feb 14 2024 21:58:46 +00:00  netconf.odm
+52904   -rw-              601  Feb 14 2024 21:58:46 +00:00  platform.odm
+52905   -rw-              481  Feb 14 2024 21:58:46 +00:00  platformType.odm
+52906   -rw-              945  Feb 14 2024 21:58:46 +00:00  portStatus.odm
+52907   -rw-             1770  Feb 14 2024 21:58:46 +00:00  qfpexmem.odm
+52908   -rw-             2375  Feb 14 2024 21:58:46 +00:00  redundancyState.odm
+52909   -rw-              702  Feb 14 2024 21:58:46 +00:00  ripIPv6Details.odm
+52910   -rw-              936  Feb 14 2024 21:58:46 +00:00  showAAAMethodListNames.odm
+52911   -rw-             4338  Feb 14 2024 21:58:46 +00:00  showAAARadiusDetails.odm
+52912   -rw-              958  Feb 14 2024 21:58:46 +00:00  showAVBStreamDetails.odm
+52913   -rw-              681  Feb 14 2024 21:58:46 +00:00  showAclIpv4Ipv6.odm
+52914   -rw-              596  Feb 14 2024 21:58:46 +00:00  showAclIpvSix.odm
+52915   -rw-              863  Feb 14 2024 21:58:46 +00:00  showAllVRF.odm
+52916   -rw-              876  Feb 14 2024 21:58:46 +00:00  showAvbDomainDetails.odm
+52918   -rw-              877  Feb 14 2024 21:58:46 +00:00  showAvcWlanCumulativeData.odm
+52919   -rw-              896  Feb 14 2024 21:58:46 +00:00  showAvcWlanLastIntData.odm
+52920   -rw-              788  Feb 14 2024 21:58:46 +00:00  showCPUAlloc.odm
+52921   -rw-             1892  Feb 14 2024 21:58:46 +00:00  showCPUUtilization.odm
+52922   -rw-             2348  Feb 14 2024 21:58:46 +00:00  showCallHomeGeneral.odm
+52923   -rw-              446  Feb 14 2024 21:58:46 +00:00  showCallHomeMailServer.odm
+52924   -rw-             1155  Feb 14 2024 21:58:46 +00:00  showCallHomeProfile.odm
+52925   -rw-              489  Feb 14 2024 21:58:46 +00:00  showCallHomeProfileAlert.odm
+52926   -rw-              495  Feb 14 2024 21:58:46 +00:00  showCallHomeProfileSyslog.odm
+52927   -rw-              486  Feb 14 2024 21:58:46 +00:00  showCallHomeProfilelist.odm
+52928   -rw-              500  Feb 14 2024 21:58:46 +00:00  showCallHomeVrf.odm
+52929   -rw-             1079  Feb 14 2024 21:58:46 +00:00  showClassMap.odm
+52930   -rw-              442  Feb 14 2024 21:58:46 +00:00  showClock.odm
+52931   -rw-             1248  Feb 14 2024 21:58:46 +00:00  showControllers.odm
+52932   -rw-              481  Feb 14 2024 21:58:46 +00:00  showDeviceClassifier.odm
+52933   -rw-              774  Feb 14 2024 21:58:46 +00:00  showEigrp.odm
+52934   -rw-              594  Feb 14 2024 21:58:46 +00:00  showEtherChannel.odm
+52935   -rw-              567  Feb 14 2024 21:58:46 +00:00  showEtherchannelSummary.odm
+52936   -rw-             1334  Feb 14 2024 21:58:46 +00:00  showInstallPackage.odm
+52937   -rw-              424  Feb 14 2024 21:58:46 +00:00  showInstallProfile.odm
+52938   -rw-              586  Feb 14 2024 21:58:46 +00:00  showInstallRollback.odm
+52939   -rw-              866  Feb 14 2024 21:58:46 +00:00  showInstallSummary.odm
+52940   -rw-              960  Feb 14 2024 21:58:46 +00:00  showIntStatus.odm
+52941   -rw-              881  Feb 14 2024 21:58:46 +00:00  showIntStatusNoDesc.odm
+52942   -rw-              945  Feb 14 2024 21:58:46 +00:00  showIntStatusSVL.odm
+52943   -rw-              500  Feb 14 2024 21:58:46 +00:00  showInterfaceDescription.odm
+52944   -rw-              657  Feb 14 2024 21:58:46 +00:00  showInterfaceSummary.odm
+52945   -rw-              787  Feb 14 2024 21:58:46 +00:00  showInterfaces.odm
+52946   -rw-             2186  Feb 14 2024 21:58:46 +00:00  showIssuStateDetail.odm
+52947   -rw-              692  Feb 14 2024 21:58:46 +00:00  showLicenseApCount.odm
+52948   -rw-              649  Feb 14 2024 21:58:46 +00:00  showLicenseRightToUse.odm
+52949   -rw-             7578  Feb 14 2024 21:58:46 +00:00  showMSRPInterfaceDetail.odm
+52950   -rw-              679  Feb 14 2024 21:58:46 +00:00  showMSRPPortBandwidth.odm
+52951   -rw-             1672  Feb 14 2024 21:58:46 +00:00  showMSRPPortDetails.odm
+52952   -rw-             1522  Feb 14 2024 21:58:46 +00:00  showMSRPStreamDetails.odm
+52953   -rw-             1015  Feb 14 2024 21:58:46 +00:00  showMemory.odm
+52954   -rw-              513  Feb 14 2024 21:58:46 +00:00  showMemoryCritical.odm
+52955   -rw-              788  Feb 14 2024 21:58:46 +00:00  showMemoryDetails.odm
+52956   -rw-             2690  Feb 14 2024 21:58:46 +00:00  showMethodListNames.odm
+52957   -rw-              880  Feb 14 2024 21:58:46 +00:00  showModuleDetail.odm
+52958   -rw-             1074  Feb 14 2024 21:58:46 +00:00  showMulticast.odm
+52959   -rw-             1753  Feb 14 2024 21:58:46 +00:00  showMvrpInterface.odm
+52960   -rw-              499  Feb 14 2024 21:58:46 +00:00  showNtp.odm
+52961   -rw-              574  Feb 14 2024 21:58:46 +00:00  showPPPOESession.odm
+52962   -rwx              547  Feb 14 2024 21:58:46 +00:00  showPRPChannelSummary.odm
+52963   -rw-              528  Feb 14 2024 21:58:46 +00:00  showPTPDelayPortDetails.odm
+52964   -rw-             1769  Feb 14 2024 21:58:46 +00:00  showPTPPortDetails.odm
+52965   -rw-             4096  Feb 14 2024 21:58:46 +00:00  showParticularIntfDetail.odm
+52966   -rw-             4386  Feb 14 2024 21:58:46 +00:00  showPdelayPortDetails.odm
+52967   -rw-              981  Feb 14 2024 21:58:46 +00:00  showPlatform.odm
+52968   -rw-             3820  Feb 14 2024 21:58:46 +00:00  showPorts.odm
+52969   -rw-             1056  Feb 14 2024 21:58:46 +00:00  showProcessCPU.odm
+52970   -rw-              936  Feb 14 2024 21:58:46 +00:00  showProcessMemory.odm
+52971   -rw-              878  Feb 14 2024 21:58:46 +00:00  showProcessMemoryGraph.odm
+52972   -rw-             1823  Feb 14 2024 21:58:46 +00:00  showQoS.odm
+52973   -rw-              541  Feb 14 2024 21:58:46 +00:00  showRaguardDetail.odm
+52974   -rw-              434  Feb 14 2024 21:58:46 +00:00  showRouteMap.odm
+52975   -rw-             1071  Feb 14 2024 21:58:46 +00:00  showSerialIntfDetails.odm
+52976   -rw-             1002  Feb 14 2024 21:58:46 +00:00  showStackwiseVirtual.odm
+52977   -rw-              726  Feb 14 2024 21:58:46 +00:00  showStackwiseVirtualDual.odm
+52978   -rw-              568  Feb 14 2024 21:58:46 +00:00  showStackwiseVirtualLink.odm
+52979   -rw-              490  Feb 14 2024 21:58:46 +00:00  showStackwiseVirtualNeighbor.odm
+52980   -rw-              803  Feb 14 2024 21:58:46 +00:00  showStormcontrol.odm
+52981   -rw-              437  Feb 14 2024 21:58:46 +00:00  showSwitch.odm
+52982   -rw-             1006  Feb 14 2024 21:58:46 +00:00  showSwitchDetail.odm
+52983   -rw-              439  Feb 14 2024 21:58:46 +00:00  showSwitchDetails.odm
+52984   -rw-              387  Feb 14 2024 21:58:46 +00:00  showTemplate.odm
+52985   -rw-              490  Feb 14 2024 21:58:46 +00:00  showVRFByProtocols.odm
+52986   -rw-              589  Feb 14 2024 21:58:46 +00:00  showVlanBrief.odm
+52987   -rw-              388  Feb 14 2024 21:58:46 +00:00  showVrf.odm
+52988   -rw-              490  Feb 14 2024 21:58:46 +00:00  showVrfNames.odm
+52989   -rw-              601  Feb 14 2024 21:58:46 +00:00  showVrfNtp.odm
+52990   -rw-              798  Feb 14 2024 21:58:46 +00:00  showWlanSummary.odm
+52991   -rw-              751  Feb 14 2024 21:58:46 +00:00  showipbriefdet.odm
+52992   -rw-              869  Feb 14 2024 21:58:46 +00:00  showipv6interface.odm
+52993   -rw-              869  Feb 14 2024 21:58:46 +00:00  showl3mgid.odm
+52994   -rw-             2808  Feb 14 2024 21:58:46 +00:00  showloopbackIntf.odm
+52995   -rw-             2278  Feb 14 2024 21:58:46 +00:00  showmgmtIntf.odm
+52996   -rw-              696  Feb 14 2024 21:58:46 +00:00  showqfpcpu.odm
+52997   -rw-             2687  Feb 14 2024 21:58:46 +00:00  showtengigIntf.odm
+52998   -rw-              694  Feb 14 2024 21:58:46 +00:00  shwAcl.odm
+52999   -rw-              920  Feb 14 2024 21:58:46 +00:00  shwAclInterface.odm
+53000   -rw-              531  Feb 14 2024 21:58:46 +00:00  shwQOSPolicy.odm
+53001   -rw-             1953  Feb 14 2024 21:58:46 +00:00  smartLicense.odm
+53002   -rw-              545  Feb 14 2024 21:58:46 +00:00  smartLicenseProductInfo.odm
+53003   -rw-              837  Feb 14 2024 21:58:46 +00:00  snmp.odm
+53004   -rw-              692  Feb 14 2024 21:58:46 +00:00  snmpUserGroup.odm
+53005   -rw-              866  Feb 14 2024 21:58:46 +00:00  stealthwatch.odm
+53006   -rw-              690  Feb 14 2024 21:58:46 +00:00  stpMonitoring.odm
+53007   -rw-              755  Feb 14 2024 21:58:46 +00:00  stpMonitoringMst.odm
+53008   -rw-              532  Feb 14 2024 21:58:46 +00:00  stpMonitoringMstDetail.odm
+53009   -rw-              731  Feb 14 2024 21:58:46 +00:00  stpMonitoringrstp.odm
+53010   -rw-              671  Feb 14 2024 21:58:46 +00:00  switchStackMode.odm
+53011   -rw-              756  Feb 14 2024 21:58:46 +00:00  switchoverRedundancy.odm
+53012   -rw-              824  Feb 14 2024 21:58:46 +00:00  switchportMode.odm
+53013   -rw-              871  Feb 14 2024 21:58:46 +00:00  user.odm
+53014   -rw-             1187  Feb 14 2024 21:58:46 +00:00  userAAA.odm
+53015   -rw-             1399  Feb 14 2024 21:58:46 +00:00  userCreation.odm
+53016   -rw-              820  Feb 14 2024 21:58:46 +00:00  userNew.odm
+53017   -rw-             1077  Feb 14 2024 21:58:46 +00:00  version.odm
+53018   -rw-              559  Feb 14 2024 21:58:46 +00:00  vlanGrp.odm
+53019   -rw-              863  Feb 14 2024 21:58:46 +00:00  vtp.odm
+53020   -rw-              672  Feb 14 2024 21:58:46 +00:00  wlanClientCount.odm
+
+3748556800 bytes total (3670564864 bytes free)
+Directory of nvram:/
+
+13      -rw-               60                    <no date>  ma_trap_keyword
+11      -rw-             1507                    <no date>  sdwan_trap.eci
+10      -rw-                0                    <no date>  ifIndex-table
+9       -rw-              805                    <no date>  CiscoLicensi#1CA.cer
+8       -rw-              818                    <no date>  IOS-Self-Sig#1.cer
+7       -rw-               17                    <no date>  ecfm_ieee_mib
+5       -rw-             1497                    <no date>  C1111X-2x1GE_0_0_0
+3       -rw-             1150                    <no date>  C1111X-ES-8_0_1_0
+2       ----              299                    <no date>  persistent-data
+1       ----                4                    <no date>  private-KS1
+32771   -rw-                0                    <no date>  underlying-config
+32770   ----                0                    <no date>  private-config
+32769   -rw-                0                    <no date>  startup-config
+
+33554432 bytes total (33541068 bytes free)
+Router#   
+Router#   
+Router#
+Router#
+Router#
+Router#
+Router#  
+Router#         sh lic all   
+Smart Licensing Status
+======================
+
+Smart Licensing is ENABLED
+
+License Conversion:
+  Automatic Conversion Enabled: True
+  Status: Not started
+
+Export Authorization Key:
+  Features Authorized:
+    <none>
+
+Utility:
+  Status: DISABLED
+
+Smart Licensing Using Policy:
+  Status: ENABLED
+
+Data Privacy:
+  Sending Hostname: yes
+    Callhome hostname privacy: DISABLED
+    Smart Licensing hostname privacy: DISABLED
+  Version privacy: DISABLED
+
+Transport:
+  Type: cslu
+  Cslu address: <empty>
+  Proxy:
+    Not Configured
+
+Miscellaneous:
+  Custom Id: <empty>
+
+Policy:
+  Policy in use: Merged from multiple sources.
+  Reporting ACK required: yes (CISCO default)
+  Unenforced/Non-Export Perpetual Attributes:
+    First report requirement (days): 365 (CISCO default)
+    Reporting frequency (days): 0 (CISCO default)
+    Report on change (days): 90 (CISCO default)
+  Unenforced/Non-Export Subscription Attributes:
+    First report requirement (days): 90 (CISCO default)
+    Reporting frequency (days): 90 (CISCO default)
+    Report on change (days): 90 (CISCO default)
+  Enforced (Perpetual/Subscription) License Attributes:
+    First report requirement (days): 0 (CISCO default)
+    Reporting frequency (days): 0 (CISCO default)
+    Report on change (days): 0 (CISCO default)
+  Export (Perpetual/Subscription) License Attributes:
+    First report requirement (days): 0 (CISCO default)
+    Reporting frequency (days): 0 (CISCO default)
+    Report on change (days): 0 (CISCO default)
+
+Usage Reporting:
+  Last ACK received: <none>
+  Next ACK deadline: <none>
+  Reporting push interval: 0 (no reporting)
+  Next ACK push check: <none>
+  Next report push: <none>
+  Last report push: <none>
+  Last report file write: <none>
+
+Trust Code Installed: <none>
+
+License Usage
+=============
+
+No licenses in use
+
+Product Information
+===================
+UDI: PID:C1111X-8P,SN:FGL2613LFZW
+
+Agent Version
+=============
+Smart Agent for Licensing: 5.1.30_rel/137
+
+License Authorizations
+======================
+Overall status:
+  Active: PID:C1111X-8P,SN:FGL2613LFZW
+      Status: RESERVATION IN PROGRESS on Mar 25 18:26:48 2022 UTC
+      Request code: CB-ZC1111X-8P:FGL2613LFZW-A8STcBg6m-E2
+
+Purchased Licenses:
+  No Purchase Information Available
+
+ 
+
+
+Router#   
+Router#
+Router#
+Router#
+Router#
+Router#    
+Router#  sh lic udi   
+UDI: PID:C1111X-8P,SN:FGL2613LFZW
+
+
+Router#   
+Router#    
+Router#
+Router#    sh 
