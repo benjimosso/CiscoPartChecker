@@ -1,8 +1,10 @@
 import Link from "next/link";
 import Images from "./Images";
+import supabase from "../config/supabaseClient";
+
 
 export default function SingleItem({ single }) {
-
+  
   // Object.keys(single).map((item) => {
   //   console.log(item, single[item])
   // }) OPTION TO RENDER THINGS IN A LOOP
@@ -118,6 +120,13 @@ export default function SingleItem({ single }) {
       <p className="pt-1 flex justify-center text-sm font-sans font-bold">
         ***some part numbers may not be correct ***
       </p>
+        <div className="flex justify-center pt-4">
+          <Link href="/edit/[id]" as={`/edit/${single.ID}`}>
+            <p className="bg-indigo-500 text-white px-4 py-2 rounded-md">
+              Edit
+            </p>
+          </Link>
+        </div>
     </div>
   );
 }
