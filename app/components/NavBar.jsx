@@ -8,6 +8,7 @@ export default function NavBar({ user }) {
     <nav className="bg-neutral-500 text-neutral-100 p-4 flex justify-between">
       <ul className="flex items-center">
         <li className="pl-4 pr-4">
+         {/* TO CHECK, NEED THE HOME PAGE BUTTON TO REFRESH THE PAGE... */}
           <Link href="/">
             <div className="flex items-center">
               <IoMdHome />
