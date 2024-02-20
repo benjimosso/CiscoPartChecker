@@ -2,9 +2,11 @@ import Link from "next/link";
 import { IoMdHome } from "react-icons/io";
 import { IoMdInformationCircle } from "react-icons/io";
 import LogouButton from "./LogouButton";
+import SearchBar from "./SearchBar";
 
 export default function NavBar({ user }) {
   return (
+    <>
     <nav className="bg-neutral-500 text-neutral-100 p-4 flex justify-between">
       <ul className="flex items-center">
         <li className="pl-4 pr-4">
@@ -44,6 +46,9 @@ export default function NavBar({ user }) {
           </li>
         </ul>
       )}
+      
     </nav>
+    {/* It could be an idea to put the searchbar here...  */}
+    </>
   );
 }

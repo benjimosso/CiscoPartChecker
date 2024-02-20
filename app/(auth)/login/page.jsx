@@ -24,6 +24,7 @@ export default function Login() {
 
         if (!error) {
             router.push("/");
+            router.refresh();
         }
     };
 
@@ -32,7 +33,7 @@ export default function Login() {
     <div className="flex-1 flex items-center flex-col">
       <h2 className="text-2xl pb-4 font-bold">Login</h2>
         <AuthForm handleSubmit={handleSubmit} />
-        {error && <p>{error}</p>}
+        {error && <p className="pt-2 text-red-500 font-bold">{error}</p>}
     </div>
   )
 }

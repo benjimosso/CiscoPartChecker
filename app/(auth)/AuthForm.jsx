@@ -9,7 +9,7 @@ export default function AuthForm({ handleSubmit }) {
   return (
     <form
       onSubmit={(e) => handleSubmit(e, email, password)}
-      className="flex flex-col gap-4 w-1/2 mx-auto mt-8"
+      className="flex flex-col gap-4 w-1/2 mx-auto mt-8 max-w-3xl p-4 border-2 border-gray-300 rounded-md bg-gray-200"
     >
       <div className="flex flex-col items-center">
         <label htmlFor="email" className="text-lg font-bold">

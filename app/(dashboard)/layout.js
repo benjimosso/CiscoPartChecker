@@ -18,8 +18,6 @@ export default async function DashboardLayout({ children }) {
       {/* if a user is logged in, send credentials, otherwhise do not. */}
       {data.session ? <Navbar user={data.session.user} /> : <Navbar />}
       {children}
-      {/* The option below did not work, is passing the user as undefined. */}
-      {/* {React.cloneElement(children, { user: data.session.user })} */}
       <Footer />
     </div>
   );

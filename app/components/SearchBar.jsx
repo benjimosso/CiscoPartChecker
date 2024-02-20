@@ -3,6 +3,8 @@ import { useState, useEffect } from "react";
 import Image from "next/image";
 import logo from "../assets/images/logo.png";
 
+// idea: add searchbar to the navbar component, this will allow the user to search for items from any page.
+
 export default function SearchBar({
   ciscoData,
   CiscoId,
