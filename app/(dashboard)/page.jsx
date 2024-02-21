@@ -14,7 +14,7 @@ export default function Home() {
 
   useEffect(() => {
     const getData = async () => {
-      const { data, error } = await supabase.from("Cisco").select();
+      const { data, error } = await supabase.from("cisco").select();
       if (error) console.log("Error fetching data from Supabase: ", error);
       setData(null);
       if (data) {
@@ -26,9 +26,9 @@ export default function Home() {
 
   const fetchDataForId = async (id) => {
     const { data: single, error } = await supabase
-      .from("Cisco")
+      .from("cisco")
       .select()
-      .eq("ID", id)
+      .eq("id", id)
       .single();
     setCiscoSingle(single);
   };

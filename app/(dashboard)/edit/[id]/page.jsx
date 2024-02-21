@@ -16,7 +16,7 @@ async function checkUser() {
 
 async function getItem(id) {
   const supabase = createServerComponentClient({ cookies });
-  const { data } = await supabase.from("Cisco").select().eq("ID", id).single();
+  const { data } = await supabase.from("cisco").select().eq("id", id).single();
   if (!data) {
     return { notFound: true };
   }

@@ -22,7 +22,7 @@ export default function SearchBar({
     }
     setActiveSearch(
       ciscoData
-        .map((c) => c.CiscoPN)
+        .map((c) => c.ciscopn)
         .filter((c) => c.includes(e.target.value.toUpperCase()))
         .slice(0, 8)
     );
@@ -31,11 +31,11 @@ export default function SearchBar({
   const handleClick = async (e, s) => {
     e.preventDefault();
     ciscoData.forEach((c) => {
-      if (c.CiscoPN === s) {
-        setCiscoId(c.ID);
+      if (c.ciscopn === s) {
+        setCiscoId(c.id);
         setActiveSearch([]);
-        fetchDataForId(c.ID);
-        setPlaceholder(c.CiscoPN);
+        fetchDataForId(c.id);
+        setPlaceholder(c.ciscopn);
       }
     });
   };
