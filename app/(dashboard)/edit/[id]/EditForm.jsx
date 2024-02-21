@@ -1,37 +1,49 @@
 'use client'
 import { useState } from 'react';
+import { useRouter } from 'next/navigation';
+import supabase from '@/app/config/supabaseClient';
 
-export default function EditForm({ item }) {
-
+export default function  EditForm({ item }) {
+  const router = useRouter();
   
-  const [ciscoPN, setCiscoPN] = useState(item.item.ciscopn);
-  const [description, setDescription] = useState(item.item.description);
+  const [ciscoPN, setCiscoPN] = useState(item.ciscopn);
+  const [description, setDescription] = useState(item.description);
   
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    console.log(ciscoPN);
+    const { data, error } = await supabase
+      .from('cisco')
+      .update({ ciscopn: ciscoPN, description: description })
+      .eq('id', item.id);
+
+    if (error) {
+      console.error(error);
+    } 
+    if (!error) {
+      router.refresh();
+    }
   }
   
 
 
   return (
    <form 
-   className="flex flex-col gap-4 w-1/2 mx-auto mt-8 max-w-3xl p-4 border-2 border-gray-300 rounded-md bg-gray-200"
+   className="flex flex-col gap-4 w-2/3  mx-auto mt-8 p-4 border-2 border-gray-300 rounded-md bg-gray-200"
    onSubmit={handleSubmit}
    >
     {/* CISCO PN */}
-    <label className='flex flex-col justify-center items-center'>
+    <label className='flex flex-col justify-center items-center '>
       <span className='font-bold text-2xl'>Cisco PN</span>
       <div className='flex items-center'>
       <span>Current Value: </span>
-      <p className='font-bold text-lg pl-3 text-blue-700'>{`${item.item.ciscopn}`}</p>
+      <p className='font-bold text-lg pl-3 text-blue-700'>{`${item.ciscopn}`}</p>
       </div>
       <input 
-      className="border-2 border-gray-300 p-2 rounded-md w-full focus:outline-none focus:ring-2 focus:ring-indigo-400 focus:border-transparent font-bold"
+      className="input-form"
       type="text" 
       onChange={(e) => setCiscoPN(e.target.value)}
       value={ciscoPN}
-      // placeholder={`${item.item.ciscopn}`}
+      // placeholder={`${item.ciscopn}`}
       />
       {/* DESCRIPTION */}
     </label>
@@ -39,17 +51,17 @@ export default function EditForm({ item }) {
       <span className='font-bold text-2xl'>Description</span>
       <div className='flex items-center'>
       <span>Current Value: </span>
-      <p className='font-bold text-lg pl-3 text-blue-700'>{`${item.item.description}`}</p>
+      <p className='font-bold text-lg pl-3 text-blue-700'>{`${item.description}`}</p>
       </div>
       <input 
-      className="border-2 border-gray-300 p-2 rounded-md w-full focus:outline-none focus:ring-2 focus:ring-indigo-400 focus:border-transparent font-bold"
+      className="input-form"
       type="text" 
       onChange={(e) => setDescription(e.target.value)}
       value={description}
-      // placeholder={`${item.item.ciscopn}`}
+      // placeholder={`${item.ciscopn}`}
       />
     </label>
-    <button className='bg-indigo-500 text-white px-4 py-2 rounded-md'>Update</button>
+    <button className='btn1'>Update</button>
    </form>
  
   )
@@ -58,7 +70,7 @@ export default function EditForm({ item }) {
 
   {/* <div>
     <select>
-      {Object.keys(item.item).map((key) => {
+      {Object.keys(item).map((key) => {
         return <option key={key} value={key}>{key}</option>
       })}
     </select>

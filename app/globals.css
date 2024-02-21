@@ -8,8 +8,6 @@
   --background-end-rgb: 255, 255, 255;
 } */
 
-
-
 @media (prefers-color-scheme: dark) {
   :root {
     --foreground-rgb: 255, 255, 255;
@@ -32,4 +30,32 @@ body {
   .text-balance {
     text-wrap: balance;
   }
+}
+
+.input-form {
+  @apply border-2
+   border-gray-300 
+   p-2 
+   rounded-md 
+   w-2/3 
+   focus:outline-none 
+   focus:ring-2 
+   focus:ring-indigo-400 
+   focus:border-transparent 
+   font-bold;
+}
+
+.btn1 {
+  @apply bg-indigo-500 
+  text-white 
+  p-2 
+  rounded-md 
+  w-1/2 
+  mx-auto 
+  hover:bg-indigo-600 
+  focus:outline-none 
+  focus:ring-2 
+  focus:ring-indigo-400 
+  focus:ring-offset-2 
+  focus:ring-offset-gray-100;
 }

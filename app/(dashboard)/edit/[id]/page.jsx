@@ -20,7 +20,7 @@ async function getItem(id) {
   if (!data) {
     return { notFound: true };
   }
-  return { item: data };
+  return  data ;
 }
 
 export default async function Edit({ params }) {
