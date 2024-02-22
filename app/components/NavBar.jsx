@@ -4,7 +4,12 @@ import { IoMdInformationCircle } from "react-icons/io";
 import LogouButton from "./LogouButton";
 import SearchBar from "./SearchBar";
 
-export default function NavBar({ user }) {
+export default function NavBar({ user, ciscoData }) {
+
+  const re = new RegExp("^.+?(?=@)")
+  const username = user.email.match(re);
+  
+
   return (
     <>
     <nav className="bg-neutral-500 text-neutral-100 p-4 flex justify-between">
@@ -29,7 +34,7 @@ export default function NavBar({ user }) {
       </ul>
       {user ? (
         <div className="flex items-center justify-center">
-          <p className="pr-4">{user.email}</p>
+          <p className="pr-4">{username}</p>
           <LogouButton/>
         </div>
       ) : (
@@ -49,6 +54,7 @@ export default function NavBar({ user }) {
       
     </nav>
     {/* It could be an idea to put the searchbar here...  */}
+    <SearchBar ciscoData={ciscoData} />
     </>
   );
 }

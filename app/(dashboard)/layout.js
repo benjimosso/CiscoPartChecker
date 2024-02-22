@@ -7,16 +7,16 @@ import Footer from "../components/Footer";
 
 export default async function DashboardLayout({ children }) {
   const supabase = createServerComponentClient({ cookies });
-  const { data } = await supabase.auth.getSession();
-  // console.log("Data from layout: ", data);
-  // if (!data.session) {
-  //   redirect("/login");
-  // }
-
+  const { data: session } = await supabase.auth.getSession();
+  const { data, error } = await supabase.from('cisco').select('id, ciscopn');
+  if (error) {
+    console.error(error);
+  }
   return (
     <div className="flex flex-col h-screen">
       {/* if a user is logged in, send credentials, otherwhise do not. */}
-      {data.session ? <Navbar user={data.session.user} /> : <Navbar />}
+      {session.session ? <Navbar user={session.session.user} ciscoData={data}/> 
+      : <Navbar ciscoData={data}/>}
       {children}
       <Footer />
     </div>

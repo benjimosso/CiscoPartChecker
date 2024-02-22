@@ -15,8 +15,18 @@ const Images = ({ images }) => {
   //   };
 
   return (
-    <div className="flex">
-      <div className="flex flex-col justify-center pr-6">
+    <div className="flex flex-col">
+      <div className="flex justify-center mt-3 overflow-hidden">
+        {/* Render the larger image */}
+        {selectedImage && (
+          <Image src={selectedImage} 
+          alt={`image`} 
+          height={500} 
+          width={500} 
+          className="rounded-lg hover:scale-125 transition-all duration-500 cursor-pointer w-96" />
+        )}
+      </div>
+      <div className="flex  justify-center pr-6">
         {/* Render small thumbnail images */}
         {images.map((image, index) => (
           <Image
@@ -26,15 +36,9 @@ const Images = ({ images }) => {
             height={150}
             width={150}
             onClick={() => handleThumbnailClick(image)}
-            className="m-2 border-2 border-indigo-200 hover:border-indigo-500 cursor-pointer rounded-3xl"
+            className="m-2 border-2 border-gray-500 hover:border-indigo-500 cursor-pointer  "
           />
         ))}
-      </div>
-      <div className="flex justify-center mt-3 max-h-[340px] overflow-hidden">
-        {/* Render the larger image */}
-        {selectedImage && (
-          <Image src={selectedImage} alt={`image`} height={500} width={500} className="rounded-lg hover:scale-125 transition-all duration-500 cursor-pointer" />
-        )}
       </div>
     </div>
   );

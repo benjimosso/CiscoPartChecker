@@ -17,6 +17,11 @@ const nextConfig = {
                 hostname: 'www.tempestns.com',
                 port: ''
             },
+            {
+              protocol: 'https',
+              hostname: 'opqkqhhqloevwevuydcs.supabase.co',
+              port: ''
+            }
         ],
       },
 };

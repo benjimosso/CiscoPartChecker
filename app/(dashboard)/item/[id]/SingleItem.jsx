@@ -1,7 +1,6 @@
 import Link from "next/link";
-import Images from "./Images";
-// import useSession from "../hooks/useSession";
-import EditButton from "./EditButton";
+import Images from "../../../components/Images";
+import EditButton from "../../../components/EditButton";
 
 export default function SingleItem({ single }) {
     

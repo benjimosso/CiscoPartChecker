@@ -2,15 +2,18 @@
 import { useState, useEffect } from "react";
 import Image from "next/image";
 import logo from "../assets/images/logo.png";
+import { useRouter } from "next/navigation";
 
 // idea: add searchbar to the navbar component, this will allow the user to search for items from any page.
 
 export default function SearchBar({
   ciscoData,
-  CiscoId,
-  setCiscoId,
-  fetchDataForId,
+  // CiscoId,
+  // setCiscoId,
+  // fetchDataForId,
 }) {
+
+  const router = useRouter();
   const [activeSearch, setActiveSearch] = useState([]);
   const [placeholder, setPlaceholder] = useState("");
 
@@ -32,10 +35,11 @@ export default function SearchBar({
     e.preventDefault();
     ciscoData.forEach((c) => {
       if (c.ciscopn === s) {
-        setCiscoId(c.id);
+        // setCiscoId(c.id);
         setActiveSearch([]);
-        fetchDataForId(c.id);
+        // fetchDataForId(c.id);
         setPlaceholder(c.ciscopn);
+        router.push(`/item/${c.id}`);
       }
     });
   };

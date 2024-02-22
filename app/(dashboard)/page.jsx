@@ -1,41 +1,40 @@
-"use client";
 // components
-import SearchBar from "../components/SearchBar";
-import SingleItem from "../components/SingleItem";
-import EditButton from "../components/EditButton";
+// import SearchBar from "../components/SearchBar";
+// import SingleItem from "./item/[id]/SingleItem";
+// import EditButton from "../components/EditButton";
 // hooks
-import { useState, useEffect } from "react";
-import supabase from "../config/supabaseClient";
+// import { useState, useEffect } from "react";
+// import supabase from "../config/supabaseClient";
 
 export default function Home() {
-  const [CiscoId, setCiscoId] = useState(null);
-  const [data, setData] = useState([]);
-  const [ciscoSingle, setCiscoSingle] = useState(null);
+  // const [CiscoId, setCiscoId] = useState(null);
+  // const [data, setData] = useState([]);
+  // const [ciscoSingle, setCiscoSingle] = useState(null);
 
-  useEffect(() => {
-    const getData = async () => {
-      const { data, error } = await supabase.from("cisco").select();
-      if (error) console.log("Error fetching data from Supabase: ", error);
-      setData(null);
-      if (data) {
-        setData(data);
-      }
-    };
-    getData();
-  }, []);
+  // useEffect(() => {
+  //   const getData = async () => {
+  //     const { data, error } = await supabase.from("cisco").select();
+  //     if (error) console.log("Error fetching data from Supabase: ", error);
+  //     setData(null);
+  //     if (data) {
+  //       setData(data);
+  //     }
+  //   };
+  //   getData();
+  // }, []);
 
-  const fetchDataForId = async (id) => {
-    const { data: single, error } = await supabase
-      .from("cisco")
-      .select()
-      .eq("id", id)
-      .single();
-    setCiscoSingle(single);
-  };
+  // const fetchDataForId = async (id) => {
+  //   const { data: single, error } = await supabase
+  //     .from("cisco")
+  //     .select()
+  //     .eq("id", id)
+  //     .single();
+  //   setCiscoSingle(single);
+  // };
 
   return (
     <main className="flex-1">
-      {data && (
+      {/* {data && (
         <SearchBar
           ciscoData={data}
           CiscoId={CiscoId}
@@ -44,7 +43,7 @@ export default function Home() {
         />
       )}
 
-      {ciscoSingle !== null && <SingleItem single={ciscoSingle} />}
+      {ciscoSingle !== null && <SingleItem single={ciscoSingle} />} */}
     </main>
   );
 }
