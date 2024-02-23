@@ -9,10 +9,10 @@ export default async function DashboardLayout({ children }) {
   const supabase = createServerComponentClient({ cookies });
   const { data: session } = await supabase.auth.getSession();
   const { data, error } = await supabase.from('cisco').select('id, ciscopn');
-  const { data: rackData, error: rackError } = await supabase.from('rackmounts').select('rackpn, cisco(ciscopn)');
-  rackData.map((r) => {
-    r.cisco.map((c) => console.log(c.ciscopn) )
-  });
+  // const { data: rackData, error: rackError } = await supabase.from('rackmounts').select('rackpn, cisco(ciscopn)');
+  // rackData.map((r) => {
+  //   r.cisco.map((c) => console.log(c.ciscopn) )
+  // });
   if (error) {
     console.error(error);
   }

@@ -24,24 +24,21 @@ export default function SearchBar({
       return false;
     }
 
-        // tests for retrieving data from the server
+    // tests for retrieving data from the server
 
     const { data, error } = await supabase
       .from("cisco")
-      .select("ciscopn, rackmounts!inner(rackpn)")
-      .ilike('rackmounts.rackpn', `%${e.target.value.toUpperCase()}%`)
+      .select("ciscopn")
+      .ilike("ciscopn", `%${e.target.value.toUpperCase()}%`)
       .limit(8);
 
-
     console.log(data);
-  
 
-    
     setActiveSearch(
-      ciscoData
-        .map((c) => c.ciscopn)
-        .filter((c) => c.includes(e.target.value.toUpperCase()))
-        .slice(0, 8)
+      // ciscoData
+        data.map((c) => c.ciscopn)
+        // .filter((c) => c.includes(e.target.value.toUpperCase()))
+        // .slice(0, 8)
     );
   };
 
