@@ -34,7 +34,7 @@ export default function NavBar({ user, ciscoData }) {
       </ul>
       {user ? (
         <div className="flex items-center justify-center">
-          <p className="pr-4">{username}</p>
+          <p className="pr-4">Hi, {username}</p>
           <LogouButton/>
         </div>
       ) : (

@@ -3,6 +3,7 @@ import { useState, useEffect } from "react";
 import Image from "next/image";
 import logo from "../assets/images/logo.png";
 import { useRouter } from "next/navigation";
+import supabase from "../config/supabaseClient";
 
 // idea: add searchbar to the navbar component, this will allow the user to search for items from any page.
 
@@ -12,17 +13,30 @@ export default function SearchBar({
   // setCiscoId,
   // fetchDataForId,
 }) {
-
   const router = useRouter();
   const [activeSearch, setActiveSearch] = useState([]);
   const [placeholder, setPlaceholder] = useState("");
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     setPlaceholder(e.target.value);
     if (e.target.value === "") {
       setActiveSearch([]);
       return false;
     }
+
+        // tests for retrieving data from the server
+
+    const { data, error } = await supabase
+      .from("cisco")
+      .select("ciscopn, rackmounts!inner(rackpn)")
+      .ilike('rackmounts.rackpn', `%${e.target.value.toUpperCase()}%`)
+      .limit(8);
+
+
+    console.log(data);
+  
+
+    
     setActiveSearch(
       ciscoData
         .map((c) => c.ciscopn)

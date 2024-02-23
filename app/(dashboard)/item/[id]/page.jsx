@@ -12,12 +12,13 @@ async function getSingleItem(id) {
   const supabase = createServerComponentClient({ cookies });
   const { data, error } = await supabase
     .from("cisco")
-    .select()
+    .select('*, rackmounts(rackpn)')
     .eq("id", id)
     .single();
   // get session of the user
   const { data: session } = await supabase.auth.getSession();
   return { data, error, session };
+  
 }
 
 export default async function SingleItemShow({ params }) {
