@@ -1,10 +1,13 @@
 import Link from "next/link";
+// components
+import NoImages from "@/app/components/NoImages";
 import Images from "../../../components/Images";
 import EditButton from "../../../components/EditButton";
+/// THIS SINGLE COMPONENT IS NOT BEING USED, IT WAS REPLACED BY THE PAGE COMPONENT
 
 export default function SingleItem({ single }) {
     
-
+ 
 
   // Object.keys(single).map((item) => {
   //   console.log(item, single[item])

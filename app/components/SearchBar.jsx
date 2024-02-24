@@ -32,7 +32,10 @@ export default function SearchBar({
       .ilike("ciscopn", `%${e.target.value.toUpperCase()}%`)
       .limit(8);
 
-    console.log(data);
+    if (error) {
+      console.error(error);
+    
+    }
 
     setActiveSearch(
       // ciscoData
@@ -56,32 +59,32 @@ export default function SearchBar({
   };
 
   return (
-    <div className="flex flex-col items-center">
-      <Image
+    <div className="flex flex-col justify-center">
+      {/* <Image
         className="pt-7 pb-0"
         src={logo}
         alt="dhd logo"
         width={100}
         height={100}
-      />
+      /> */}
 
-      <form className="w-[500px] relative pt-8 ">
+      <form className="w-[400px] relative pt-8 ">
         <div className="">
           <input
             onChange={(e) => handleSubmit(e)}
             type="search"
             placeholder="Type here"
-            className="w-full p-4 rounded-full bg-slate-300 text-black border border-slate-300 focus:outline-none focus:ring-2 focus:ring-indigo-400 focus:border-transparent"
+            className="w-full p-2 rounded-sm bg-white text-black border border-black focus:outline-none focus:ring-2 focus:ring-indigo-400 focus:border-transparent"
             value={placeholder}
           />
         </div>
 
         {activeSearch.length > 0 && (
-          <div className=" mt-1 p-4 bg-slate-300 text-black w-full rounded-xl left-1/2-translate-x-1/2 flex flex-col gap-2 overflow-auto">
+          <div className="absolute  p-2 bg-slate-50 text-black w-full  left-1/2-translate-x-1/2 flex flex-col gap-2 overflow-auto">
             {activeSearch.map((s, i) => (
               <button
                 onClick={(e) => handleClick(e, s)}
-                className=" border-2 p-2 rounded-full hover:bg-slate-400 "
+                className=" border-2 p-2 rounded-sm hover:bg-slate-400 "
                 key={i}
               >
                 {s}
