@@ -41,7 +41,7 @@ const Images = ({ images }) => {
             height="150"
             width="150"
             onClick={() => handleThumbnailClick(image)}
-            className="m-2 border-2 border-gray-500 hover:border-indigo-500 cursor-pointer  "
+            className="m-2 border-2 border-gray-500 hover:border-indigo-500 cursor-pointer overflow-auto h-28"
           />
         ))}
       </div>

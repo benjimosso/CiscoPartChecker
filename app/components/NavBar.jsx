@@ -38,7 +38,7 @@ export default function NavBar({ user, ciscoData }) {
         <SearchBar ciscoData={ciscoData} />
         {user ? (
           <div className="flex items-center justify-center">
-            <p className="pr-4">Hi, {username}</p>
+            <p className="pr-4">Hi, {user.email}</p>
             <LogouButton />
           </div>
         ) : (
