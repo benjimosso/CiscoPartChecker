@@ -10,8 +10,7 @@ export default function PaginationControls({hasNextPage, hasPrevPage, dataLength
   
     const page = searchParams.get('page') ?? '1'
     const per_page = searchParams.get('per_page') ?? '10'
-    console.log()
-    console.log('per page', per_page)
+  
   
     return (
       <div className='flex gap-2 m-6'>

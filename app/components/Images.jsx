@@ -5,6 +5,7 @@ import Image from "next/image";
 const Images = ({ images }) => {
   const [selectedImage, setSelectedImage] = useState(images[0]);
 
+
   // handle the click event on the thumbnail
   const handleThumbnailClick = (image) => {
     setSelectedImage(image);

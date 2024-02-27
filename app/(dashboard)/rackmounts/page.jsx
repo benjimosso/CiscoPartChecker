@@ -18,13 +18,12 @@ export default async function page({searchParams}) {
   const per_page = searchParams['per_page'] ?? '10'
    // mocked, skipped and limited in the real app
    const start = (Number(page) - 1) * Number(per_page) // 0, 5, 10 ...
-   console.log(start)
    const end = start + Number(per_page) // 5, 10, 15 ...
-   console.log("este es end",end)
+  
 
    const entries = data.slice(start, end)  
 
-
+// either here or in the racklist component I need to make a filter searchbar for the rackmounts!!!!
 
   return (
     <div className="flex flex-col flex-1 justify-center items-center m-6 rounded-md">

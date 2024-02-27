@@ -1,7 +1,7 @@
 'use client'
 import { useState } from 'react';
 import { useRouter } from 'next/navigation';
-import supabase from '@/app/config/supabaseClient';
+import supabase from '../../../config/supabaseClient';
 
 export default function  EditForm({ item }) {
   const router = useRouter();

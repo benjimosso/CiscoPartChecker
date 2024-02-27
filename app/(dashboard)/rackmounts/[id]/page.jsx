@@ -13,13 +13,13 @@ async function getSingleRackmount(id) {
 export default async function SingleRackmount({ params }) {
 
      const { data, error } = await getSingleRackmount(params.id)
-    console.log("Cisco Data HERE:" ,data.cisco)
+   
 
   return (
-    <div className='flex flex-col items-center justify-center'>
-    <div className="flex justify-center  bg-white w-3/4 h-auto p-6 m-6 rounded-md ">
+    <div className='flex flex-1 flex-col items-center justify-center'>
+    <div className="flex justify-normal   bg-white w-3/4 h-auto p-6 m-6 rounded-md ">
         <div className="border-r-2  border-slate-300 pr-4">
-        {data.image ? <Image src={data.image} alt="Rackmount Image" width={100} height={100} className="w-96 h-auto" /> : <Image src={noImage} alt="No Image Available" className="w-96 h-auto" />}
+        {data.image ? <Image src={data.image} alt="Rackmount Image" width={100} height={100} className="w-96 h-auto" /> : <Image src={noImage} alt="No Image Available" className="w-96 h-auto " />}
         </div>
         <div className="flex flex-col pl-6">
           {data.rackpn && (
