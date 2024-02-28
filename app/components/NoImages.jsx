@@ -7,7 +7,7 @@ export default function NoImages() {
 
   return (
     <div className="flex flex-col">
-    <div className="flex   overflow-hidden w-96 h-96">
+    <div className="flex overflow-hidden w-96 h-96">
       {/* Render the larger image */}
     
         <Image src={noImage} 

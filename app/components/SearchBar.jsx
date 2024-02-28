@@ -80,7 +80,7 @@ export default function SearchBar({
         </div>
 
         {activeSearch.length > 0 && (
-          <div className="absolute  p-2 bg-slate-50 text-black w-full  left-1/2-translate-x-1/2 flex flex-col gap-2 overflow-auto">
+          <div className="absolute  p-2 bg-slate-50 text-black w-full  left-1/2-translate-x-1/2 flex flex-col gap-2 overflow-auto z-50">
             {activeSearch.map((s, i) => (
               <button
                 onClick={(e) => handleClick(e, s)}
