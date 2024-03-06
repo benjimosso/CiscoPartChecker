@@ -34,14 +34,13 @@ export default function SearchBar({
 
     if (error) {
       console.error(error);
-    
     }
 
     setActiveSearch(
       // ciscoData
-        data.map((c) => c.ciscopn)
-        // .filter((c) => c.includes(e.target.value.toUpperCase()))
-        // .slice(0, 8)
+      data.map((c) => c.ciscopn)
+      // .filter((c) => c.includes(e.target.value.toUpperCase()))
+      // .slice(0, 8)
     );
   };
 
@@ -60,14 +59,6 @@ export default function SearchBar({
 
   return (
     <div className="flex flex-col justify-center">
-      {/* <Image
-        className="pt-7 pb-0"
-        src={logo}
-        alt="dhd logo"
-        width={100}
-        height={100}
-      /> */}
-
       <form className="w-[400px] relative pt-8 ">
         <div className="">
           <input
