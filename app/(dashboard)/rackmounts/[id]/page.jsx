@@ -1,7 +1,7 @@
 import { createServerComponentClient } from "@supabase/auth-helpers-nextjs";
 import { cookies } from "next/headers";
 // ebay client
-import { EbayClient } from "../../../config/ebayClient";
+// import { EbayClient } from "../../../config/ebayClient";
 // components
 import noImage from "../../../assets/images/no-image-available.jpg";
 import Images from "../../../components/Images";
@@ -23,11 +23,13 @@ export default async function SingleRackmount({ params }) {
     console.error(error);
     return <div>Error</div>;
   }
-  const ebayData = await EbayClient({ keyword: data.rackpn });
-  const ebayItem = ebayData.findItemsByKeywordsResponse[0].searchResult[0];
-  console.log("+++++++++++++++++++++++++++++++++++++++++++++++++");
-  console.log(ebayItem);
-  console.log("+++++++++++++++++++++++++++++++++++++++++++++++++");
+
+  // EBAY DATA OPTION
+  // const ebayData = await EbayClient({ keyword: data.rackpn });
+  // const ebayItem = ebayData.findItemsByKeywordsResponse[0].searchResult[0];
+  // console.log("+++++++++++++++++++++++++++++++++++++++++++++++++");
+  // console.log(ebayItem);
+  // console.log("+++++++++++++++++++++++++++++++++++++++++++++++++");
 
   return (
     <div className="flex flex-1 flex-col items-center justify-center">
