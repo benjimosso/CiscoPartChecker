@@ -15,17 +15,23 @@ async function getSingleItem(id) {
   const supabase = createServerComponentClient({ cookies });
   const { data, error } = await supabase
     .from("cisco")
-    .select("*, rackmounts(rackpn)")
+    .select("*, rackmounts(rackpn), ciscofans(fans(*))")
     .eq("id", id)
     .single();
   // get session of the user
   const { data: session } = await supabase.auth.getSession();
+  // const {data: data2} = await supabase
+  // .from("ciscofans")
+  // .select("*, cisco(ciscopn), fans(fan_pn)")
+  // .eq("cisco_id", id);
   return { data, error, session };
 }
 
 export default async function SingleItemShow({ params }) {
   const { data: single, error, session } = await getSingleItem(params.id);
-  
+  // console output of a many to many relationship between cisco and ciscofans and fans
+  // here the 0 next to ciscofans is the index of the array, in case is more than one i can map through it... example below, it can be item or item.fans or item.fans.fan_pn
+//  single.ciscofans.map((item) => console.log(item.fans.fan_pn));
   
 
   if (error) {
