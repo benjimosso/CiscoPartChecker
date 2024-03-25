@@ -15,7 +15,7 @@ async function getSingleItem(id) {
   const supabase = createServerComponentClient({ cookies });
   const { data, error } = await supabase
     .from("cisco")
-    .select("*, rackmounts(rackpn), ciscofans(fans(*))")
+    .select("*, rackmounts(rackpn), ciscofans(fans(*)), ciscopowers(powers(*))")
     .eq("id", id)
     .single();
   // get session of the user
@@ -30,8 +30,10 @@ async function getSingleItem(id) {
 export default async function SingleItemShow({ params }) {
   const { data: single, error, session } = await getSingleItem(params.id);
   // console output of a many to many relationship between cisco and ciscofans and fans
+  // console.log(single.ciscopowers);
   // here the 0 next to ciscofans is the index of the array, in case is more than one i can map through it... example below, it can be item or item.fans or item.fans.fan_pn
-//  single.ciscofans.map((item) => console.log(item.fans.fan_pn));
+ single.ciscofans.map((item) => console.log(item.fans.fan_pn));
+ single.ciscopowers.map((item) => console.log(item.powers.power_pn));
   
 
   if (error) {
@@ -80,10 +82,20 @@ export default async function SingleItemShow({ params }) {
               </Link>
             </div>
           )}
-           {single.powers && (
+           {/* {single.powers && (
             <div className="flex">
               <h1 className="font-bold">Power: </h1>
               <p className="pl-2">{single.powers}</p>
+            </div>
+          )} */}
+
+          { single.ciscopowers && (
+            <div className="">            
+              <h1 className="font-bold">Power: </h1>
+              {single.ciscopowers.map((item, index) => (
+                <p key={index} className="pl-2">{item.powers.power_pn}</p>
+              
+              ) )}
             </div>
           )}
 
