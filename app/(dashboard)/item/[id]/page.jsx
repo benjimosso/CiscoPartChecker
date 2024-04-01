@@ -34,7 +34,7 @@ export default async function SingleItemShow({ params }) {
   // here the 0 next to ciscofans is the index of the array, in case is more than one i can map through it... example below, it can be item or item.fans or item.fans.fan_pn
 //  single.ciscofans.map((item) => console.log(item.fans.fan_pn));
 //  single.ciscopowers.map((item) => console.log(item.powers.power_pn));
-console.log(single)
+console.log(Object.keys(single.ciscofans).length);
   
 
   if (error) {
@@ -90,7 +90,7 @@ console.log(single)
             </div>
           )} */}
 
-          { single.ciscopowers && (
+          { Object.keys(single.ciscopowers).length > 0 && (
             <div className="">            
               <h1 className="font-bold">Power: </h1>
               {single.ciscopowers.map((item, index) => (
@@ -107,10 +107,12 @@ console.log(single)
             </div>
           )}
 
-          {single.fans && (
-            <div className="flex">
+          {Object.keys(single.ciscofans).length > 0 && (
+            <div className="">
               <h1 className="font-bold">Fans: </h1>
-              <p className="pl-2">{single.fans}</p>
+              {single.ciscofans.map((f, index) => (
+                <p key={index} className="pl-2">{f.fans.fan_pn}</p>
+              ))}
             </div>
           )}
 
