@@ -1,30 +1,28 @@
 'use client'
 import { useState } from 'react';
-import { useRouter } from 'next/navigation';
-import supabase from '../../../config/supabaseClient';
+import htmlToPdf from '../../../helpers/htmlTopdf';
+
+
 
 export default function  EditForm({ item }) {
-  const router = useRouter();
   
-  const [ciscoPN, setCiscoPN] = useState(item.ciscopn);
-  const [description, setDescription] = useState(item.description);
   
+  const [power, setPower] = useState('');
+  const [power2, setPower2] = useState('');
+  const [fan, setFan] = useState('');
+  const [rackmount, setRackmount] = useState('');
+
+  console.log(power, fan, rackmount)
   const handleSubmit = async (e) => {
     e.preventDefault();
-    const { data, error } = await supabase
-      .from('cisco')
-      .update({ ciscopn: ciscoPN, description: description })
-      .eq('id', item.id);
-
-    if (error) {
-      console.error(error);
-    } 
-    if (!error) {
-      router.refresh();
-    }
+    htmlToPdf({ 
+      title: 'Cisco PDF',
+      heading: 'Cisco PDF',
+      content: `The item is ${item.ciscopn} with the following options: Power: ${power}, Power 2: ${power2}, Fan: ${fan}, Rackmount: ${rackmount}`
+    })
   }
   
-
+  // IMPORTANT!! I need to check how many powers the unit uses. maybe I can add a row in the table to show the power and fan quantities. 
 
   return (
    <form 
@@ -32,36 +30,83 @@ export default function  EditForm({ item }) {
    onSubmit={handleSubmit}
    >
     {/* CISCO PN */}
-    <label className='flex flex-col justify-center items-center '>
-      <span className='font-bold text-2xl'>Cisco PN</span>
-      <div className='flex items-center'>
-      <span>Current Value: </span>
-      <p className='font-bold text-lg pl-3 text-blue-700'>{`${item.ciscopn}`}</p>
+    <div className='flex flex-col justify-center items-center'>
+      <h1 className='text-2xl font-bold pb-2'>Cisco PN </h1>
+      <p className='text-xl text-blue-700 pb-3 border-slate-600 border-b-2 '>{item.ciscopn}</p>
+    </div>
+    {/* DESCRIPTION */}
+    <div className='flex flex-col justify-center items-center'>
+      <h1 className='text-2xl font-bold pb-2'>Description </h1>
+      <p className='text-xl text-blue-700 pb-3 border-slate-600 border-b-2 '>{item.description}</p>
+    </div>
+    {/* Rackmounts This can change if I need new table for rackmounts.*/}
+    { Object.keys(item.rackmounts).length > 0 && 
+    <div>
+      <div className='flex flex-col justify-center items-center'>
+      <h1 className='text-2xl font-bold pb-2'>Rackmount</h1>
+      <select
+      value={rackmount}
+      onChange={(e) => setRackmount(e.target.value)}
+      >
+        <option value='none'>Select Rackmount</option>
+        <option value="No Rackmount"> No Rackmount</option>
+        <option value={item.rackmounts.rackpn}>{item.rackmounts.rackpn}</option>
+      </select>
+      </div> 
+      </div> }
+    {/* Power */}
+    { Object.keys(item.ciscopowers).length > 0 &&
+    <div>
+      <div className='flex flex-col justify-center items-center'>
+      <h1 className='text-2xl font-bold pb-2'>Power</h1>
+      <select
+      value={power}
+      onChange={(e) => setPower(e.target.value)}
+      >
+        <option value='none'>Select Power</option>
+        <option value="No Power"> No Power</option>
+        {item.ciscopowers.map((power, index) => {
+          return <option key={index} value={power.powers.power_pn}>{power.powers.power_pn}</option>
+        })}
+      </select>
       </div>
-      <input 
-      className="input-form"
-      type="text" 
-      onChange={(e) => setCiscoPN(e.target.value)}
-      value={ciscoPN}
-      // placeholder={`${item.ciscopn}`}
-      />
-      {/* DESCRIPTION */}
-    </label>
-    <label className='flex flex-col justify-center items-center'>
-      <span className='font-bold text-2xl'>Description</span>
-      <div className='flex items-center'>
-      <span>Current Value: </span>
-      <p className='font-bold text-lg pl-3 text-blue-700'>{`${item.description}`}</p>
+    </div> }
+      {/* Second power */}
+       {/* Power */}
+    { Object.keys(item.ciscopowers).length > 0 &&
+    <div>
+      <div className='flex flex-col justify-center items-center'>
+      <h1 className='text-2xl font-bold pb-2'>Second Power</h1>
+      <select
+      value={power2}
+      onChange={(e) => setPower2(e.target.value)}
+      >
+        <option value='none'>Select Power 2</option>
+        <option value="No Power"> No Power</option>
+        {item.ciscopowers.map((power, index) => {
+          return <option key={index} value={power.powers.power_pn}>{power.powers.power_pn}</option>
+        })}
+      </select>
       </div>
-      <input 
-      className="input-form"
-      type="text" 
-      onChange={(e) => setDescription(e.target.value)}
-      value={description}
-      // placeholder={`${item.ciscopn}`}
-      />
-    </label>
-    <button className='btn1'>Update</button>
+    </div> }
+    {/* Fans */}
+    { Object.keys(item.ciscofans).length > 0 &&
+    <div>
+      <div className='flex flex-col justify-center items-center'>
+      <h1 className='text-2xl font-bold pb-2'>Fan</h1>
+      <select
+      value={fan}
+      onChange={(e) => setFan(e.target.value)}
+      >
+        <option value='none'>Select Fan</option>
+        <option value="No Fan"> No Fan</option>
+        {item.ciscofans.map((fan, index) => {
+          return <option key={index} value={fan.fans.fan_pn}>{fan.fans.fan_pn}</option>
+        })}
+      </select>
+      </div>
+    </div> }
+    <button className='btn1'>Generate PDF</button>
    </form>
  
   )

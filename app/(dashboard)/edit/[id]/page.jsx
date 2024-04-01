@@ -16,16 +16,20 @@ async function checkUser() {
 
 async function getItem(id) {
   const supabase = createServerComponentClient({ cookies });
-  const { data } = await supabase.from("cisco").select().eq("id", id).single();
+  const { data } = await supabase
+    .from("cisco")
+    .select("*, rackmounts(rackpn), ciscofans(fans(*)), ciscopowers(powers(*))")
+    .eq("id", id)
+    .single();
   if (!data) {
     return { notFound: true };
   }
-  return  data ;
+  return data;
 }
 
 export default async function Edit({ params }) {
   const user = await checkUser();
-  
+
   const item = await getItem(params.id);
   if (item.notFound) {
     return <h1>Not found</h1>;

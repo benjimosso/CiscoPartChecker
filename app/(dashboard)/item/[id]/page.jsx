@@ -34,7 +34,7 @@ export default async function SingleItemShow({ params }) {
   // here the 0 next to ciscofans is the index of the array, in case is more than one i can map through it... example below, it can be item or item.fans or item.fans.fan_pn
 //  single.ciscofans.map((item) => console.log(item.fans.fan_pn));
 //  single.ciscopowers.map((item) => console.log(item.powers.power_pn));
-console.log(Object.keys(single.ciscofans).length);
+// console.log(single)
   
 
   if (error) {
