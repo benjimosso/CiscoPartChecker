@@ -29,7 +29,7 @@ export default function EditForm({ item }) {
     //   file: "cisco.pdf",
     // }); 
 
-    generatePdfDocument(power, power2, fan, rackmount, item.ciscopn);
+    generatePdfDocument(power, power2, fan, rackmount, item.ciscopn, item.description, item.weight, item.dims);
     // router.push("/");
     
     

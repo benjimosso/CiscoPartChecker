@@ -18,22 +18,24 @@ const styles = StyleSheet.create({
     alignItems: "center", //center the content
     justifyContent: "center", //center the content
     backgroundColor: "white",
-    padding: 10,
+    padding: 1,
   },
   section: {
-    margin: 10,
-    padding: 10,
+    margin: 5,
+    borderBottom: "1px solid #000",
+    // padding: 10,
     // flexGrow: 1,
   },
 
   test: {
     flex: 1,
     flexDirection: "row",
-    justifyContent: "space-between",
+    // justifyContent: "space-between",
     alignItems: "center",
-    padding: 10,
-    margin: 10,
-    
+    padding: 20,
+    fontSize: 12,
+    // margin: 15,
+    // border: "2px solid #000",
   },
   // viewer: {
   //   width: window.innerWidth, //the pdf viewer will take up all of the width and height
@@ -42,21 +44,55 @@ const styles = StyleSheet.create({
 });
 
 // Create Document Component
-function HtmlToPdf({ power, power2, fan, rackmount, filename }) {
+function HtmlToPdf({
+  power,
+  power2,
+  fan,
+  rackmount,
+  ciscopn,
+  description,
+  weight,
+  dims,
+}) {
   return (
     <Document>
       <Page size="A4" style={styles.page}>
         <View style={styles.section}>
-          <Text>{"ESTO ES UN TEST"}</Text>
+          <Text>{"List of Materials"}</Text>
         </View>
         <View style={styles.section}>
           <View style={styles.test}>
-            <Text style={{border: "1px solid #000"}}>{"Power: "}</Text>
+            <Text>{"Cisco PN: "}</Text>
+            <Text>{ciscopn}</Text>
+          </View>
+          <View style={styles.test}>
+            <Text>{"Rackmount: "}</Text>
+            <Text>{rackmount}</Text>
+          </View>
+          <View style={styles.test}>
+            <Text>{"Power: "}</Text>
             <Text>{power}</Text>
           </View>
-          <Text>{power2}</Text>
-          <Text>{fan}</Text>
-          <Text>{rackmount}</Text>
+          <View style={styles.test}>
+            <Text>{"Power2: "}</Text>
+            <Text>{power2}</Text>
+          </View>
+          <View style={styles.test}>
+            <Text>{"Fan: "}</Text>
+            <Text>{fan}</Text>
+          </View>
+          {/* <View style={styles.test}>
+            <Text>{"Description: "}</Text>
+            <Text>{description}</Text>
+          </View> */}
+          <View style={styles.test}>
+            <Text>{"Weight: "}</Text>
+            <Text>{weight}</Text>
+          </View>
+          <View style={styles.test}>
+            <Text>{"Dims: "}</Text>
+            <Text>{dims}</Text>
+          </View>
         </View>
       </Page>
     </Document>

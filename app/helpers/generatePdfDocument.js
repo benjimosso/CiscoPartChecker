@@ -3,7 +3,7 @@ import { pdf } from '@react-pdf/renderer';
 // import PdfDocument from '../PdfDocument';
 import HtmlToPdf from './htmlToPdf';
 
-const generatePdfDocument = async (power, power2, fan, rackmount, ciscopn) => {
+const generatePdfDocument = async (power, power2, fan, rackmount, ciscopn, descriprion, wiight, dims) => {
         const blob = await pdf((
             <HtmlToPdf
                 power={power}
@@ -11,6 +11,9 @@ const generatePdfDocument = async (power, power2, fan, rackmount, ciscopn) => {
                 fan={fan}
                 rackmount={rackmount}
                 ciscopn={ciscopn}
+                description={descriprion}
+                weight={wiight}
+                dims={dims}
 
             />
         )).toBlob();
