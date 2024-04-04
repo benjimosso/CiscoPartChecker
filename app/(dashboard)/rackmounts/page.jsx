@@ -29,6 +29,8 @@ export default async function page({searchParams}) {
     <div className="flex flex-col flex-1 justify-center items-center m-6 rounded-md">
       <div className="bg-white w-1/2 text-black">
       <h1 className="flex justify-center text-2xl  text-black p-8 font-mono">Rackmounts</h1>
+      {/* MAYBE THE FILTER BAR WILL GO HERE. */}
+      <input type='text' className='border-2 border-gray-950  ' />
       <ul>
         {entries.map((r) => (
           <RackmountList key={r.id} data={r} />
