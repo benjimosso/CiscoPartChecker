@@ -83,13 +83,7 @@ export default async function SingleItemShow({ params }) {
               </Link>
             </div>
           )}
-           {/* {single.powers && (
-            <div className="flex">
-              <h1 className="font-bold">Power: </h1>
-              <p className="pl-2">{single.powers}</p>
-            </div>
-          )} */}
-
+         
           { Object.keys(single.ciscopowers).length > 0 && (
             <div className="">            
               <h1 className="font-bold">Power: </h1>
@@ -100,12 +94,12 @@ export default async function SingleItemShow({ params }) {
             </div>
           )}
 
-          {single.p2 && (
+          {/* {single.p2 && (
             <div className="flex">
               <h1 className="font-bold">Power 2: </h1>
               <p className="pl-2">{single.p2}</p>
             </div>
-          )}
+          )} */}
 
           {Object.keys(single.ciscofans).length > 0 && (
             <div className="">
