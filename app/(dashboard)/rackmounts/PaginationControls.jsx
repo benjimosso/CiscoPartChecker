@@ -1,5 +1,5 @@
 'use client'
-import { FC } from 'react'
+
 import { useRouter, useSearchParams } from 'next/navigation'
 import { GrFormNextLink } from "react-icons/gr";
 import { GrFormPreviousLink } from "react-icons/gr";

@@ -29,7 +29,7 @@ async function getItem(id) {
 
 export default async function Edit({ params }) {
   const user = await checkUser();
-
+  user.session ? console.log("user is logged in") : console.log("user is not logged in");
   const item = await getItem(params.id);
   if (item.notFound) {
     return <h1>Not found</h1>;
