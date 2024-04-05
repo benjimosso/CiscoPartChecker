@@ -44,7 +44,7 @@ const styles = StyleSheet.create({
 });
 
 // Create Document Component
-function HtmlToPdf({
+function pdfTemplate({
   power,
   power2,
   fan,
@@ -96,11 +96,11 @@ function HtmlToPdf({
         </View>
       </Page>
     </Document>
-    // <PDFDownloadLink document={<HtmlToPdf />} fileName="somename.pdf">
+    // <PDFDownloadLink document={<pdfTemplate />} fileName="somename.pdf">
     //     {({loading, error }) => (loading ? <button>Loading Document...</button> : <button>Download</button>)}
     // </PDFDownloadLink>
   );
 }
 
-export default HtmlToPdf;
-// await ReactPDF.render(<htmlToPdf />, `${__dirname}/output.pdf`);
+export default pdfTemplate;
+// await ReactPDF.render(<pdfTemplate />, `${__dirname}/output.pdf`);
