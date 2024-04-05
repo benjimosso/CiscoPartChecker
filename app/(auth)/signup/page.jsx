@@ -10,7 +10,7 @@ export default function Singup() {
 
   const handleSubmit = async (e, email, password) => {
     e.preventDefault();
-    console.log("Email: ", email, "Password: ", password);
+    // console.log("Email: ", email, "Password: ", password);
     const supabase = createClientComponentClient();
     const { error } = await supabase.auth.signUp({
       email,

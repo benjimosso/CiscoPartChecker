@@ -3,6 +3,7 @@ import {cookies} from 'next/headers'
 import { NextResponse } from "next/server"
 
 export async function GET(request) {
+    console.log('GET /api/auth/callback')
     const url = new URL(request.url)
     const code = url.searchParams.get('code')
 
