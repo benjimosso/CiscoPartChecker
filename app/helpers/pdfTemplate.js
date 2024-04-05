@@ -44,7 +44,7 @@ const styles = StyleSheet.create({
 });
 
 // Create Document Component
-function pdfTemplate({
+function PdfTemplate({
   power,
   power2,
   fan,
@@ -54,6 +54,7 @@ function pdfTemplate({
   weight,
   dims,
 }) {
+    console.log(ciscopn)
   return (
     <Document>
       <Page size="A4" style={styles.page}>
@@ -96,11 +97,11 @@ function pdfTemplate({
         </View>
       </Page>
     </Document>
-    // <PDFDownloadLink document={<pdfTemplate />} fileName="somename.pdf">
+    // <PDFDownloadLink document={<PdfTemplate />} fileName="somename.pdf">
     //     {({loading, error }) => (loading ? <button>Loading Document...</button> : <button>Download</button>)}
     // </PDFDownloadLink>
   );
 }
 
-export default pdfTemplate;
-// await ReactPDF.render(<pdfTemplate />, `${__dirname}/output.pdf`);
+export default PdfTemplate;
+// await ReactPDF.render(<PdfTemplate />, `${__dirname}/output.pdf`);

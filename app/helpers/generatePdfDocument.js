@@ -1,10 +1,10 @@
 import { saveAs } from 'file-saver';
 import { pdf } from '@react-pdf/renderer';
-import pdfTemplate from './pdfTemplate';
+import PdfTemplate from './pdfTemplate'
 
 const generatePdfDocument = async (power, power2, fan, rackmount, ciscopn, descriprion, wiight, dims) => {
         const blob = await pdf((
-            <pdfTemplate
+            <PdfTemplate
                 power={power}
                 power2={power2}
                 fan={fan}
