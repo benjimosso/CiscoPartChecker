@@ -1,5 +1,6 @@
 import { createServerComponentClient } from "@supabase/auth-helpers-nextjs";
 import { cookies } from "next/headers";
+import Link from "next/link";
 // ebay client
 // import { EbayClient } from "../../../config/ebayClient";
 // components
@@ -11,7 +12,7 @@ async function getSingleRackmount(id) {
   const supabase = createServerComponentClient({ cookies });
   const { data, error } = await supabase
     .from("rackmounts")
-    .select("*, cisco(ciscopn)")
+    .select("*, cisco(ciscopn, id)")
     .eq("id", id)
     .single();
   return { data, error };
@@ -66,12 +67,13 @@ export default async function SingleRackmount({ params }) {
         </h1>
         <div className="grid grid-cols-4 gap-4 m-6">
           {data.cisco.map((c, index) => (
-            <p
+            <Link
+              href={`/item/${c.id}`}
               key={index}
-              className="flex p-2 text-sm font-semibold border-r-2 border-b-2 border-slate-300 shadow-md m-2"
+              className="flex p-2 text-sm font-semibold border-r-2 border-b-2 border-slate-300 shadow-md m-2 hover:bg-slate-300 hover:text-white"
             >
               {c.ciscopn}
-            </p>
+            </Link>
           ))}
         </div>
       </div>
