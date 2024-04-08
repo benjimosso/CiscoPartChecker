@@ -5,13 +5,15 @@ import { IoMdInformationCircle } from "react-icons/io";
 import LogouButton from "./LogouButton";
 import SearchBar from "./SearchBar";
 import LowerNav from "./LowerNav";
+//shadcn components
+import { Avatar, AvatarImage, AvatarFallback } from "@/components/ui/avatar";
+
 
 export default function NavBar({ user, ciscoData }) {
   if (user) {
     const re = new RegExp("^.+?(?=@)");
     const username = user.email.match(re);
   }
-
   return (
     <>
       <nav className="bg-white text-black p-4 flex justify-between items-baseline border-solid border-b-4 border-slate-300 ">
@@ -38,7 +40,14 @@ export default function NavBar({ user, ciscoData }) {
         <SearchBar ciscoData={ciscoData} />
         {user ? (
           <div className="flex items-center justify-center">
-            <p className="pr-4">Hi, {user.email}</p>
+            <p className="pr-4">Hi, </p>
+            <Avatar>
+              <AvatarImage
+                src={"../assets/avatarDefault.jpg"}
+                alt="avatar"
+              />
+              <AvatarFallback>DM</AvatarFallback>  
+            </Avatar>
             <LogouButton />
           </div>
         ) : (
