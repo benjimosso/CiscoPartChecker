@@ -4,6 +4,9 @@ import AuthForm from "../AuthForm";
 import { useState } from "react";
 import { useRouter } from "next/navigation";
 
+// shadcn components
+import { loginShad } from "@/components/component/loginShad"
+
 export default function Login() {
 
     const router = useRouter();
@@ -32,7 +35,8 @@ export default function Login() {
   return (
     <div className="flex-1 flex items-center flex-col">
       <h2 className="text-2xl pb-4 font-bold">Login</h2>
-        <AuthForm handleSubmit={handleSubmit} />
+        {/* <AuthForm handleSubmit={handleSubmit} /> */}
+        <loginShad handleSubmit={handleSubmit} />
         {error && <p className="pt-2 text-red-500 font-bold">{error}</p>}
     </div>
   )
