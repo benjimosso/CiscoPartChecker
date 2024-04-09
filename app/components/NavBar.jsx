@@ -43,7 +43,7 @@ export default function NavBar({ user, ciscoData }) {
             <p className="pr-4">Hi, </p>
             <Avatar>
               <AvatarImage
-                src="https://avatars.dicebear.com/api/human/123.svg"
+                src=""
                 alt="avatar"
                 
               />
