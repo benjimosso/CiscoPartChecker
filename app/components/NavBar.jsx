@@ -39,14 +39,15 @@ export default function NavBar({ user, ciscoData }) {
         {/* It could be an idea to put the searchbar here...  */}
         <SearchBar ciscoData={ciscoData} />
         {user ? (
-          <div className="flex items-center justify-center">
+          <div className="flex items-center">
             <p className="pr-4">Hi, </p>
             <Avatar>
               <AvatarImage
-                src={"../assets/avatarDefault.jpg"}
+                src="https://avatars.dicebear.com/api/human/123.svg"
                 alt="avatar"
+                
               />
-              <AvatarFallback>DM</AvatarFallback>  
+              {/* <AvatarFallback>DM</AvatarFallback>   */}
             </Avatar>
             <LogouButton />
           </div>
