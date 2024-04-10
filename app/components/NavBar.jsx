@@ -15,7 +15,7 @@ import {
   DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu"
-
+// import {ModeToggle} from "@/components/ui/darkmode";
 
 export default function NavBar({ user, ciscoData }) {
   // if (user) {
@@ -28,7 +28,7 @@ export default function NavBar({ user, ciscoData }) {
 
   return (
     <>
-      <nav className="bg-white text-black p-4 flex justify-between items-baseline border-solid border-b-4 border-slate-300 ">
+      <nav className="bg-white text-black p-4 flex justify-between items-baseline border-solid border-b-4 border-secondary-foreground ">
         <ul className="flex items-center pl-8">
           <li className="pl-4 pr-4">
             {/* TO CHECK, NEED THE HOME PAGE BUTTON TO REFRESH THE PAGE... */}
@@ -66,7 +66,7 @@ export default function NavBar({ user, ciscoData }) {
               <AvatarFallback>U</AvatarFallback>  }
             </Avatar>
             </DropdownMenuTrigger>  
-            <DropdownMenuContent align="right">
+            <DropdownMenuContent align="end">
             <DropdownMenuLabel>My Account</DropdownMenuLabel>
             <DropdownMenuSeparator />
               <DropdownMenuItem>
@@ -79,7 +79,9 @@ export default function NavBar({ user, ciscoData }) {
               </DropdownMenuItem>
             </DropdownMenuContent>
             </DropdownMenu>
+            {/* <ModeToggle className="ml-6"/> */}
           </div>
+          
         ) : (
           <ul className="flex items-center pr-8">
             <li className="pr-4">

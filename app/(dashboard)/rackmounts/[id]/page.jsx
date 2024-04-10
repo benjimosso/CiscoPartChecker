@@ -70,7 +70,7 @@ export default async function SingleRackmount({ params }) {
             <Link
               href={`/item/${c.id}`}
               key={index}
-              className="flex p-2 text-sm font-semibold border-r-2 border-b-2 border-slate-300 shadow-md m-2 hover:bg-slate-300 hover:text-white"
+              className="flex p-2 text-sm font-semibold border-r-2 border-b-2 border-slate-300 shadow-md m-2 hover:bg-primary hover:text-white"
             >
               {c.ciscopn}
             </Link>

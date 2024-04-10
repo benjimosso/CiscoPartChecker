@@ -107,6 +107,8 @@ export default async function SingleItemShow({ params }) {
                       width={200}
                       height={200}
                       alt="rackmount Image"
+                      priority={true}
+                      style={{width:'auto', height: "auto" }}
                     />
                   )}
                 </HoverCardContent>
