@@ -14,7 +14,7 @@ export default async function DashboardLayout({ children }) {
     console.error(error);
   }
   return (
-    <div className="flex flex-col h-screen bg-slate-200 overflow-auto">
+    <div className="flex flex-col h-screen bg-slate-150 overflow-auto">
       {/* if a user is logged in, send credentials, otherwhise do not. */}
       {session.session ? <Navbar user={session.session.user} ciscoData={data}/> 
       : <Navbar ciscoData={data}/>}
