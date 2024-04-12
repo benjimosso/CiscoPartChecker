@@ -1,6 +1,7 @@
 import supabase from '../../config/supabaseClient';
 import RackmountList from "./RackmountList";
 import PaginationControls from "./PaginationControls";
+import {DataTable} from "../powers/data-table";
 
 export default async function page({searchParams}) {
 
@@ -11,7 +12,7 @@ export default async function page({searchParams}) {
   
   if (error) {
     console.error(error);
-  }
+  } 
 
   const page = searchParams['page'] ?? '1'
   
@@ -27,6 +28,7 @@ export default async function page({searchParams}) {
 
   return (
     <div className="flex flex-col flex-1 justify-center items-center m-6 rounded-md">
+      {/* <DataTable /> */}
       <div className="bg-white w-1/2 text-black">
       <h1 className="flex justify-center text-2xl  text-black p-8 font-mono">Rackmounts</h1>
       {/* MAYBE THE FILTER BAR WILL GO HERE. */}
