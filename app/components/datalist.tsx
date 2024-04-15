@@ -9,6 +9,7 @@ import {
   CardHeader,
   CardTitle,
 } from "@/components/ui/card";
+import { AspectRatio } from "@/components/ui/aspect-ratio";
 
 export default function Datalist({
   pn,
@@ -21,27 +22,34 @@ export default function Datalist({
 }) {
   return (
     <div>
-      <Card className="hover:border-blue-300">
+      <Card className="hover:border-blue-300 ">
         <CardHeader>
           <CardTitle className="text-xl">{pn}</CardTitle>
-        </CardHeader>
-        <CardContent>
           <CardDescription>Model# {pn}</CardDescription>
-        </CardContent>
-        <CardFooter className="relative flex justify-center">
-          {!image ? (
-            <Image src={noImage} alt={pn} className="w-20 h-20 rounded-full" />
+        </CardHeader>
+        <CardContent className="flex justify-center ">
+        {!image ? (
+            <AspectRatio ratio={3 / 2}>
+              <Image
+                src={noImage}
+                alt={pn}
+                width={200}
+                height={200}
+                className="rounded-md object-cover overflow-auto mt-8"
+              />
+            </AspectRatio>
           ) : (
-            <Image 
-            src={image} 
-            alt={pn} 
-            className=" rounded-full overflow-hidden w-20 h-20"
-            priority
-            width={80}
-            height={80}
-             />
+            <AspectRatio ratio={3 / 2}>
+              <Image
+                src={image}
+                alt={pn}
+                className=" rounded-md object-cover mt-8"
+                width={200}
+                height={200}
+              />
+            </AspectRatio>
           )}
-        </CardFooter>
+        </CardContent>
       </Card>
     </div>
   );
