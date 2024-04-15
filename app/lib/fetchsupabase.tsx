@@ -67,7 +67,7 @@ export async function getRackmounts({
       .order("id", { ascending: true })
       .range((page - 1) * limit, page * limit - 1)
       .limit(limit)
-      .ilike("rack_pn", `%${query}%`);
+      .ilike("rackpn", `%${query}%`);
     if (error) console.log("error", error);
     return (rackmounts as Rackmounts[]) || [];
   }
