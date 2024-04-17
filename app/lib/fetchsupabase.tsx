@@ -4,7 +4,7 @@ import { Fans, Rackmounts } from "./interfaces";
 export async function getFans({
   query,
   page = 1,
-  limit = 10,
+  limit = 9,
 }: {
   query?: string;
   page?: number;
@@ -45,7 +45,7 @@ export async function getFan(id: number) {
 export async function getRackmounts({
   query,
   page = 1,
-  limit = 10,
+  limit = 9,
 }: {
   query?: string;
   page?: number;

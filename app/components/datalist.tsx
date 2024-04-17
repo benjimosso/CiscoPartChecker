@@ -24,8 +24,8 @@ export default function Datalist({
     <div>
       <Card className="hover:border-blue-300 ">
         <CardHeader>
-          <CardTitle className="text-xl">{pn}</CardTitle>
-          <CardDescription>Model# {pn}</CardDescription>
+          <CardTitle className="text-xl truncate hover:text-clip">{pn}</CardTitle>
+          {/* <CardDescription>Model# {pn}</CardDescription> */}
         </CardHeader>
         <CardContent className="flex justify-center ">
         {!image ? (
@@ -35,7 +35,7 @@ export default function Datalist({
                 alt={pn}
                 width={200}
                 height={200}
-                className="rounded-md object-cover overflow-auto mt-8"
+                className="rounded-md object-cover "
               />
             </AspectRatio>
           ) : (
@@ -43,7 +43,7 @@ export default function Datalist({
               <Image
                 src={image}
                 alt={pn}
-                className=" rounded-md object-cover mt-8"
+                className=" rounded-md object-cover"
                 width={200}
                 height={200}
               />
