@@ -38,7 +38,7 @@ export default async function Rackmounts({
               },
             }}
           >
-            <Button>Previous</Button>
+            <Button className="font-bold">Previous</Button>
           </Link>
           {rackmounts.length < limit ? null : (
             <Link
@@ -50,7 +50,7 @@ export default async function Rackmounts({
                 },
               }}
             >
-              <Button>Next</Button>
+              <Button className="font-bold">Next</Button>
             </Link>
           )}
         </div>

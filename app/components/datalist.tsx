@@ -22,7 +22,7 @@ export default function Datalist({
 }) {
   return (
     <div>
-      <Card className="hover:border-blue-300 ">
+      <Card className="hover:border-primary hover:border-4">
         <CardHeader>
           <CardTitle className="text-xl truncate hover:text-clip">{pn}</CardTitle>
           {/* <CardDescription>Model# {pn}</CardDescription> */}
