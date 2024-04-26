@@ -5,7 +5,7 @@ import { IoLogoGithub } from "react-icons/io5";
 
 export default function Footer() {
   return (
-    <div className=" bottom-0 w-full bg-slate-400 ">
+    <div className=" bottom-0 w-full bg-primary ">
       <div className="flex justify-center items-center">
         <FaCopyright size={17} />
         <p className="pl-2 pr-4 ">Daniel Mosso</p>
