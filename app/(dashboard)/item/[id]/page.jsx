@@ -2,10 +2,18 @@ import React from "react";
 import { createServerComponentClient } from "@supabase/auth-helpers-nextjs";
 import { cookies } from "next/headers";
 import Link from "next/link";
+import Image from "next/image";
 // components
 import NoImages from "../../../components/NoImages";
 import Images from "../../../components/Images";
 import EditButton from "../../../components/EditButton";
+
+// shadcn components
+import {
+  HoverCard,
+  HoverCardContent,
+  HoverCardTrigger,
+} from "@/components/ui/hover-card";
 
 export const dynamicParams = true;
 
@@ -15,7 +23,9 @@ async function getSingleItem(id) {
   const supabase = createServerComponentClient({ cookies });
   const { data, error } = await supabase
     .from("cisco")
-    .select("*, rackmounts(rackpn), ciscofans(fans(*)), ciscopowers(powers(*))")
+    .select(
+      "*, rackmounts(rackpn, image, id), ciscofans(fans(*)), ciscopowers(powers(*))"
+    )
     .eq("id", id)
     .single();
   // get session of the user
@@ -32,10 +42,8 @@ export default async function SingleItemShow({ params }) {
   // console output of a many to many relationship between cisco and ciscofans and fans
   // console.log(single.ciscopowers);
   // here the 0 next to ciscofans is the index of the array, in case is more than one i can map through it... example below, it can be item or item.fans or item.fans.fan_pn
-//  single.ciscofans.map((item) => console.log(item.fans.fan_pn));
-//  single.ciscopowers.map((item) => console.log(item.powers.power_pn));
-// console.log(single)
-  
+  //  single.ciscofans.map((item) => console.log(item.fans.fan_pn));
+  //  single.ciscopowers.map((item) => console.log(item.powers.power_pn));
 
   if (error) {
     console.error(error);
@@ -50,7 +58,9 @@ export default async function SingleItemShow({ params }) {
         <div className="flex flex-col gap-4 pl-6">
           {single.ciscopn && (
             <div className="">
-              <p className=" font-bold text-xl pb-4 pt-6 border-b-2 border-slate-300">{single.ciscopn}</p>
+              <p className=" font-bold text-xl pb-4 pt-6 border-b-2 border-slate-300">
+                {single.ciscopn}
+              </p>
             </div>
           )}
           {single.description && (
@@ -74,23 +84,46 @@ export default async function SingleItemShow({ params }) {
           {single.rackmounts && (
             <div className="flex">
               <h1 className="font-bold">Rackmount: </h1>
-              <Link
+              {/* <Link
                 className="text-blue-700 pl-2"
                 target="blanks"
                 href={`https://www.google.com/search?q=${single.rackmounts.rackpn}`}
               >
                 {single.rackmounts.rackpn}
-              </Link>
+              </Link> */}
+
+              <HoverCard>
+                <HoverCardTrigger>
+                  <p className="ml-3 cursor-pointer">{single.rackmounts.rackpn}</p>
+                </HoverCardTrigger>
+
+                <HoverCardContent>
+                  <a className="text-blue-500" href={`/rackmounts/${single.rackmounts.id}`}>
+                    {single.rackmounts.rackpn}
+                  </a>
+                  {single.rackmounts.image && (
+                    <Image
+                      src={single.rackmounts.image}
+                      width={200}
+                      height={200}
+                      alt="rackmount Image"
+                      priority={true}
+                      style={{width:'auto', height: "auto" }}
+                    />
+                  )}
+                </HoverCardContent>
+              </HoverCard>
             </div>
           )}
-         
-          { Object.keys(single.ciscopowers).length > 0 && (
-            <div className="">            
+
+          {Object.keys(single.ciscopowers).length > 0 && (
+            <div className="">
               <h1 className="font-bold">Power: </h1>
               {single.ciscopowers.map((item, index) => (
-                <p key={index} className="pl-2">{item.powers.power_pn}</p>
-              
-              ) )}
+                <p key={index} className="pl-2">
+                  {item.powers.power_pn}
+                </p>
+              ))}
             </div>
           )}
 
@@ -105,7 +138,9 @@ export default async function SingleItemShow({ params }) {
             <div className="">
               <h1 className="font-bold">Fans: </h1>
               {single.ciscofans.map((f, index) => (
-                <p key={index} className="pl-2">{f.fans.fan_pn}</p>
+                <p key={index} className="pl-2">
+                  {f.fans.fan_pn}
+                </p>
               ))}
             </div>
           )}
@@ -152,9 +187,9 @@ export default async function SingleItemShow({ params }) {
           )}
         </div>
       </div>
-      
+
       {/* <div> */}
-        {/* <div className="mt-1 p-6 grid grid-cols-2 gap-10 max-w-[900px] border-4 border-indigo-200">
+      {/* <div className="mt-1 p-6 grid grid-cols-2 gap-10 max-w-[900px] border-4 border-indigo-200">
           {single.devicetype && (
             <div className="flex">
               <h1 className="font-bold">Device Type: </h1>

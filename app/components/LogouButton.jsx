@@ -1,6 +1,8 @@
 'use client';
 import { createClientComponentClient } from "@supabase/auth-helpers-nextjs";
 import { useRouter } from "next/navigation";
+// shadcn components
+import { Button } from "@/components/ui/button";
 
 export default function LogouButton() {
 
@@ -17,11 +19,13 @@ export default function LogouButton() {
         }
     };
   return (
-      <button 
+      <Button 
       onClick={handleLogout}
-      className="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded-full "
+      size="sm"
+      variant="destructive"
+    //   className="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded-full "
       >
         Logout
-      </button>
+      </Button>
   )
 }

@@ -65,7 +65,7 @@ export default function SearchBar({
             onChange={(e) => handleSubmit(e)}
             type="search"
             placeholder="Type here"
-            className="w-full p-2 rounded-sm bg-white text-black border border-black focus:outline-none focus:ring-2 focus:ring-indigo-400 focus:border-transparent"
+            className="w-full p-2 rounded-sm bg-white text-black border border-border focus:outline-none focus:ring-2 focus:ring-indigo-400 focus:border-transparent"
             value={placeholder}
           />
         </div>
