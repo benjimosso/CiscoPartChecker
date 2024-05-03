@@ -4,6 +4,7 @@ import React from "react";
 // components
 import Navbar from "../components/NavBar";
 import Footer from "../components/Footer";
+import LowerNav from "../components/LowerNav";
 
 export default async function DashboardLayout({ children }) {
   const supabase = createServerComponentClient({ cookies });
@@ -18,6 +19,7 @@ export default async function DashboardLayout({ children }) {
       {/* if a user is logged in, send credentials, otherwhise do not. */}
       {session.session ? <Navbar user={session.session.user} ciscoData={data}/> 
       : <Navbar ciscoData={data}/>}
+      <LowerNav />  
       {children}
       <Footer />
     </div>

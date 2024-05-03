@@ -1,5 +1,5 @@
 import supabase from "../config/supabaseClient";
-import { Fans, Rackmounts } from "./interfaces";
+import { Fans, Rackmounts, PowerSupplies } from "./interfaces";
 
 export async function getFans({
   query,
@@ -72,3 +72,35 @@ export async function getRackmounts({
     return (rackmounts as Rackmounts[]) || [];
   }
 }
+
+export async function getPowers({
+  query,
+  page = 1,
+  limit = 9,
+}: {
+  query?: string;
+  page?: number;
+  limit?: number;
+}) {
+  if (!query) {
+    let { data: powers, error } = await supabase
+      .from("powers")
+      .select("*")
+      .order("id", { ascending: true })
+      .range((page - 1) * limit, page * limit - 1)
+      .limit(limit);
+    if (error) console.log("error", error);
+    return (powers as PowerSupplies[]) || [];
+  } else {
+    let { data: powers, error } = await supabase
+      .from("powers")
+      .select("*")
+      .order("id", { ascending: true })
+      .range((page - 1) * limit, page * limit - 1)
+      .limit(limit)
+      .ilike("power_pn", `%${query}%`);
+    if (error) console.log("error", error);
+    return (powers as PowerSupplies[]) || [];
+  }
+}
+

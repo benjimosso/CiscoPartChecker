@@ -15,7 +15,7 @@ import {
 
 export default function LowerNav() {
   return (
-    <div className="flex justify-start items-center bg-primary  h-12">
+    <div className="flex  justify-start items-center bg-primary  h-12 overflow-visible p-6">
       <NavigationMenu>
         <NavigationMenuList className="text-white space-x-8 pl-4">
           <NavigationMenuItem>
@@ -32,6 +32,11 @@ export default function LowerNav() {
           <NavigationMenuItem>
             <NavigationMenuLink href="/fans">
               Fans
+            </NavigationMenuLink>
+          </NavigationMenuItem>
+          <NavigationMenuItem>
+            <NavigationMenuLink href="/powers">
+              Powers
             </NavigationMenuLink>
           </NavigationMenuItem>
         </NavigationMenuList>

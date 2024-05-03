@@ -97,7 +97,7 @@ export default async function SingleItemShow({ params }) {
                   <p className="ml-3 cursor-pointer">{single.rackmounts.rackpn}</p>
                 </HoverCardTrigger>
 
-                <HoverCardContent>
+                <HoverCardContent className="bg-slate-100 p-3">
                   <a className="text-blue-500" href={`/rackmounts/${single.rackmounts.id}`}>
                     {single.rackmounts.rackpn}
                   </a>
@@ -109,6 +109,7 @@ export default async function SingleItemShow({ params }) {
                       alt="rackmount Image"
                       priority={true}
                       style={{width:'auto', height: "auto" }}
+                      className="rounded-md, mt-4"
                     />
                   )}
                 </HoverCardContent>

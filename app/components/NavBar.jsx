@@ -28,7 +28,7 @@ export default function NavBar({ user, ciscoData }) {
 
   return (
     <>
-      <nav className="bg-white text-black p-4 flex justify-between items-baseline border-solid border-b-4 border-primary ">
+      <nav className="bg-white text-black p-4 flex justify-between items-baseline border-solid ">
         <ul className="flex items-center pl-8">
           <li className="pl-4 pr-4">
             {/* TO CHECK, NEED THE HOME PAGE BUTTON TO REFRESH THE PAGE... */}
@@ -97,7 +97,7 @@ export default function NavBar({ user, ciscoData }) {
           </ul>
         )}
       </nav>
-      <LowerNav />
+      
     </>
   );
 }
