@@ -84,14 +84,6 @@ export default async function SingleItemShow({ params }) {
           {single.rackmounts && (
             <div className="flex">
               <h1 className="font-bold">Rackmount: </h1>
-              {/* <Link
-                className="text-blue-700 pl-2"
-                target="blanks"
-                href={`https://www.google.com/search?q=${single.rackmounts.rackpn}`}
-              >
-                {single.rackmounts.rackpn}
-              </Link> */}
-
               <HoverCard>
                 <HoverCardTrigger>
                   <p className="ml-3 cursor-pointer">{single.rackmounts.rackpn}</p>
@@ -121,9 +113,28 @@ export default async function SingleItemShow({ params }) {
             <div className="">
               <h1 className="font-bold">Power: </h1>
               {single.ciscopowers.map((item, index) => (
-                <p key={index} className="pl-2">
-                  {item.powers.power_pn}
-                </p>
+                <HoverCard key={index}>
+                <HoverCardTrigger>
+                  <p className="ml-3 cursor-pointer">{item.powers.power_pn}</p>
+                </HoverCardTrigger>
+
+                <HoverCardContent className="bg-slate-100 p-3">
+                  <a className="text-blue-500" href={`/rackmounts/${item.powers.id}`}>
+                    {item.powers.power_pn}
+                  </a>
+                  {item.powers.image && (
+                    <Image
+                      src={item.powers.image}
+                      width={200}
+                      height={200}
+                      alt="rackmount Image"
+                      priority={true}
+                      style={{width:'auto', height: "auto" }}
+                      className="rounded-md, mt-4"
+                    />
+                  )}
+                </HoverCardContent>
+              </HoverCard>
               ))}
             </div>
           )}
@@ -139,9 +150,28 @@ export default async function SingleItemShow({ params }) {
             <div className="">
               <h1 className="font-bold">Fans: </h1>
               {single.ciscofans.map((f, index) => (
-                <p key={index} className="pl-2">
-                  {f.fans.fan_pn}
-                </p>
+                <HoverCard key={index}>
+                <HoverCardTrigger>
+                  <p className="ml-3 cursor-pointer">{f.fans.fan_pn}</p>
+                </HoverCardTrigger>
+
+                <HoverCardContent className="bg-slate-100 p-3">
+                  <a className="text-blue-500" href={`/rackmounts/${f.fans.id}`}>
+                    {f.fans.fan_pn}
+                  </a>
+                  {f.fans.image && (
+                    <Image
+                      src={f.fans.image}
+                      width={200}
+                      height={200}
+                      alt="rackmount Image"
+                      priority={true}
+                      style={{width:'auto', height: "auto" }}
+                      className="rounded-md, mt-4"
+                    />
+                  )}
+                </HoverCardContent>
+              </HoverCard>
               ))}
             </div>
           )}
