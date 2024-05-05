@@ -30,24 +30,23 @@ async function getSingleItem(id) {
     .single();
   // get session of the user
   const { data: session } = await supabase.auth.getSession();
-  // const {data: data2} = await supabase
-  // .from("ciscofans")
-  // .select("*, cisco(ciscopn), fans(fan_pn)")
-  // .eq("cisco_id", id);
+  // get user from users table.
+  if (session.session) {
+    const { data: user } = await supabase
+      .from("users")
+      .select("name, lastname")
+      .eq("id", session.session.user.id)
+      .single();
+    return { data, error, session, user };
+  }
+  if (error) {
+    console.error(error);
+  }
   return { data, error, session };
 }
 
 export default async function SingleItemShow({ params }) {
-  const { data: single, error, session } = await getSingleItem(params.id);
-  // console output of a many to many relationship between cisco and ciscofans and fans
-  // console.log(single.ciscopowers);
-  // here the 0 next to ciscofans is the index of the array, in case is more than one i can map through it... example below, it can be item or item.fans or item.fans.fan_pn
-  //  single.ciscofans.map((item) => console.log(item.fans.fan_pn));
-  //  single.ciscopowers.map((item) => console.log(item.powers.power_pn));
-
-  if (error) {
-    console.error(error);
-  }
+  const { data: single, error, session, user } = await getSingleItem(params.id);
 
   return (
     <div className="flex flex-1 flex-col items-center pb-8 ">
@@ -86,11 +85,16 @@ export default async function SingleItemShow({ params }) {
               <h1 className="font-bold">Rackmount: </h1>
               <HoverCard>
                 <HoverCardTrigger>
-                  <p className="ml-3 cursor-pointer">{single.rackmounts.rackpn}</p>
+                  <p className="ml-3 cursor-pointer">
+                    {single.rackmounts.rackpn}
+                  </p>
                 </HoverCardTrigger>
 
                 <HoverCardContent className="bg-slate-100 p-3">
-                  <a className="text-blue-500" href={`/rackmounts/${single.rackmounts.id}`}>
+                  <a
+                    className="text-blue-500"
+                    href={`/rackmounts/${single.rackmounts.id}`}
+                  >
                     {single.rackmounts.rackpn}
                   </a>
                   {single.rackmounts.image && (
@@ -100,7 +104,7 @@ export default async function SingleItemShow({ params }) {
                       height={200}
                       alt="rackmount Image"
                       priority={true}
-                      style={{width:'auto', height: "auto" }}
+                      style={{ width: "auto", height: "auto" }}
                       className="rounded-md, mt-4"
                     />
                   )}
@@ -114,27 +118,32 @@ export default async function SingleItemShow({ params }) {
               <h1 className="font-bold">Power: </h1>
               {single.ciscopowers.map((item, index) => (
                 <HoverCard key={index}>
-                <HoverCardTrigger>
-                  <p className="ml-3 cursor-pointer">{item.powers.power_pn}</p>
-                </HoverCardTrigger>
+                  <HoverCardTrigger>
+                    <p className="ml-3 cursor-pointer">
+                      {item.powers.power_pn}
+                    </p>
+                  </HoverCardTrigger>
 
-                <HoverCardContent className="bg-slate-100 p-3">
-                  <a className="text-blue-500" href={`/rackmounts/${item.powers.id}`}>
-                    {item.powers.power_pn}
-                  </a>
-                  {item.powers.image && (
-                    <Image
-                      src={item.powers.image}
-                      width={200}
-                      height={200}
-                      alt="rackmount Image"
-                      priority={true}
-                      style={{width:'auto', height: "auto" }}
-                      className="rounded-md, mt-4"
-                    />
-                  )}
-                </HoverCardContent>
-              </HoverCard>
+                  <HoverCardContent className="bg-slate-100 p-3">
+                    <a
+                      className="text-blue-500"
+                      href={`/rackmounts/${item.powers.id}`}
+                    >
+                      {item.powers.power_pn}
+                    </a>
+                    {item.powers.image && (
+                      <Image
+                        src={item.powers.image}
+                        width={200}
+                        height={200}
+                        alt="rackmount Image"
+                        priority={true}
+                        style={{ width: "auto", height: "auto" }}
+                        className="rounded-md, mt-4"
+                      />
+                    )}
+                  </HoverCardContent>
+                </HoverCard>
               ))}
             </div>
           )}
@@ -151,27 +160,30 @@ export default async function SingleItemShow({ params }) {
               <h1 className="font-bold">Fans: </h1>
               {single.ciscofans.map((f, index) => (
                 <HoverCard key={index}>
-                <HoverCardTrigger>
-                  <p className="ml-3 cursor-pointer">{f.fans.fan_pn}</p>
-                </HoverCardTrigger>
+                  <HoverCardTrigger>
+                    <p className="ml-3 cursor-pointer">{f.fans.fan_pn}</p>
+                  </HoverCardTrigger>
 
-                <HoverCardContent className="bg-slate-100 p-3">
-                  <a className="text-blue-500" href={`/rackmounts/${f.fans.id}`}>
-                    {f.fans.fan_pn}
-                  </a>
-                  {f.fans.image && (
-                    <Image
-                      src={f.fans.image}
-                      width={200}
-                      height={200}
-                      alt="rackmount Image"
-                      priority={true}
-                      style={{width:'auto', height: "auto" }}
-                      className="rounded-md, mt-4"
-                    />
-                  )}
-                </HoverCardContent>
-              </HoverCard>
+                  <HoverCardContent className="bg-slate-100 p-3">
+                    <a
+                      className="text-blue-500"
+                      href={`/rackmounts/${f.fans.id}`}
+                    >
+                      {f.fans.fan_pn}
+                    </a>
+                    {f.fans.image && (
+                      <Image
+                        src={f.fans.image}
+                        width={200}
+                        height={200}
+                        alt="rackmount Image"
+                        priority={true}
+                        style={{ width: "auto", height: "auto" }}
+                        className="rounded-md, mt-4"
+                      />
+                    )}
+                  </HoverCardContent>
+                </HoverCard>
               ))}
             </div>
           )}
@@ -219,102 +231,10 @@ export default async function SingleItemShow({ params }) {
         </div>
       </div>
 
-      {/* <div> */}
-      {/* <div className="mt-1 p-6 grid grid-cols-2 gap-10 max-w-[900px] border-4 border-indigo-200">
-          {single.devicetype && (
-            <div className="flex">
-              <h1 className="font-bold">Device Type: </h1>
-              <p className="pl-2">{single.devicetype}</p>
-            </div>
-          )}
-
-          {single.fixedmodular && (
-            <div className="flex">
-              <h1 className="font-bold">Fixed/Modular: </h1>
-              <p className="pl-2">{single.fixedmodular}</p>
-            </div>
-          )}
-
-          {single.rackmounts.rackpn && (
-            <div className="flex">
-              <h1 className="font-bold">Rackmount: </h1>
-              <Link
-                className="text-blue-700 pl-2"
-                target="blanks"
-                href={`https://www.google.com/search?q=${single.rackmounts.rackpn}`}
-              >
-                {single.rackmounts.rackpn}
-              </Link>
-            </div>
-          )}
-
-          {single.powers && (
-            <div className="flex">
-              <h1 className="font-bold">Power: </h1>
-              <p className="pl-2">{single.powers}</p>
-            </div>
-          )}
-
-          {single.p2 && (
-            <div className="flex">
-              <h1 className="font-bold">Power 2: </h1>
-              <p className="pl-2">{single.p2}</p>
-            </div>
-          )}
-
-          {single.fans && (
-            <div className="flex">
-              <h1 className="font-bold">Fans: </h1>
-              <p className="pl-2">{single.fans}</p>
-            </div>
-          )}
-
-          {single.accesories && (
-            <div className="flex">
-              <h1 className="font-bold">Accesories: </h1>
-              <p className="pl-2">{single.accesories}</p>
-            </div>
-          )}
-
-          {single.blanks && (
-            <div className="flex ">
-              <h1 className="font-bold">Blanks: </h1>
-              <p className="pr-2 pl-1">{single.blanks}</p>
-              {single.b2 ||
-                (single.b3 && (
-                  <p>
-                    {single.b2}, {single.b3}
-                  </p>
-                ))}
-            </div>
-          )}
-
-          {single.console && (
-            <div className="flex">
-              <h1 className="font-bold">Console: </h1>
-              <p className="pl-2">{single.console}</p>
-            </div>
-          )}
-
-          {single.dims && (
-            <div className="flex">
-              <h1 className="font-bold">DIMS: </h1>
-              <p className="pl-2">{single.dims}</p>
-            </div>
-          )}
-
-          {single.weight && (
-            <div className="flex">
-              <h1 className="font-bold">Weight: </h1>
-              <p className="justify-end pl-2">{single.weight} LBS</p>
-            </div>
-          )}
-        </div>
-      </div> */}
       <p className="pt-1 flex justify-center text-sm font-sans font-bold">
         ***some part numbers may not be correct ***
       </p>
-      {session.session && <EditButton id={single.id} />}
+      {user && <EditButton id={single.id} />}
     </div>
   );
 }

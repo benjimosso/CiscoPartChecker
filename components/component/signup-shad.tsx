@@ -16,8 +16,8 @@ export function SignupShad({ handleSubmit}) {
 
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const [firstName, setFirstName] = useState("");
-  const [lastName, setLastName] = useState("");
+  const [first_name, setFirstName] = useState("");
+  const [last_name, setLastName] = useState("");
 
   return (
     <Card className="mx-auto max-w-sm">
@@ -25,7 +25,7 @@ export function SignupShad({ handleSubmit}) {
         <CardTitle className="text-xl">Sign Up</CardTitle>
         <CardDescription>Enter your information to create an account</CardDescription>
       </CardHeader>
-      <form onSubmit={(e) => handleSubmit(e, email, password, firstName, lastName)}>
+      <form onSubmit={(e) => handleSubmit(e, email, password, first_name, last_name)}>
       <CardContent>
         <div className="grid gap-4">
           <div className="grid grid-cols-2 gap-4">
@@ -35,7 +35,7 @@ export function SignupShad({ handleSubmit}) {
               id="first-name" 
               placeholder="Max" 
               required 
-              value={firstName}
+              value={first_name}
               onChange={(e) => setFirstName(e.target.value)}
               />
             </div>
@@ -45,7 +45,7 @@ export function SignupShad({ handleSubmit}) {
               id="last-name" 
               placeholder="Robinson" 
               required 
-              value={lastName}
+              value={last_name}
               onChange={(e) => setLastName(e.target.value)}
               />
             </div>

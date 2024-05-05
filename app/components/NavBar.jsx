@@ -14,16 +14,10 @@ import {
   DropdownMenuLabel,
   DropdownMenuSeparator,
   DropdownMenuTrigger,
-} from "@/components/ui/dropdown-menu"
+} from "@/components/ui/dropdown-menu";
 // import {ModeToggle} from "@/components/ui/darkmode";
 
 export default function NavBar({ user, ciscoData }) {
-  // if (user) {
-  //   const re = new RegExp("^.+?(?=@)");
-  //   const username = user.email.match(re);
-  // }
-
-  
   
 
   return (
@@ -52,36 +46,36 @@ export default function NavBar({ user, ciscoData }) {
         <SearchBar ciscoData={ciscoData} />
         {user ? (
           <div className="flex items-center">
-            <p className="pr-4">Hi, {user.user_metadata.firstName}</p>
-            <DropdownMenu> 
+            <p className="pr-4">Hi, {user.name}</p>
+            <DropdownMenu>
               <DropdownMenuTrigger>
-            <Avatar className="mr-4">
-              <AvatarImage
-                src=""
-                alt="avatar"
-                
-              />
-              {/* This could be an option, please review for a better solution */}
-              { user.user_metadata.firstName && user.user_metadata.lastName ? <AvatarFallback>{Array.from(user.user_metadata.firstName)[0] + Array.from(user.user_metadata.lastName)[0] }</AvatarFallback> :
-              <AvatarFallback>U</AvatarFallback>  }
-            </Avatar>
-            </DropdownMenuTrigger>  
-            <DropdownMenuContent align="end">
-            <DropdownMenuLabel>My Account</DropdownMenuLabel>
-            <DropdownMenuSeparator />
-              <DropdownMenuItem>
-                <Link href="/profile">
-                  <p>Profile</p>
-                </Link>
-              </DropdownMenuItem>
-              <DropdownMenuItem>
-                <LogouButton />
-              </DropdownMenuItem>
-            </DropdownMenuContent>
+                <Avatar className="mr-4">
+                  <AvatarImage src="" alt="avatar" />
+                  {/* This could be an option, please review for a better solution */}
+                {user.name ? (
+                    <AvatarFallback>
+                      {Array.from(user.name)[0] + Array.from(user.lastname)[0]}
+                    </AvatarFallback>
+                  ) : (
+                    <AvatarFallback></AvatarFallback>
+                  )} 
+                </Avatar>
+              </DropdownMenuTrigger>
+              <DropdownMenuContent align="end">
+                <DropdownMenuLabel>My Account</DropdownMenuLabel>
+                <DropdownMenuSeparator />
+                <DropdownMenuItem>
+                  <Link href="/profile">
+                    <p>Profile</p>
+                  </Link>
+                </DropdownMenuItem>
+                <DropdownMenuItem>
+                  <LogouButton />
+                </DropdownMenuItem>
+              </DropdownMenuContent>
             </DropdownMenu>
             {/* <ModeToggle className="ml-6"/> */}
           </div>
-          
         ) : (
           <ul className="flex items-center pr-8">
             <li className="pr-4">
@@ -97,7 +91,6 @@ export default function NavBar({ user, ciscoData }) {
           </ul>
         )}
       </nav>
-      
     </>
   );
 }
