@@ -7,6 +7,7 @@ import Image from "next/image";
 import NoImages from "../../../components/NoImages";
 import Images from "../../../components/Images";
 import EditButton from "../../../components/EditButton";
+import Comments from "@/app/components/comments";
 
 // shadcn components
 import {
@@ -34,17 +35,7 @@ async function getSingleItem(id) {
     .from("profiles")
     .select("first_name, last_name")
     .single();
-  // get session of the user
-  // const { data: session } = await supabase.auth.getSession();
-  // get user from users table.
-  // if (session.session) {
-  //   const { data: user } = await supabase
-  //     .from("users")
-  //     .select("name, lastname")
-  //     .eq("id", session.session.user.id)
-  //     .single();
-  //   return { data, error, session, user };
-  // }
+    // I may still have to get the session!
   if (error) {
     console.error(error);
   }
@@ -241,6 +232,9 @@ export default async function SingleItemShow({ params }) {
         ***some part numbers may not be correct ***
       </p>
       {profile && <EditButton id={single.id} />}
+      <div className="m-10">
+      {profile && <Comments profile={profile} />}
+      </div>
     </div>
   );
 }

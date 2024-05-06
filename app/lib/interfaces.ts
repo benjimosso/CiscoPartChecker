@@ -40,5 +40,6 @@ export interface Profiles {
   last_name: string;
   username: string;
   created_at: string;
-
+  email: string;
+  avatar: string;
 }

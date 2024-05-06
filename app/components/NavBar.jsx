@@ -18,7 +18,6 @@ import {
 // import {ModeToggle} from "@/components/ui/darkmode";
 
 export default function NavBar({ profile, ciscoData }) {
-  
 
   return (
     <>
@@ -50,14 +49,14 @@ export default function NavBar({ profile, ciscoData }) {
             <DropdownMenu>
               <DropdownMenuTrigger>
                 <Avatar className="mr-4">
-                  <AvatarImage src="" alt="avatar" />
+                  {/* <AvatarImage src={profile.avatar} alt="avatar" /> */}
                   {/* This could be an option, please review for a better solution */}
-                {profile.first_name ? (
-                    <AvatarFallback>
-                      {Array.from(profile.first_name)[0] + Array.from(profile.last_name)[0]}
-                    </AvatarFallback>
+                {profile.avatar ? (
+                   <AvatarImage src={profile.avatar} alt="avatar" />
                   ) : (
-                    <AvatarFallback></AvatarFallback>
+                    <AvatarFallback>
+                    {Array.from(profile.first_name)[0] + Array.from(profile.last_name)[0]}
+                  </AvatarFallback>
                   )} 
                 </Avatar>
               </DropdownMenuTrigger>

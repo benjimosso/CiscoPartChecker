@@ -8,6 +8,7 @@ import LowerNav from "../components/LowerNav";
 
 async function FetchData() {
   const supabase = createServerComponentClient({ cookies });
+  // I may have to still check the session here, for now we won't use it.
   // const { data: session } = await supabase.auth.getSession();
   const { data, error } = await supabase
   .from("cisco")
@@ -16,16 +17,8 @@ async function FetchData() {
   // fetch profile data (this has row level security, so it will only return the data that the user has access to)
   const { data: profile, error: profileError } = await supabase
   .from("profiles")
-  .select("first_name, last_name")
+  .select("*")
   .single();
-  // if (session.session) {
-  //   const { data: user } = await supabase
-  //     .from("users")
-  //     .select("name, lastname")
-  //     .eq("id", session.session.user.id)
-  //     .single();
-  //   return { session, data, user };
-  // }
   if (error) {
     console.error(error);
   }
