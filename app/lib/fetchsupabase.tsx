@@ -18,6 +18,7 @@ export async function getFans({
       .select("*")
       .range((page - 1) * limit, page * limit - 1)
       .limit(limit)
+      .order("fan_pn", { ascending: true })
       
     if (error) console.log("error", error);
     return (fans as Fans[]) || [];
@@ -55,16 +56,17 @@ export async function getRackmounts({
     let { data: rackmounts, error } = await supabase
       .from("rackmounts")
       .select("*")
-      .order("id", { ascending: true })
+      .order("rackpn", { ascending: true })
       .range((page - 1) * limit, page * limit - 1)
-      .limit(limit);
+      .limit(limit)
+      
     if (error) console.log("error", error);
     return (rackmounts as Rackmounts[]) || [];
   } else {
     let { data: rackmounts, error } = await supabase
       .from("rackmounts")
       .select("*")
-      .order("id", { ascending: true })
+      .order("rackpn", { ascending: true })
       .range((page - 1) * limit, page * limit - 1)
       .limit(limit)
       .ilike("rackpn", `%${query}%`);
@@ -86,16 +88,17 @@ export async function getPowers({
     let { data: powers, error } = await supabase
       .from("powers")
       .select("*")
-      .order("id", { ascending: true })
+      .order("power_pn", { ascending: true })
       .range((page - 1) * limit, page * limit - 1)
-      .limit(limit);
+      .limit(limit)
+      
     if (error) console.log("error", error);
     return (powers as PowerSupplies[]) || [];
   } else {
     let { data: powers, error } = await supabase
       .from("powers")
       .select("*")
-      .order("id", { ascending: true })
+      .order("power_pn", { ascending: true })
       .range((page - 1) * limit, page * limit - 1)
       .limit(limit)
       .ilike("power_pn", `%${query}%`);

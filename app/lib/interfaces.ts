@@ -31,3 +31,14 @@ export interface PowerSupplies {
     }
   ]
 }
+
+
+// profiles interface
+export interface Profiles {
+  id: number;
+  first_name: string;
+  last_name: string;
+  username: string;
+  created_at: string;
+
+}

@@ -23,7 +23,7 @@ async function getSingleFan({ id }: { id: string }) : Promise<Fans | null> {
 
 export default async function singlePower({params}: {params: {id: string}}) {
     const fan = await getSingleFan({id: params.id});
-    console.log(fan)
+    
    
    
     return (

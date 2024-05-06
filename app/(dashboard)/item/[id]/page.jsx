@@ -28,25 +28,31 @@ async function getSingleItem(id) {
     )
     .eq("id", id)
     .single();
+
+    // get user's profile. 
+    const { data: profile, error: profileError } = await supabase
+    .from("profiles")
+    .select("first_name, last_name")
+    .single();
   // get session of the user
-  const { data: session } = await supabase.auth.getSession();
+  // const { data: session } = await supabase.auth.getSession();
   // get user from users table.
-  if (session.session) {
-    const { data: user } = await supabase
-      .from("users")
-      .select("name, lastname")
-      .eq("id", session.session.user.id)
-      .single();
-    return { data, error, session, user };
-  }
+  // if (session.session) {
+  //   const { data: user } = await supabase
+  //     .from("users")
+  //     .select("name, lastname")
+  //     .eq("id", session.session.user.id)
+  //     .single();
+  //   return { data, error, session, user };
+  // }
   if (error) {
     console.error(error);
   }
-  return { data, error, session };
+  return { data, error, profile };
 }
 
 export default async function SingleItemShow({ params }) {
-  const { data: single, error, session, user } = await getSingleItem(params.id);
+  const { data: single, error, profile } = await getSingleItem(params.id);
 
   return (
     <div className="flex flex-1 flex-col items-center pb-8 ">
@@ -127,7 +133,7 @@ export default async function SingleItemShow({ params }) {
                   <HoverCardContent className="bg-slate-100 p-3">
                     <a
                       className="text-blue-500"
-                      href={`/rackmounts/${item.powers.id}`}
+                      href={`/powers/${item.powers.id}`}
                     >
                       {item.powers.power_pn}
                     </a>
@@ -167,7 +173,7 @@ export default async function SingleItemShow({ params }) {
                   <HoverCardContent className="bg-slate-100 p-3">
                     <a
                       className="text-blue-500"
-                      href={`/rackmounts/${f.fans.id}`}
+                      href={`/fans/${f.fans.id}`}
                     >
                       {f.fans.fan_pn}
                     </a>
@@ -234,7 +240,7 @@ export default async function SingleItemShow({ params }) {
       <p className="pt-1 flex justify-center text-sm font-sans font-bold">
         ***some part numbers may not be correct ***
       </p>
-      {user && <EditButton id={single.id} />}
+      {profile && <EditButton id={single.id} />}
     </div>
   );
 }

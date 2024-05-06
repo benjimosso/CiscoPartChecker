@@ -26,21 +26,24 @@ async function FetchData() {
   //     .single();
   //   return { session, data, user };
   // }
-  if (error || profileError) {
-    console.error(error || profileError);
+  if (error) {
+    console.error(error);
+  }
+  if (profileError) {
+    console.log( '++++ Here is the Profile error ++++', profileError)
   }
   return { profile, data };
 }
 
 export default async function DashboardLayout({ children }) {
-  const { session, data, profile } = await FetchData();
-  console.log(profile.first_name, profile.last_name)
+  const {data, profile } = await FetchData();
+ 
  
   return (
     <div className="flex flex-col h-screen bg-slate-150 overflow-auto">
       {/* if a user is logged in, send credentials, otherwhise do not. */}
       {profile ? (
-        <Navbar user={profile} ciscoData={data} />
+        <Navbar profile={profile} ciscoData={data} />
       ) : (
         <Navbar ciscoData={data} />
       )}

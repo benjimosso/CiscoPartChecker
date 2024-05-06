@@ -17,7 +17,7 @@ import {
 } from "@/components/ui/dropdown-menu";
 // import {ModeToggle} from "@/components/ui/darkmode";
 
-export default function NavBar({ user, ciscoData }) {
+export default function NavBar({ profile, ciscoData }) {
   
 
   return (
@@ -44,17 +44,17 @@ export default function NavBar({ user, ciscoData }) {
         </ul>
         {/* It could be an idea to put the searchbar here...  */}
         <SearchBar ciscoData={ciscoData} />
-        {user ? (
+        {profile ? (
           <div className="flex items-center">
-            <p className="pr-4">Hi, {user.name}</p>
+            <p className="pr-4">Hi, {profile.first_name}</p>
             <DropdownMenu>
               <DropdownMenuTrigger>
                 <Avatar className="mr-4">
                   <AvatarImage src="" alt="avatar" />
                   {/* This could be an option, please review for a better solution */}
-                {user.name ? (
+                {profile.first_name ? (
                     <AvatarFallback>
-                      {Array.from(user.name)[0] + Array.from(user.lastname)[0]}
+                      {Array.from(profile.first_name)[0] + Array.from(profile.last_name)[0]}
                     </AvatarFallback>
                   ) : (
                     <AvatarFallback></AvatarFallback>
