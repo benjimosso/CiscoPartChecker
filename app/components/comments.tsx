@@ -1,5 +1,5 @@
+'use client'
 import React from 'react'
-import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
 import {
     Card,
     CardContent,
@@ -10,51 +10,43 @@ import {
   } from "@/components/ui/card"
 
 
-export default function Comments() {
+export default function Comments({profile}) {
 
-    const tabValue = [
-        {
-            value:'Notes'
-        },
-        {
-            value:'Comments'
-        },
-        {
-            value:'IOS'
-        }
-    ]
+    const [comment, setComment] = React.useState('') // comment state
+    console.log(profile)  
+    
+    const changeHandeler = (e: React.ChangeEvent<HTMLInputElement>) => {
+        setComment(e.target.value)
+    }
+
+    const submitHandeler = (e: React.FormEvent<HTMLFormElement>) => {
+        e.preventDefault()
+        console.log(comment)
+    }
 
     // the problem with this comments approach is that I would have to
     // create a new table on the DB for each comment section.
     
   return (
     <div className=''>
-      <Tabs defaultValue='Notes' className='flex flex-col items-center'>
-        <TabsList>
-            {tabValue.map((tab, index) => (
-                <TabsTrigger value={tab.value} key={index}>
-                    {tab.value}
-                </TabsTrigger>
-            ))}
-        </TabsList>
-        {tabValue.map((tab, index) => (
-            <TabsContent value={tab.value} key={index}>
-               <Card className=''>
-                     <CardHeader>
-                          <CardTitle>
-                            {tab.value}
-                          </CardTitle>
-                     </CardHeader>
-                     <CardContent>
-                          <CardDescription>
-                            This is the {tab.value} section
-                          </CardDescription>
-                     </CardContent>
-               </Card>
-            </TabsContent>
-        
-        ))}
-      </Tabs>
+      <Card>
+        <CardHeader>
+          <CardTitle>Comments</CardTitle>
+        </CardHeader>
+        <form onSubmit={submitHandeler}>
+        <CardContent>
+          
+            <input 
+            type="text" 
+            onChange={changeHandeler}
+            placeholder='Add Comment'/>
+         
+        </CardContent>
+        <CardFooter>
+          <button>Comment</button>
+        </CardFooter>
+        </form>
+      </Card>
     </div>
   )
 }

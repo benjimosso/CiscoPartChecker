@@ -33,7 +33,7 @@ async function getSingleItem(id) {
     // get user's profile. 
     const { data: profile, error: profileError } = await supabase
     .from("profiles")
-    .select("first_name, last_name")
+    .select("*")
     .single();
     // I may still have to get the session!
   if (error) {
@@ -44,7 +44,7 @@ async function getSingleItem(id) {
 
 export default async function SingleItemShow({ params }) {
   const { data: single, error, profile } = await getSingleItem(params.id);
-
+  
   return (
     <div className="flex flex-1 flex-col items-center pb-8 ">
       <div className="flex justify-normal  bg-white w-3/4 p-6 m-6 rounded-md overflow-auto">
