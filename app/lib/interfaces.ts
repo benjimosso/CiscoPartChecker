@@ -43,3 +43,10 @@ export interface Profiles {
   email: string;
   avatar: string;
 }
+
+export interface Comments {
+  id: number;
+  payload: string;
+  created_at: string;
+  profile_id: Profiles;
+}

@@ -44,6 +44,7 @@ async function getSingleItem(id) {
 
 export default async function SingleItemShow({ params }) {
   const { data: single, error, profile } = await getSingleItem(params.id);
+  // console.log(single)
   
   return (
     <div className="flex flex-1 flex-col items-center pb-8 ">

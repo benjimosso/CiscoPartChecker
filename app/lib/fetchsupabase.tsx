@@ -1,5 +1,5 @@
 import supabase from "../config/supabaseClient";
-import { Fans, Rackmounts, PowerSupplies } from "./interfaces";
+import { Fans, Rackmounts, PowerSupplies, Comments } from "./interfaces";
 
 export async function getFans({
   query,
@@ -107,3 +107,21 @@ export async function getPowers({
   }
 }
 
+
+export async function insertComment (payload: string, profile_id: number, user_id: string) {
+  let { data, error } = await supabase
+    .from("comments")
+    .insert([{ payload: payload, profile_id: profile_id, user_id: user_id}]);
+  if (error) console.log("error", error);
+  return data;
+}
+
+
+export async function getComments() {
+  let { data: comments, error } = await supabase
+    .from("comments")
+    .select("*")
+    .order("created_at", { ascending: true });
+  if (error) console.log("error", error);
+  return (comments as Comments[]) || [];
+}

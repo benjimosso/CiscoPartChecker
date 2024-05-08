@@ -8,20 +8,30 @@ import {
     CardHeader,
     CardTitle,
   } from "@/components/ui/card"
-
+import { Comments as Comentarios } from '@/app/lib/interfaces'
+import { insertComment, getComments } from '../lib/fetchsupabase'
+import supabase from '../config/supabaseClient'
 
 export default function Comments({profile}) {
-
+    const user_id = profile.id
+    console.log(user_id)
     const [comment, setComment] = React.useState('') // comment state
-    console.log(profile)  
+      
     
     const changeHandeler = (e: React.ChangeEvent<HTMLInputElement>) => {
         setComment(e.target.value)
     }
 
-    const submitHandeler = (e: React.FormEvent<HTMLFormElement>) => {
+    const  submitHandeler = async (e: React.FormEvent<HTMLFormElement>)  => {
         e.preventDefault()
-        console.log(comment)
+        // const commentInserted = await insertComment(comment, profile.id, user_id)
+
+       const Test1 = await insertComment(comment, profile.id, user_id)
+        console.log(Test1)
+
+     const comments = await getComments()
+     console.log(comments)
+
     }
 
     // the problem with this comments approach is that I would have to
