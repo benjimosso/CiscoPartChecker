@@ -1,9 +1,10 @@
-import supabase from "../config/supabaseClient";
+// import supabase from "../config/supabaseClient";
 import { Fans, Rackmounts, PowerSupplies, Comments } from "./interfaces";
+import { createServerComponentClient } from "@supabase/auth-helpers-nextjs";
+import { cookies } from "next/headers";
 
-// problem about fetching data like this, when I use supabase from 
-// /configsupabaseclient I do not include the user access token.
-// I use instead the api key as the barrier token in the http request.
+const supabase = createServerComponentClient({cookies});
+
 
 export async function getFans({
   query,
@@ -112,20 +113,20 @@ export async function getPowers({
 }
 
 
-export async function insertComment (payload: string, profile_id: number, user_id: string) {
-  let { data, error } = await supabase
-    .from("comments")
-    .insert([{ payload: payload, profile_id: profile_id, user_id: user_id}]);
-  if (error) console.log("error", error);
-  return data;
-}
+// export async function insertComment (payload: string, profile_id: number, user_id: string) {
+//   let { data, error } = await supabase
+//     .from("comments")
+//     .insert([{ payload: payload, profile_id: profile_id, user_id: user_id}]);
+//   if (error) console.log("error", error);
+//   return data;
+// }
 
 
-export async function getComments() {
-  let { data: comments, error } = await supabase
-    .from("comments")
-    .select("*")
-    .order("created_at", { ascending: true });
-  if (error) console.log("error", error);
-  return (comments as Comments[]) || [];
-}
+// export async function getComments() {
+//   let { data: comments, error } = await supabase
+//     .from("comments")
+//     .select("*")
+//     .order("created_at", { ascending: true });
+//   if (error) console.log("error", error);
+//   return (comments as Comments[]) || [];
+// }

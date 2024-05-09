@@ -38,7 +38,7 @@ if (comentsError) console.log("error", comentsError);
 
 export default async function DashboardLayout({ children }) {
   const {data, profile, session, comments } = await FetchData();
-  console.log(session)
+
  
   return (
     <div className="flex flex-col h-screen bg-slate-150 overflow-auto">

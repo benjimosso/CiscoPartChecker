@@ -234,7 +234,7 @@ export default async function SingleItemShow({ params }) {
       </p>
       {profile && <EditButton id={single.id} />}
       <div className="m-10">
-      {profile && <Comments profile={profile} />}
+      {profile && <Comments id={single.id} />}
       </div>
     </div>
   );

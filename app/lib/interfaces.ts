@@ -49,4 +49,7 @@ export interface Comments {
   payload: string;
   created_at: string;
   profile_id: Profiles;
+  item_id: string;
+  title: string;
+  profiles: Profiles;
 }
