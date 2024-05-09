@@ -10,7 +10,8 @@ import {
   } from "@/components/ui/card"
 import { Comments as Comentarios } from '@/app/lib/interfaces'
 import { insertComment, getComments } from '../lib/fetchsupabase'
-import supabase from '../config/supabaseClient'
+import { createClientComponentClient } from '@supabase/auth-helpers-nextjs'
+import { cookies } from 'next/headers'
 
 export default function Comments({profile}) {
     const user_id = profile.id
@@ -26,10 +27,8 @@ export default function Comments({profile}) {
         e.preventDefault()
         // const commentInserted = await insertComment(comment, profile.id, user_id)
 
-       const Test1 = await insertComment(comment, profile.id, user_id)
-        console.log(Test1)
-
-     const comments = await getComments()
+     const supabase = createClientComponentClient()
+     const { data: comments, error } = await supabase.from('comments').select('*, profiles(*)')
      console.log(comments)
 
     }

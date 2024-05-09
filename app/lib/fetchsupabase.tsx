@@ -1,6 +1,10 @@
 import supabase from "../config/supabaseClient";
 import { Fans, Rackmounts, PowerSupplies, Comments } from "./interfaces";
 
+// problem about fetching data like this, when I use supabase from 
+// /configsupabaseclient I do not include the user access token.
+// I use instead the api key as the barrier token in the http request.
+
 export async function getFans({
   query,
   page = 1,

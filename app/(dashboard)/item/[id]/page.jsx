@@ -50,7 +50,7 @@ export default async function SingleItemShow({ params }) {
     <div className="flex flex-1 flex-col items-center pb-8 ">
       <div className="flex justify-normal  bg-white w-3/4 p-6 m-6 rounded-md overflow-auto">
         <div className="border-r-2  border-slate-300 pr-4">
-          {single.images ? <Images images={single.images} /> : <NoImages />}
+          {single?.images ? <Images images={single.images} /> : <NoImages />}
         </div>
         <div className="flex flex-col gap-4 pl-6">
           {single.ciscopn && (
