@@ -8,6 +8,7 @@ import NoImages from "../../../components/NoImages";
 import Images from "../../../components/Images";
 import EditButton from "../../../components/EditButton";
 import Comments from "@/app/components/comments";
+import AddComment from "@/app/components/addcomment";
 
 // shadcn components
 import {
@@ -44,6 +45,15 @@ async function getSingleItem(id) {
 
 export default async function SingleItemShow({ params }) {
   const { data: single, error, profile } = await getSingleItem(params.id);
+
+  // submit to insert a comment/note
+  // const handleSubmit = async (e, title , note ) => {
+  //   'use server';
+  //   e.preventDefault();
+  //   console.log("note", note);
+  //   console.log("title", title);
+  // }
+
   // console.log(single)
   
   return (
@@ -53,7 +63,7 @@ export default async function SingleItemShow({ params }) {
           {single?.images ? <Images images={single.images} /> : <NoImages />}
         </div>
         <div className="flex flex-col gap-4 pl-6">
-          {single.ciscopn && (
+          {single?.ciscopn && (
             <div className="">
               <p className=" font-bold text-xl pb-4 pt-6 border-b-2 border-slate-300">
                 {single.ciscopn}
@@ -234,7 +244,10 @@ export default async function SingleItemShow({ params }) {
       </p>
       {profile && <EditButton id={single.id} />}
       <div className="m-10">
-      {profile && <Comments id={single.id} />}
+      {profile && <Comments id={single.id} profile={profile} />}
+      </div>
+      <div>
+      <AddComment profile={profile} id={single.id} />
       </div>
     </div>
   );

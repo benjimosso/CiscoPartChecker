@@ -14,7 +14,7 @@ import { Comments as Comentarios } from "@/app/lib/interfaces";
 import { createServerComponentClient } from "@supabase/auth-helpers-nextjs";
 import { cookies } from "next/headers";
 
-export default async function Comments({ id }) {
+export default async function Comments({ id, profile }) {
   // supabase handlers.
   const supabase = createServerComponentClient({ cookies });
   const { data, error } = await supabase
@@ -24,20 +24,15 @@ export default async function Comments({ id }) {
     .eq("item_id", id);
   if (error) console.log("error", error);
   if (data)
-    console.log(
-      data.map((note: Comentarios) =>
-        new Date(note.created_at).toLocaleDateString()
-      )
-    );
+    console.log(data);
 
-    // handle the data to insert.
-    const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
-        e.preventDefault()
-        console.log('e.target', e.target)
-
-    }
-
-
+    // handle submit
+  // const handleSubmit = async (e: React.FormEvent, title: string, note: string) => {
+  //   'use server';
+  //   e.preventDefault();
+  //   console.log("note", note);
+  //   console.log("title", title);
+  // }
 
   return (
     <div className="mt-16">
@@ -68,7 +63,7 @@ export default async function Comments({ id }) {
             ))}
         </div>
         <CardFooter>
-          <AddComment />
+          
         </CardFooter>
       </Card>
      
