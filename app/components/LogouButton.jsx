@@ -1,5 +1,5 @@
 'use client';
-import { createClientComponentClient } from "@supabase/auth-helpers-nextjs";
+import { createClient } from "@/utils/supabase/client";
 import { useRouter } from "next/navigation";
 // shadcn components
 import { Button } from "@/components/ui/button";
@@ -8,7 +8,7 @@ export default function LogouButton() {
 
     const router = useRouter();
     const handleLogout = async () => {
-        const supabase = createClientComponentClient();
+        const supabase = createClient();
         const {error} = await supabase.auth.signOut();
         if(!error){
             router.push('/login')

@@ -1,6 +1,6 @@
-import React from "react";
+"use client";
+import { useEffect, useState } from "react";
 // Shadcn
-import { Button } from "@/components/ui/button"
 import {
   Card,
   CardContent,
@@ -9,74 +9,101 @@ import {
   CardHeader,
   CardTitle,
 } from "@/components/ui/card";
-import AddComment from "./addcomment";
+// import AddComment from "./addcomment";
 import { Comments as Comentarios } from "@/app/lib/interfaces";
-import { createServerComponentClient } from "@supabase/auth-helpers-nextjs";
-import { cookies } from "next/headers";
+import DeleteComment from "./deletecomment";
+// supabase handlers.
+import { createClient } from "@/utils/supabase/client";
 
-export default async function Comments({ id, profile }) {
+export default function Comments({
+  id,
+  profile_id,
+  Servernotes,
+}: {
+  id: number;
+  profile_id: string;
+  Servernotes: Comentarios[];
+}) {
   // supabase handlers.
-  const supabase = createServerComponentClient({ cookies });
-  const { data, error } = await supabase
-    .from("comments")
-    .select("*, profiles(first_name, last_name, avatar)")
-    .order("created_at", { ascending: false })
-    .eq("item_id", id);
-  if (error) console.log("error", error);
-  if (data)
-    console.log(data);
+  const supabase = createClient();
+  // get comments
 
-    // handle submit
-  // const handleSubmit = async (e: React.FormEvent, title: string, note: string) => {
-  //   'use server';
-  //   e.preventDefault();
-  //   console.log("note", note);
-  //   console.log("title", title);
-  // }
+  const [notes, setNotes] = useState(Servernotes);
+  
+  useEffect(() => {
+    const channel = supabase
+      .channel("realtime notes Insert")
+      .on(
+        "postgres_changes",
+        {
+          event: "INSERT", // INSERT
+          schema: "public",
+          table: "comments",
+        },
+        (payload) => {
+          // console.log("Change received!", payload);
+          setNotes([...notes, payload.new as Comentarios]);
+        }
+      )
+      .subscribe();
+
+      const channelDelete = supabase
+      .channel("realtime notes Delete")
+      .on(
+        "postgres_changes",
+        {
+          event: "DELETE", // DELETE
+          schema: "public",
+          table: "comments",
+        },
+        (payload) => {
+          // console.log("Change received!", payload);
+          setNotes(notes.filter((note) => note.id !== payload.old.id));
+        }
+      )
+      .subscribe();
+
+    return () => {
+      supabase.removeChannel(channel);
+      supabase.removeChannel(channelDelete);
+    };
+  }, [supabase, notes, setNotes]);
 
   return (
     <div className="mt-16">
-      <Card className="bg-slate-100">
+      <Card className="bg-slate-100 ">
         <CardHeader>
           <CardTitle>Notes</CardTitle>
           <CardDescription>This can be seen by your Teammates</CardDescription>
         </CardHeader>
         <div className="grid grid-cols-4 gap-9 p-8">
-          {data &&
-            data.map((note: Comentarios) => (
+          {notes &&
+            notes.map((note: Comentarios) => (
               <Card key={note.id} className="shadow-md">
                 <CardHeader>
-                  <CardTitle>
-                    {note.title}
-                  </CardTitle>
+                  <CardTitle>{note.title}</CardTitle>
+
                   <CardDescription>
-                    {note.profiles.first_name} {note.profiles.last_name}
+                    {note.first_name} {note.last_name}
                   </CardDescription>
+
                   <CardDescription>
                     {new Date(note.created_at).toLocaleDateString()}
                   </CardDescription>
                 </CardHeader>
                 <CardContent>
-                  <CardDescription>{note.payload}</CardDescription>
+                  <p className="font-semibold">{note.payload}</p>
                 </CardContent>
+                {profile_id === note.profile_id && (
+                  <CardFooter className=" p-0">
+                    <DeleteComment noteid={note.id} profile_id={profile_id} />
+                  </CardFooter>
+                )}
               </Card>
             ))}
         </div>
-        <CardFooter>
-          
-        </CardFooter>
+        <CardFooter></CardFooter>
       </Card>
-     
     </div>
   );
 }
-
-// const [comment, setComment] = React.useState('')
-
-// const changeHandeler = (e: React.ChangeEvent<HTMLInputElement>) => {
-//     setComment(e.target.value)
-// }
-
-// const  submitHandeler = async (e: React.FormEvent<HTMLFormElement>)  => {
-//     e.preventDefault()
-// }

@@ -1,5 +1,5 @@
-import { createServerComponentClient } from "@supabase/auth-helpers-nextjs";
-import { cookies } from "next/headers";
+// supabase handler
+import { createClient } from "@/utils/supabase/server";
 import Link from "next/link";
 // ebay client
 // import { EbayClient } from "../../../config/ebayClient";
@@ -9,7 +9,7 @@ import Images from "../../../components/Images";
 import Image from "next/image";
 
 async function getSingleRackmount(id) {
-  const supabase = createServerComponentClient({ cookies });
+  const supabase = createClient();
   const { data, error } = await supabase
     .from("rackmounts")
     .select("*, cisco(ciscopn, id)")

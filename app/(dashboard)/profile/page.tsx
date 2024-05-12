@@ -1,6 +1,6 @@
-import React from "react";
-import { createServerComponentClient } from "@supabase/auth-helpers-nextjs";
-import { cookies } from "next/headers";
+// supabase
+import { createClient } from "@/utils/supabase/server";
+
 import { Profiles } from "@/app/lib/interfaces";
 import Link from "next/link";
 
@@ -27,7 +27,7 @@ import {
 import { Avatar, AvatarImage, AvatarFallback } from "@/components/ui/avatar";
 
 async function getProfile() {
-  const supabase = createServerComponentClient({ cookies });
+  const supabase = createClient();
   const { data: profile, error } = await supabase
     .from("profiles")
     .select("*")

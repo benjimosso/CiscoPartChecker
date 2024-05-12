@@ -1,5 +1,5 @@
 "use client";
-import { createClientComponentClient } from "@supabase/auth-helpers-nextjs";
+import { createClient } from "@/utils/supabase/client";
 import AuthForm from "../AuthForm";
 import { useState } from "react";
 import { useRouter } from "next/navigation";
@@ -13,7 +13,7 @@ export default function Singup() {
   const handleSubmit = async (e, email, password, first_name, last_name) => {
     e.preventDefault();
     // console.log("Email: ", email, "Password: ", password);
-    const supabase = createClientComponentClient();
+    const supabase = createClient();
     const { error, data } = await supabase.auth.signUp({
       email,
       password,

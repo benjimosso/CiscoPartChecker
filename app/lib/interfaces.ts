@@ -42,14 +42,19 @@ export interface Profiles {
   created_at: string;
   email: string;
   avatar: string;
+  team_id: number;
+  company_id: number;
 }
 
 export interface Comments {
   id: number;
   payload: string;
   created_at: string;
-  profile_id: Profiles;
+  profile_id: string;
   item_id: string;
   title: string;
   profiles: Profiles;
+  first_name: string;
+  last_name: string;
+  team_id: number;
 }

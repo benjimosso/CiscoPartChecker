@@ -1,6 +1,5 @@
-import React from "react";
-import { createServerComponentClient } from "@supabase/auth-helpers-nextjs";
-import { cookies } from "next/headers";
+// supabase
+import { createClient } from "@/utils/supabase/server";
 import Link from "next/link";
 import Image from "next/image";
 // components
@@ -22,7 +21,8 @@ export const dynamicParams = true;
 async function getSingleItem(id) {
   // idea: get ebays api to get the price of the item
   // get single item from the database
-  const supabase = createServerComponentClient({ cookies });
+  const supabase = createClient();
+  // get single item from cisco table
   const { data, error } = await supabase
     .from("cisco")
     .select(
@@ -31,31 +31,31 @@ async function getSingleItem(id) {
     .eq("id", id)
     .single();
 
-    // get user's profile. 
-    const { data: profile, error: profileError } = await supabase
+  // get user's profile.
+  const { data: profile, error: profileError } = await supabase
     .from("profiles")
     .select("*")
     .single();
-    // I may still have to get the session!
-  if (error) {
-    console.error(error);
-  }
-  return { data, error, profile };
+
+  // get comments
+  const { data: notes, error: commentError } = await supabase
+    .from("comments")
+    .select("*, profiles(first_name, last_name, avatar)")
+    .order("created_at", { ascending: false })
+    .eq("item_id", id)
+    .eq("team_id", profile.team_id)
+
+  if (error) console.log("error", error);
+  if (profileError) console.log("profileError", profileError);
+  if (commentError) console.log("commentError", commentError);
+ 
+  return { data, error, profile, notes };
 }
 
 export default async function SingleItemShow({ params }) {
-  const { data: single, error, profile } = await getSingleItem(params.id);
+  const { data: single, error, profile, notes } = await getSingleItem(params.id);
 
-  // submit to insert a comment/note
-  // const handleSubmit = async (e, title , note ) => {
-  //   'use server';
-  //   e.preventDefault();
-  //   console.log("note", note);
-  //   console.log("title", title);
-  // }
 
-  // console.log(single)
-  
   return (
     <div className="flex flex-1 flex-col items-center pb-8 ">
       <div className="flex justify-normal  bg-white w-3/4 p-6 m-6 rounded-md overflow-auto">
@@ -173,10 +173,7 @@ export default async function SingleItemShow({ params }) {
                   </HoverCardTrigger>
 
                   <HoverCardContent className="bg-slate-100 p-3">
-                    <a
-                      className="text-blue-500"
-                      href={`/fans/${f.fans.id}`}
-                    >
+                    <a className="text-blue-500" href={`/fans/${f.fans.id}`}>
                       {f.fans.fan_pn}
                     </a>
                     {f.fans.image && (
@@ -244,10 +241,17 @@ export default async function SingleItemShow({ params }) {
       </p>
       {profile && <EditButton id={single.id} />}
       <div className="m-10">
-      {profile && <Comments id={single.id} profile={profile} />}
+        {profile && <Comments id={single.id} profile_id={profile.id} Servernotes={notes}/>}
       </div>
       <div>
-      <AddComment profile={profile} id={single.id} />
+        {profile && 
+        <AddComment 
+        profile_id={profile.id} 
+        // profile_name={profile.first_name + " " + profile.last_name}
+        first_name={profile.first_name}
+        last_name={profile.last_name}
+        team_id={profile.team_id}
+        id={single.id} />}
       </div>
     </div>
   );

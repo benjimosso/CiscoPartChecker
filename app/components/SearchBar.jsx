@@ -3,7 +3,7 @@ import { useState, useEffect } from "react";
 import Image from "next/image";
 import logo from "../assets/images/logo.png";
 import { useRouter } from "next/navigation";
-import supabase from "../config/supabaseClient";
+import { createClient } from "@/utils/supabase/client";
 
 // idea: add searchbar to the navbar component, this will allow the user to search for items from any page.
 
@@ -24,8 +24,8 @@ export default function SearchBar({
       return false;
     }
 
-    // tests for retrieving data from the server
-
+    // fetch data from the Supabase
+    const supabase = createClient();
     const { data, error } = await supabase
       .from("cisco")
       .select("ciscopn")
