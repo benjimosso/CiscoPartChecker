@@ -1,10 +1,7 @@
-// import supabase from "../config/supabaseClient";
 import { Fans, Rackmounts, PowerSupplies, Comments } from "./interfaces";
 import { createClient } from "@/utils/supabase/server";
-import { cookies } from "next/headers";
 
 const supabase = createClient();
-
 
 export async function getFans({
   query,
@@ -15,16 +12,14 @@ export async function getFans({
   page?: number;
   limit?: number;
 }) {
-
-  console  
   if (!query) {
     let { data: fans, error } = await supabase
       .from("fans")
       .select("*")
       .range((page - 1) * limit, page * limit - 1)
       .limit(limit)
-      .order("fan_pn", { ascending: true })
-      
+      .order("fan_pn", { ascending: true });
+
     if (error) console.log("error", error);
     return (fans as Fans[]) || [];
   } else {
@@ -63,8 +58,8 @@ export async function getRackmounts({
       .select("*")
       .order("rackpn", { ascending: true })
       .range((page - 1) * limit, page * limit - 1)
-      .limit(limit)
-      
+      .limit(limit);
+
     if (error) console.log("error", error);
     return (rackmounts as Rackmounts[]) || [];
   } else {
@@ -95,8 +90,8 @@ export async function getPowers({
       .select("*")
       .order("power_pn", { ascending: true })
       .range((page - 1) * limit, page * limit - 1)
-      .limit(limit)
-      
+      .limit(limit);
+
     if (error) console.log("error", error);
     return (powers as PowerSupplies[]) || [];
   } else {
@@ -112,7 +107,6 @@ export async function getPowers({
   }
 }
 
-
 // export async function insertComment (payload: string, profile_id: number, user_id: string) {
 //   let { data, error } = await supabase
 //     .from("comments")
@@ -120,7 +114,6 @@ export async function getPowers({
 //   if (error) console.log("error", error);
 //   return data;
 // }
-
 
 // export async function getComments() {
 //   let { data: comments, error } = await supabase
