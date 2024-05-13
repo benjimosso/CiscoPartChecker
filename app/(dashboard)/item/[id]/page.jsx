@@ -38,12 +38,16 @@ async function getSingleItem(id) {
     .single();
 
   // get comments
+  // IMPORTANT! CHECK IF PROFILE IS NULL BEFORE RUNNING THIS QUERY
+  if (profile === null) {
+    return { single, error, profile: null, notes: null };
+  }
   const { data: notes, error: commentError } = await supabase
     .from("comments")
     .select("*, profiles(first_name, last_name, avatar)")
     .order("created_at", { ascending: false })
     .eq("item_id", id)
-    .eq("team_id", profile.team_id)
+    .eq("team_id", profile.team_id);
 
   if (error) console.log("error", error);
   if (profileError) console.log("profileError", profileError);
