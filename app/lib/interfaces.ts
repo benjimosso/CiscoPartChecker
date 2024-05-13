@@ -44,6 +44,12 @@ export interface Profiles {
   avatar: string;
   team_id: number;
   company_id: number;
+  company?: {
+    company_name: string;
+  }
+  teams?: {
+    team_name: string;
+  } 
 }
 
 export interface Comments {

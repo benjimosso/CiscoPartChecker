@@ -15,6 +15,11 @@ import DeleteComment from "./deletecomment";
 // supabase handlers.
 import { createClient } from "@/utils/supabase/client";
 
+// TODO HERE!
+// FIND A WAY TO SORT THE COMMENTS BY DATE
+// AND SHOW THE LATEST FIRST
+// possible solution: sort((a, b) => Number(a.created_at) - Number(b.created_at)).
+
 export default function Comments({
   id,
   profile_id,

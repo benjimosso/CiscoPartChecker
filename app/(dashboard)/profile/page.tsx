@@ -30,15 +30,16 @@ async function getProfile() {
   const supabase = createClient();
   const { data: profile, error } = await supabase
     .from("profiles")
-    .select("*")
+    .select("*, company(company_name), teams(team_name)")
     .single();
-
+    
   if (error) console.log("error", error);
   return (profile as Profiles) || null;
 }
 
 export default async function Profile() {
   const profile = await getProfile();
+  
   // if (profile) {
   //   console.log(profile)
   // }
@@ -56,7 +57,7 @@ export default async function Profile() {
     <div className="flex flex-1 m-20 border border-gray-300">
       <Card className="m-14 w-1/5 border border-primary">
         <CardHeader className="flex items-center">
-          <CardTitle>
+          {/* <CardTitle> */}
             <Avatar>
               {profile.avatar ? (
                 <AvatarImage src={profile.avatar} alt="avatar" />
@@ -67,18 +68,20 @@ export default async function Profile() {
                 </AvatarFallback>
               )}
             </Avatar>
-          </CardTitle>
+          {/* </CardTitle> */}
           <CardTitle>
             {profile.first_name} {profile.last_name}
           </CardTitle>
           <CardDescription>{profile.email}</CardDescription>
+          <CardDescription>{profile.company.company_name}</CardDescription>
+          <CardDescription>{profile.teams.team_name}</CardDescription>
         </CardHeader>
-        <CardDescription className="flex flex-col items-center mt-10">
+        <CardFooter className="flex flex-col items-center mt-10">
           <h1 className="text-primary text-xl">About</h1>
           <CardContent className="mt-5">
             Esto podria ser algo sobre la persona y si quiere decir alguna boludez. 
           </CardContent>
-        </CardDescription>
+        </CardFooter>
       </Card>
     </div>
   );

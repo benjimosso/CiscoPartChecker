@@ -23,7 +23,7 @@ async function getSingleItem(id) {
   // get single item from the database
   const supabase = createClient();
   // get single item from cisco table
-  const { data, error } = await supabase
+  const { data: single, error } = await supabase
     .from("cisco")
     .select(
       "*, rackmounts(rackpn, image, id), ciscofans(fans(*)), ciscopowers(powers(*))"
@@ -49,11 +49,11 @@ async function getSingleItem(id) {
   if (profileError) console.log("profileError", profileError);
   if (commentError) console.log("commentError", commentError);
  
-  return { data, error, profile, notes };
+  return { single, error, profile, notes };
 }
 
 export default async function SingleItemShow({ params }) {
-  const { data: single, error, profile, notes } = await getSingleItem(params.id);
+  const { single, error, profile, notes } = await getSingleItem(params.id);
 
 
   return (
