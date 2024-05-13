@@ -56,7 +56,7 @@ export default async function Rackmounts({
         </div>
       </div>
       <div className="relative grid grid-cols-3 gap-5 w-2/3 m-6">
-        {rackmounts.length === 0 ? <h1>No fans found</h1> : null}
+        {rackmounts.length === 0 ? <h1>No fans Rackmount</h1> : null}
         {rackmounts.map((rack) => (
         <Link href={`${mainpath}/${rack.id}`}  key={rack.id}>
           <Datalist

@@ -14,21 +14,14 @@ import {
   DropdownMenuLabel,
   DropdownMenuSeparator,
   DropdownMenuTrigger,
-} from "@/components/ui/dropdown-menu"
+} from "@/components/ui/dropdown-menu";
 // import {ModeToggle} from "@/components/ui/darkmode";
 
-export default function NavBar({ user, ciscoData }) {
-  // if (user) {
-  //   const re = new RegExp("^.+?(?=@)");
-  //   const username = user.email.match(re);
-  // }
-
-  
-  
+export default function NavBar({ profile, ciscoData }) {
 
   return (
     <>
-      <nav className="bg-white text-black p-4 flex justify-between items-baseline border-solid border-b-4 border-primary ">
+      <nav className="bg-white text-black p-4 flex justify-between items-baseline border-solid">
         <ul className="flex items-center pl-8">
           <li className="pl-4 pr-4">
             {/* TO CHECK, NEED THE HOME PAGE BUTTON TO REFRESH THE PAGE... */}
@@ -50,38 +43,38 @@ export default function NavBar({ user, ciscoData }) {
         </ul>
         {/* It could be an idea to put the searchbar here...  */}
         <SearchBar ciscoData={ciscoData} />
-        {user ? (
+        {profile ? (
           <div className="flex items-center">
-            <p className="pr-4">Hi, {user.user_metadata.firstName}</p>
-            <DropdownMenu> 
+            <p className="pr-4">Hi, {profile.first_name}</p>
+            <DropdownMenu>
               <DropdownMenuTrigger>
-            <Avatar className="mr-4">
-              <AvatarImage
-                src=""
-                alt="avatar"
-                
-              />
-              {/* This could be an option, please review for a better solution */}
-              { user.user_metadata.firstName && user.user_metadata.lastName ? <AvatarFallback>{Array.from(user.user_metadata.firstName)[0] + Array.from(user.user_metadata.lastName)[0] }</AvatarFallback> :
-              <AvatarFallback>U</AvatarFallback>  }
-            </Avatar>
-            </DropdownMenuTrigger>  
-            <DropdownMenuContent align="end">
-            <DropdownMenuLabel>My Account</DropdownMenuLabel>
-            <DropdownMenuSeparator />
-              <DropdownMenuItem>
-                <Link href="/profile">
-                  <p>Profile</p>
-                </Link>
-              </DropdownMenuItem>
-              <DropdownMenuItem>
-                <LogouButton />
-              </DropdownMenuItem>
-            </DropdownMenuContent>
+                <Avatar className="mr-4">
+                  {/* <AvatarImage src={profile.avatar} alt="avatar" /> */}
+                  {/* This could be an option, please review for a better solution */}
+                {profile.avatar ? (
+                   <AvatarImage src={profile.avatar} alt="avatar" />
+                  ) : (
+                    <AvatarFallback>
+                    {Array.from(profile.first_name)[0] + Array.from(profile.last_name)[0]}
+                  </AvatarFallback>
+                  )} 
+                </Avatar>
+              </DropdownMenuTrigger>
+              <DropdownMenuContent align="end">
+                <DropdownMenuLabel>My Account</DropdownMenuLabel>
+                <DropdownMenuSeparator />
+                <DropdownMenuItem>
+                  <Link href="/profile">
+                    <p>Profile</p>
+                  </Link>
+                </DropdownMenuItem>
+                <DropdownMenuItem>
+                  <LogouButton />
+                </DropdownMenuItem>
+              </DropdownMenuContent>
             </DropdownMenu>
             {/* <ModeToggle className="ml-6"/> */}
           </div>
-          
         ) : (
           <ul className="flex items-center pr-8">
             <li className="pr-4">
@@ -97,7 +90,6 @@ export default function NavBar({ user, ciscoData }) {
           </ul>
         )}
       </nav>
-      <LowerNav />
     </>
   );
 }

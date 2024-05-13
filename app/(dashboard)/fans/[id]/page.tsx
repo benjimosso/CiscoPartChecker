@@ -1,44 +1,38 @@
-// supabase handler
+// supabase
 import { createClient } from "@/utils/supabase/server";
 import Link from "next/link";
-// ebay client
-// import { EbayClient } from "../../../config/ebayClient";
-// components
 import noImage from "../../../assets/images/no-image-available.jpg";
 import Images from "../../../components/Images";
 import Image from "next/image";
+import { Fans } from "@/app/lib/interfaces";
 
-async function getSingleRackmount(id) {
+
+
+async function getSingleFan({ id }: { id: string }) : Promise<Fans | null> {
   const supabase = createClient();
-  const { data, error } = await supabase
-    .from("rackmounts")
-    .select("*, cisco(ciscopn, id)")
+  let { data: fan, error } = await supabase
+    .from("fans")
+    .select("*, ciscofans(cisco(ciscopn, id))")
     .eq("id", id)
     .single();
-  return { data, error };
+    
+  if (error) console.log("error", error);
+  return (fan as Fans) || null;
+  // I need to figuere out how to pass the error to the client
 }
 
-export default async function SingleRackmount({ params }) {
-  const { data, error } = await getSingleRackmount(params.id);
-  if (error) {
-    console.error(error);
-    return <div>Error</div>;
-  }
-
-  // EBAY DATA OPTION
-  // const ebayData = await EbayClient({ keyword: data.rackpn });
-  // const ebayItem = ebayData.findItemsByKeywordsResponse[0].searchResult[0];
-  // console.log("+++++++++++++++++++++++++++++++++++++++++++++++++");
-  // console.log(ebayItem);
-  // console.log("+++++++++++++++++++++++++++++++++++++++++++++++++");
-
-  return (
-    <div className="flex flex-1 flex-col items-center justify-center">
+export default async function singlePower({params}: {params: {id: string}}) {
+    const fan = await getSingleFan({id: params.id});
+    
+   
+   
+    return (
+        <div className="flex flex-1 flex-col items-center justify-center">
       <div className="flex justify-normal   bg-white w-3/4 h-auto p-6 m-6 rounded-md ">
         <div className="border-r-2  border-slate-300 pr-4">
-          {data.image ? (
+          {fan.image ? (
             <Image
-              src={data.image}
+              src={fan.image}
               alt="Rackmount Image"
               width={100}
               height={100}
@@ -53,9 +47,9 @@ export default async function SingleRackmount({ params }) {
           )}
         </div>
         <div className="flex flex-col pl-6">
-          {data.rackpn && (
+          {fan.fan_pn && (
             <div className="">
-              <p className=" font-bold text-xl pb-4 pt-6">{data.rackpn}</p>
+              <p className=" font-bold text-xl pb-4 pt-6">{fan.fan_pn}</p>
             </div>
           )}
           <p> IDEA: use Ebays API to searh for the items price </p>
@@ -66,17 +60,19 @@ export default async function SingleRackmount({ params }) {
           Compatible with:
         </h1>
         <div className="grid grid-cols-4 gap-4 m-6">
-          {data.cisco.map((c, index) => (
+          {fan.ciscofans.map((c, index) => (
             <Link
-              href={`/item/${c.id}`}
+              href={`/item/${c.cisco.id}`}
               key={index}
               className="flex p-2 text-sm font-semibold border-r-2 border-b-2 border-slate-300 shadow-md m-2 hover:bg-primary hover:text-white"
             >
-              {c.ciscopn}
+              {c.cisco.ciscopn}
             </Link>
           ))}
         </div>
       </div>
     </div>
-  );
+    )
 }
+
+

@@ -1,12 +1,13 @@
-import React from "react";
-import { createServerComponentClient } from "@supabase/auth-helpers-nextjs";
-import { cookies } from "next/headers";
+// supabase
+import { createClient } from "@/utils/supabase/server";
 import Link from "next/link";
 import Image from "next/image";
 // components
 import NoImages from "../../../components/NoImages";
 import Images from "../../../components/Images";
 import EditButton from "../../../components/EditButton";
+import Comments from "@/app/components/comments";
+import AddComment from "@/app/components/addcomment";
 
 // shadcn components
 import {
@@ -20,43 +21,49 @@ export const dynamicParams = true;
 async function getSingleItem(id) {
   // idea: get ebays api to get the price of the item
   // get single item from the database
-  const supabase = createServerComponentClient({ cookies });
-  const { data, error } = await supabase
+  const supabase = createClient();
+  // get single item from cisco table
+  const { data: single, error } = await supabase
     .from("cisco")
     .select(
       "*, rackmounts(rackpn, image, id), ciscofans(fans(*)), ciscopowers(powers(*))"
     )
     .eq("id", id)
     .single();
-  // get session of the user
-  const { data: session } = await supabase.auth.getSession();
-  // const {data: data2} = await supabase
-  // .from("ciscofans")
-  // .select("*, cisco(ciscopn), fans(fan_pn)")
-  // .eq("cisco_id", id);
-  return { data, error, session };
+
+  // get user's profile.
+  const { data: profile, error: profileError } = await supabase
+    .from("profiles")
+    .select("*")
+    .single();
+
+  // get comments
+  const { data: notes, error: commentError } = await supabase
+    .from("comments")
+    .select("*, profiles(first_name, last_name, avatar)")
+    .order("created_at", { ascending: false })
+    .eq("item_id", id)
+    .eq("team_id", profile.team_id)
+
+  if (error) console.log("error", error);
+  if (profileError) console.log("profileError", profileError);
+  if (commentError) console.log("commentError", commentError);
+ 
+  return { single, error, profile, notes };
 }
 
 export default async function SingleItemShow({ params }) {
-  const { data: single, error, session } = await getSingleItem(params.id);
-  // console output of a many to many relationship between cisco and ciscofans and fans
-  // console.log(single.ciscopowers);
-  // here the 0 next to ciscofans is the index of the array, in case is more than one i can map through it... example below, it can be item or item.fans or item.fans.fan_pn
-  //  single.ciscofans.map((item) => console.log(item.fans.fan_pn));
-  //  single.ciscopowers.map((item) => console.log(item.powers.power_pn));
+  const { single, error, profile, notes } = await getSingleItem(params.id);
 
-  if (error) {
-    console.error(error);
-  }
 
   return (
     <div className="flex flex-1 flex-col items-center pb-8 ">
       <div className="flex justify-normal  bg-white w-3/4 p-6 m-6 rounded-md overflow-auto">
         <div className="border-r-2  border-slate-300 pr-4">
-          {single.images ? <Images images={single.images} /> : <NoImages />}
+          {single?.images ? <Images images={single.images} /> : <NoImages />}
         </div>
         <div className="flex flex-col gap-4 pl-6">
-          {single.ciscopn && (
+          {single?.ciscopn && (
             <div className="">
               <p className=" font-bold text-xl pb-4 pt-6 border-b-2 border-slate-300">
                 {single.ciscopn}
@@ -84,21 +91,18 @@ export default async function SingleItemShow({ params }) {
           {single.rackmounts && (
             <div className="flex">
               <h1 className="font-bold">Rackmount: </h1>
-              {/* <Link
-                className="text-blue-700 pl-2"
-                target="blanks"
-                href={`https://www.google.com/search?q=${single.rackmounts.rackpn}`}
-              >
-                {single.rackmounts.rackpn}
-              </Link> */}
-
               <HoverCard>
                 <HoverCardTrigger>
-                  <p className="ml-3 cursor-pointer">{single.rackmounts.rackpn}</p>
+                  <p className="ml-3 cursor-pointer">
+                    {single.rackmounts.rackpn}
+                  </p>
                 </HoverCardTrigger>
 
-                <HoverCardContent>
-                  <a className="text-blue-500" href={`/rackmounts/${single.rackmounts.id}`}>
+                <HoverCardContent className="bg-slate-100 p-3">
+                  <a
+                    className="text-blue-500"
+                    href={`/rackmounts/${single.rackmounts.id}`}
+                  >
                     {single.rackmounts.rackpn}
                   </a>
                   {single.rackmounts.image && (
@@ -108,7 +112,8 @@ export default async function SingleItemShow({ params }) {
                       height={200}
                       alt="rackmount Image"
                       priority={true}
-                      style={{width:'auto', height: "auto" }}
+                      style={{ width: "auto", height: "auto" }}
+                      className="rounded-md, mt-4"
                     />
                   )}
                 </HoverCardContent>
@@ -120,9 +125,33 @@ export default async function SingleItemShow({ params }) {
             <div className="">
               <h1 className="font-bold">Power: </h1>
               {single.ciscopowers.map((item, index) => (
-                <p key={index} className="pl-2">
-                  {item.powers.power_pn}
-                </p>
+                <HoverCard key={index}>
+                  <HoverCardTrigger>
+                    <p className="ml-3 cursor-pointer">
+                      {item.powers.power_pn}
+                    </p>
+                  </HoverCardTrigger>
+
+                  <HoverCardContent className="bg-slate-100 p-3">
+                    <a
+                      className="text-blue-500"
+                      href={`/powers/${item.powers.id}`}
+                    >
+                      {item.powers.power_pn}
+                    </a>
+                    {item.powers.image && (
+                      <Image
+                        src={item.powers.image}
+                        width={200}
+                        height={200}
+                        alt="rackmount Image"
+                        priority={true}
+                        style={{ width: "auto", height: "auto" }}
+                        className="rounded-md, mt-4"
+                      />
+                    )}
+                  </HoverCardContent>
+                </HoverCard>
               ))}
             </div>
           )}
@@ -138,9 +167,28 @@ export default async function SingleItemShow({ params }) {
             <div className="">
               <h1 className="font-bold">Fans: </h1>
               {single.ciscofans.map((f, index) => (
-                <p key={index} className="pl-2">
-                  {f.fans.fan_pn}
-                </p>
+                <HoverCard key={index}>
+                  <HoverCardTrigger>
+                    <p className="ml-3 cursor-pointer">{f.fans.fan_pn}</p>
+                  </HoverCardTrigger>
+
+                  <HoverCardContent className="bg-slate-100 p-3">
+                    <a className="text-blue-500" href={`/fans/${f.fans.id}`}>
+                      {f.fans.fan_pn}
+                    </a>
+                    {f.fans.image && (
+                      <Image
+                        src={f.fans.image}
+                        width={200}
+                        height={200}
+                        alt="rackmount Image"
+                        priority={true}
+                        style={{ width: "auto", height: "auto" }}
+                        className="rounded-md, mt-4"
+                      />
+                    )}
+                  </HoverCardContent>
+                </HoverCard>
               ))}
             </div>
           )}
@@ -188,102 +236,23 @@ export default async function SingleItemShow({ params }) {
         </div>
       </div>
 
-      {/* <div> */}
-      {/* <div className="mt-1 p-6 grid grid-cols-2 gap-10 max-w-[900px] border-4 border-indigo-200">
-          {single.devicetype && (
-            <div className="flex">
-              <h1 className="font-bold">Device Type: </h1>
-              <p className="pl-2">{single.devicetype}</p>
-            </div>
-          )}
-
-          {single.fixedmodular && (
-            <div className="flex">
-              <h1 className="font-bold">Fixed/Modular: </h1>
-              <p className="pl-2">{single.fixedmodular}</p>
-            </div>
-          )}
-
-          {single.rackmounts.rackpn && (
-            <div className="flex">
-              <h1 className="font-bold">Rackmount: </h1>
-              <Link
-                className="text-blue-700 pl-2"
-                target="blanks"
-                href={`https://www.google.com/search?q=${single.rackmounts.rackpn}`}
-              >
-                {single.rackmounts.rackpn}
-              </Link>
-            </div>
-          )}
-
-          {single.powers && (
-            <div className="flex">
-              <h1 className="font-bold">Power: </h1>
-              <p className="pl-2">{single.powers}</p>
-            </div>
-          )}
-
-          {single.p2 && (
-            <div className="flex">
-              <h1 className="font-bold">Power 2: </h1>
-              <p className="pl-2">{single.p2}</p>
-            </div>
-          )}
-
-          {single.fans && (
-            <div className="flex">
-              <h1 className="font-bold">Fans: </h1>
-              <p className="pl-2">{single.fans}</p>
-            </div>
-          )}
-
-          {single.accesories && (
-            <div className="flex">
-              <h1 className="font-bold">Accesories: </h1>
-              <p className="pl-2">{single.accesories}</p>
-            </div>
-          )}
-
-          {single.blanks && (
-            <div className="flex ">
-              <h1 className="font-bold">Blanks: </h1>
-              <p className="pr-2 pl-1">{single.blanks}</p>
-              {single.b2 ||
-                (single.b3 && (
-                  <p>
-                    {single.b2}, {single.b3}
-                  </p>
-                ))}
-            </div>
-          )}
-
-          {single.console && (
-            <div className="flex">
-              <h1 className="font-bold">Console: </h1>
-              <p className="pl-2">{single.console}</p>
-            </div>
-          )}
-
-          {single.dims && (
-            <div className="flex">
-              <h1 className="font-bold">DIMS: </h1>
-              <p className="pl-2">{single.dims}</p>
-            </div>
-          )}
-
-          {single.weight && (
-            <div className="flex">
-              <h1 className="font-bold">Weight: </h1>
-              <p className="justify-end pl-2">{single.weight} LBS</p>
-            </div>
-          )}
-        </div>
-      </div> */}
       <p className="pt-1 flex justify-center text-sm font-sans font-bold">
         ***some part numbers may not be correct ***
       </p>
-      {session.session && <EditButton id={single.id} />}
+      {profile && <EditButton id={single.id} />}
+      <div className="m-10">
+        {profile && <Comments id={single.id} profile_id={profile.id} Servernotes={notes}/>}
+      </div>
+      <div>
+        {profile && 
+        <AddComment 
+        profile_id={profile.id} 
+        // profile_name={profile.first_name + " " + profile.last_name}
+        first_name={profile.first_name}
+        last_name={profile.last_name}
+        team_id={profile.team_id}
+        id={single.id} />}
+      </div>
     </div>
   );
 }

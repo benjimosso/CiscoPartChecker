@@ -1,5 +1,4 @@
 "use client";
-import Link from "next/link";
 // shadow components
 import {
   NavigationMenu,
@@ -14,31 +13,29 @@ import {
 } from "@/components/ui/navigation-menu";
 
 export default function LowerNav() {
+  const navValues = [
+    { name: "Switches", href: "/switches" },
+    { name: "Routers", href: "/routers" },
+    { name: "Rackmounts", href: "/rackmounts" },
+    { name: "Fans", href: "/fans" },
+    { name: "Powers", href: "/powers" },
+  ];
+
   return (
-    <div className="flex justify-start items-center bg-primary  h-12">
+    <div className="flex  justify-start items-center bg-primary  h-12 overflow-visible p-6">
       <NavigationMenu>
         <NavigationMenuList className="text-white space-x-8 pl-4">
-          <NavigationMenuItem>
-            <NavigationMenuLink href="/switches">Switches</NavigationMenuLink>
-          </NavigationMenuItem>
-          <NavigationMenuItem>
-            <NavigationMenuLink href="/routers">Routers</NavigationMenuLink>
-          </NavigationMenuItem>
-          <NavigationMenuItem>
-            <NavigationMenuLink href="/rackmounts">
-              Rackmounts
-            </NavigationMenuLink>
-          </NavigationMenuItem>
-          <NavigationMenuItem>
-            <NavigationMenuLink href="/fans">
-              Fans
-            </NavigationMenuLink>
-          </NavigationMenuItem>
+          {navValues.map((item, index) => (
+            <NavigationMenuItem key={index}>
+              <NavigationMenuLink href={item.href} className="font-mono">
+                {item.name}
+              </NavigationMenuLink>
+            </NavigationMenuItem>
+          ))}
         </NavigationMenuList>
       </NavigationMenu>
     </div>
   );
 }
 
-// for the div component.
-// className="flex justify-start items-center w-full bg-primary h-12"
+
