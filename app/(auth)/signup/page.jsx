@@ -18,7 +18,7 @@ export default function Singup() {
       email,
       password,
       options: {
-        emailRedirectTo: `${location.origin}/api/auth/callback`,
+        // emailRedirectTo: `${location.origin}/api/auth/callback`,
         data: {
           first_name,
           last_name,
