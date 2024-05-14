@@ -2,20 +2,8 @@
 import { createClient } from "@/utils/supabase/server";
 
 import { Profiles } from "@/app/lib/interfaces";
-import Link from "next/link";
 
 // shadcn
-import { Button } from "@/components/ui/button";
-import { SheetTrigger, SheetContent, Sheet } from "@/components/ui/sheet";
-import { Input } from "@/components/ui/input";
-import {
-  DropdownMenuTrigger,
-  DropdownMenuLabel,
-  DropdownMenuSeparator,
-  DropdownMenuItem,
-  DropdownMenuContent,
-  DropdownMenu,
-} from "@/components/ui/dropdown-menu";
 import {
   CardTitle,
   CardDescription,
@@ -32,14 +20,14 @@ async function getProfile() {
     .from("profiles")
     .select("*, company(company_name), teams(team_name)")
     .single();
-    
+
   if (error) console.log("error", error);
   return (profile as Profiles) || null;
 }
 
 export default async function Profile() {
   const profile = await getProfile();
-  
+
   // if (profile) {
   //   console.log(profile)
   // }
@@ -58,28 +46,33 @@ export default async function Profile() {
       <Card className="m-14 w-1/5 border border-primary">
         <CardHeader className="flex items-center">
           {/* <CardTitle> */}
-            <Avatar>
-              {profile.avatar ? (
-                <AvatarImage src={profile.avatar} alt="avatar" />
-              ) : (
-                <AvatarFallback>
-                  {Array.from(profile.first_name)[0] +
-                    Array.from(profile.last_name)[0]}
-                </AvatarFallback>
-              )}
-            </Avatar>
+          <Avatar>
+            {profile.avatar ? (
+              <AvatarImage src={profile.avatar} alt="avatar" />
+            ) : (
+              <AvatarFallback>
+                {Array.from(profile.first_name)[0] +
+                  Array.from(profile.last_name)[0]}
+              </AvatarFallback>
+            )}
+          </Avatar>
           {/* </CardTitle> */}
           <CardTitle>
             {profile.first_name} {profile.last_name}
           </CardTitle>
           <CardDescription>{profile.email}</CardDescription>
-          <CardDescription>{profile.company.company_name}</CardDescription>
-          <CardDescription>{profile.teams.team_name}</CardDescription>
+          {profile.company && (
+            <CardDescription>{profile.company.company_name}</CardDescription>
+          )}
+          {profile.teams && (
+            <CardDescription>{profile.teams.team_name}</CardDescription>
+          )}
         </CardHeader>
         <CardFooter className="flex flex-col items-center mt-10">
           <h1 className="text-primary text-xl">About</h1>
           <CardContent className="mt-5">
-            Esto podria ser algo sobre la persona y si quiere decir alguna boludez. 
+            Esto podria ser algo sobre la persona y si quiere decir alguna
+            boludez.
           </CardContent>
         </CardFooter>
       </Card>
