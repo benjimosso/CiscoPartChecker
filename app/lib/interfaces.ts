@@ -64,3 +64,39 @@ export interface Comments {
   last_name: string;
   team_id: number;
 }
+
+export interface Cisco {
+  id: number;
+  ciscopn: string;
+  description: string;
+  devicetype: string;
+  fixmodular: string;
+  console: string;
+  dims: string;
+  weight: string;
+  rack_id: string;
+  image?: string;
+
+  ciscopowers?: [
+    {
+      power: {
+        power_pn: string;
+        id: number;
+      };
+    }
+  ]
+  ciscofans?: [
+    {
+      fan: {
+        fan_pn: string;
+        id: number;
+      };
+    }
+  ]
+}
+
+export interface CiscoPn {
+  id: number;
+  ciscopn: string;
+  images?: [string];
+}

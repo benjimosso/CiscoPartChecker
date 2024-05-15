@@ -15,6 +15,7 @@ import {
   HoverCardContent,
   HoverCardTrigger,
 } from "@/components/ui/hover-card";
+import { Skeleton } from "@/components/ui/skeleton";
 
 export const dynamicParams = true;
 
@@ -52,13 +53,12 @@ async function getSingleItem(id) {
   if (error) console.log("error", error);
   if (profileError) console.log("profileError", profileError);
   if (commentError) console.log("commentError", commentError);
- 
+
   return { single, error, profile, notes };
 }
 
 export default async function SingleItemShow({ params }) {
   const { single, error, profile, notes } = await getSingleItem(params.id);
-
 
   return (
     <div className="flex flex-1 flex-col items-center pb-8 ">
@@ -245,17 +245,25 @@ export default async function SingleItemShow({ params }) {
       </p>
       {profile && <EditButton id={single.id} />}
       <div className="m-10">
-        {profile && <Comments id={single.id} profile_id={profile.id} Servernotes={notes}/>}
+        {profile && (
+          <Comments
+            id={single.id}
+            profile_id={profile.id}
+            Servernotes={notes}
+          />
+        )}
       </div>
       <div>
-        {profile && 
-        <AddComment 
-        profile_id={profile.id} 
-        // profile_name={profile.first_name + " " + profile.last_name}
-        first_name={profile.first_name}
-        last_name={profile.last_name}
-        team_id={profile.team_id}
-        id={single.id} />}
+        {profile && (
+          <AddComment
+            profile_id={profile.id}
+            // profile_name={profile.first_name + " " + profile.last_name}
+            first_name={profile.first_name}
+            last_name={profile.last_name}
+            team_id={profile.team_id}
+            id={single.id}
+          />
+        )}
       </div>
     </div>
   );
