@@ -1,6 +1,5 @@
 "use client";
 import { createClient } from "@/utils/supabase/client";
-import AuthForm from "../AuthForm";
 import { useState } from "react";
 import { useRouter } from "next/navigation";
 // shadcn components

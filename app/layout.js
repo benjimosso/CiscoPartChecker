@@ -1,6 +1,8 @@
 import { Inter, Roboto, Montserrat } from "next/font/google";
 import "./globals.css";
+// Vercel Insights and Analytics
 import { SpeedInsights } from "@vercel/speed-insights/next";
+import { Analytics } from "@vercel/analytics/react"
 // import { ThemeProvider } from "@/components/theme-provider";
 
 // const inter = Inter({ subsets: ["latin"] });
@@ -23,6 +25,7 @@ export default function RootLayout({ children }) {
         > */}
           {children}
           <SpeedInsights />
+          <Analytics />
         {/* </ThemeProvider> */}
       </body>
     </html>
