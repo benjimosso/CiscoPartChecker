@@ -1,4 +1,4 @@
-import { Fans, Rackmounts, PowerSupplies, Comments } from "./interfaces";
+import { Fans, Rackmounts, PowerSupplies, Comments, CiscoPn, Cisco } from "./interfaces";
 import { createClient } from "@/utils/supabase/server";
 
 
@@ -108,6 +108,78 @@ export async function getPowers({
       .ilike("power_pn", `%${query}%`);
     if (error) console.log("error", error);
     return (powers as PowerSupplies[]) || [];
+  }
+}
+
+// Cisco Switches
+export async function getSwitches({
+  query,
+  page = 1,
+  limit = 9,
+}: {
+  query?: string;
+  page?: number;
+  limit?: number;
+}) {
+  const supabase = createClient();
+  if (!query) {
+    let { data: ciscoSwitch, error } = await supabase
+      .from("cisco")
+      .select("ciscopn, images, id")
+      .order("ciscopn", { ascending: true })
+      .range((page - 1) * limit, page * limit - 1)
+      .limit(limit)
+      .eq("devicetype", "Switch");
+
+    if (error) console.log("error", error);
+    return (ciscoSwitch as unknown) as CiscoPn[] || [];
+  } else {
+    let { data: ciscoSwitch, error } = await supabase
+      .from("cisco")
+      .select("ciscopn, images, id")
+      .order("ciscopn", { ascending: true })
+      .range((page - 1) * limit, page * limit - 1)
+      .limit(limit)
+      .ilike("ciscopn", `%${query}%`)
+      .eq("devicetype", "Switch");
+    if (error) console.log("error", error);
+    return (ciscoSwitch as unknown) as CiscoPn[] || []; // Convert the expression to 'unknown' first
+  }
+}
+
+// get Routers
+export async function getRouters({
+  query,
+  page = 1,
+  limit = 9,
+}: {
+  query?: string;
+  page?: number;
+  limit?: number;
+}) {
+  const supabase = createClient();
+  if (!query) {
+    let { data: ciscoRouter, error } = await supabase
+      .from("cisco")
+      .select("ciscopn, images, id")
+      .order("ciscopn", { ascending: true })
+      .range((page - 1) * limit, page * limit - 1)
+      .limit(limit)
+      .eq("devicetype", "Router");
+
+    if (error) console.log("error", error);
+    return (ciscoRouter as unknown) as CiscoPn[] || [];
+  } else {
+    let { data: ciscoRouter, error } = await supabase
+      .from("cisco")
+      .select("ciscopn, images, id")
+      .order("ciscopn", { ascending: true })
+      .range((page - 1) * limit, page * limit - 1)
+      .limit(limit)
+      .ilike("ciscopn", `%${query}%`)
+      .eq("devicetype", "Router");
+    if (error) console.log("error", error);
+    return (ciscoRouter as unknown) as CiscoPn[] || []; // Convert the expression to 'unknown' first
   }
 }
 
