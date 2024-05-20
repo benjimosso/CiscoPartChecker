@@ -2,6 +2,7 @@
 import { createClient } from "@/utils/supabase/server";
 
 import { Profiles } from "@/app/lib/interfaces";
+import UpdateProfile from "@/app/components/updateprofile";
 
 // shadcn
 import {
@@ -61,21 +62,30 @@ export default async function Profile() {
             {profile.first_name} {profile.last_name}
           </CardTitle>
           <CardDescription>{profile.email}</CardDescription>
+          {profile.username && (
+            <CardDescription>{profile.username}</CardDescription>
+          )}
           {profile.company && (
-            <CardDescription>{profile.company.company_name}</CardDescription>
+            <CardDescription>Company: {profile.company.company_name}</CardDescription>
           )}
           {profile.teams && (
-            <CardDescription>{profile.teams.team_name}</CardDescription>
+            <CardDescription>Team: {profile.teams.team_name}</CardDescription>
           )}
         </CardHeader>
         <CardFooter className="flex flex-col items-center mt-10">
           <h1 className="text-primary text-xl">About</h1>
           <CardContent className="mt-5">
-            Esto podria ser algo sobre la persona y si quiere decir alguna
-            boludez.
+            {profile.about ? (
+              <p>{profile.about}</p>
+            ) : (
+              <p className="font-sans text-slate-500">
+                Please update your about section.
+              </p>
+            )}
           </CardContent>
         </CardFooter>
       </Card>
+      {profile && <UpdateProfile profile={profile} />}
     </div>
   );
 }
