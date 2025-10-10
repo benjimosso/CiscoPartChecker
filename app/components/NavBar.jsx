@@ -18,7 +18,9 @@ import {
 // import {ModeToggle} from "@/components/ui/darkmode";
 
 export default function NavBar({ profile, ciscoData }) {
-
+  // console.log('='.repeat(50))
+  // console.log("here:",profile)
+  // console.log('='.repeat(50))
   return (
     <>
       <nav className="bg-white text-black p-4 flex justify-between items-baseline border-solid">
@@ -55,7 +57,7 @@ export default function NavBar({ profile, ciscoData }) {
                    <AvatarImage src={profile.avatar} alt="avatar" />
                   ) : (
                     <AvatarFallback>
-                    {Array.from(profile.first_name)[0] + Array.from(profile.last_name)[0]}
+                    {/* {Array.from(profile.first_name)[0] + Array.from(profile.last_name)[0]} */}
                   </AvatarFallback>
                   )} 
                 </Avatar>

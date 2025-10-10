@@ -15,7 +15,7 @@ import {
 import { Avatar, AvatarImage, AvatarFallback } from "@/components/ui/avatar";
 
 async function getProfile() {
-  const supabase = createClient();
+  const supabase = await createClient();
   const { data: profile, error } = await supabase
     .from("profiles")
     .select("*, company(company_name), teams(team_name)")
@@ -51,8 +51,8 @@ export default async function Profile() {
               <AvatarImage src={profile.avatar} alt="avatar" />
             ) : (
               <AvatarFallback>
-                {Array.from(profile.first_name)[0] +
-                  Array.from(profile.last_name)[0]}
+                {/* {Array.from(profile.first_name)[0] +
+                  Array.from(profile.last_name)[0]} */}
               </AvatarFallback>
             )}
           </Avatar>

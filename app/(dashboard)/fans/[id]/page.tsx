@@ -9,7 +9,7 @@ import { Fans } from "@/app/lib/interfaces";
 
 
 async function getSingleFan({ id }: { id: string }) : Promise<Fans | null> {
-  const supabase = createClient();
+  const supabase = await createClient();
   let { data: fan, error } = await supabase
     .from("fans")
     .select("*, ciscofans(cisco(ciscopn, id))")

@@ -1,13 +1,15 @@
-import { createClient } from "@/utils/supabase/server";
+
 import React from "react";
+import { createClient } from "@/utils/supabase/server";
 // components
 import Navbar from "../components/NavBar";
 import Footer from "../components/Footer";
 import LowerNav from "../components/LowerNav";
 
 async function FetchData() {
-  const supabase = createClient();
+  const supabase = await createClient();
   // I may have to still check the session here, for now we won't use it.
+  
   const { data: userSession } = await supabase.auth.getUser();
   // get all the cisco data
   const { data, error } = await supabase
