@@ -163,7 +163,7 @@ We welcome contributions! Here's how you can help:
 ## 📞 Support
 
 For questions, suggestions, or issues:
-- **Email**: [dmosso@dhd.com](mailto:dmosso@dhd.com)
+<!-- - **Email**: [dmosso@dhd.com](mailto:dmosso@dhd.com) -->
 - **GitHub Issues**: [Create an issue](https://github.com/benjimosso/CiscoPartChecker/issues)
 
 ## 📄 License
