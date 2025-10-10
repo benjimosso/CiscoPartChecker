@@ -18,7 +18,8 @@ async function getSingleRackmount(id) {
   return { data, error };
 }
 
-export default async function SingleRackmount({ params }) {
+export default async function SingleRackmount({params}) {
+    const { id } = await params;
   const { data, error } = await getSingleRackmount(params.id);
   if (error) {
     console.error(error);

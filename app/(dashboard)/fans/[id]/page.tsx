@@ -21,8 +21,9 @@ async function getSingleFan({ id }: { id: string }) : Promise<Fans | null> {
   // I need to figuere out how to pass the error to the client
 }
 
-export default async function singlePower({params}: {params: {id: string}}) {
-    const fan = await getSingleFan({id: params.id});
+export default async function singlePower({params}: {params: Promise<{id: string}>}) {
+    const { id } = await params;
+    const fan = await getSingleFan({id});
     
    
    
