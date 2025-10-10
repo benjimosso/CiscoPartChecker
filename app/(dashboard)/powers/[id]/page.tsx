@@ -9,7 +9,7 @@ import { PowerSupplies } from "@/app/lib/interfaces";
 
 
 async function getSinglepower({ id }: { id: string }) : Promise<PowerSupplies | null> {
-  const supabase = createClient();
+  const supabase = await createClient();
   let { data: power, error } = await supabase
     .from("powers")
     .select("*, ciscopowers(cisco(ciscopn, id))")

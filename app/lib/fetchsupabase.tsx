@@ -12,7 +12,7 @@ export async function getFans({
   page?: number;
   limit?: number;
 }) {
-  const supabase = createClient();
+  const supabase = await createClient();
   if (!query) {
     let { data: fans, error } = await supabase
       .from("fans")
@@ -36,7 +36,7 @@ export async function getFans({
 }
 
 export async function getFan(id: number) {
-  const supabase = createClient();
+  const supabase = await createClient();
   let { data: fans, error } = await supabase
     .from("fans")
     .select("*")
@@ -54,7 +54,7 @@ export async function getRackmounts({
   page?: number;
   limit?: number;
 }) {
-  const supabase = createClient();
+  const supabase = await createClient();
   if (!query) {
     let { data: rackmounts, error } = await supabase
       .from("rackmounts")
@@ -87,7 +87,7 @@ export async function getPowers({
   page?: number;
   limit?: number;
 }) {
-  const supabase = createClient();
+  const supabase = await createClient();
   if (!query) {
     let { data: powers, error } = await supabase
       .from("powers")
@@ -121,7 +121,7 @@ export async function getSwitches({
   page?: number;
   limit?: number;
 }) {
-  const supabase = createClient();
+  const supabase = await createClient();
   if (!query) {
     let { data: ciscoSwitch, error } = await supabase
       .from("cisco")
@@ -157,7 +157,7 @@ export async function getRouters({
   page?: number;
   limit?: number;
 }) {
-  const supabase = createClient();
+  const supabase = await createClient();
   if (!query) {
     let { data: ciscoRouter, error } = await supabase
       .from("cisco")

@@ -9,7 +9,7 @@ import Images from "../../../components/Images";
 import Image from "next/image";
 
 async function getSingleRackmount(id) {
-  const supabase = createClient();
+  const supabase = await createClient();
   const { data, error } = await supabase
     .from("rackmounts")
     .select("*, cisco(ciscopn, id)")

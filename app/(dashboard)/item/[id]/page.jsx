@@ -25,7 +25,7 @@ export const dynamicParams = true;
 async function getSingleItem(id) {
   // idea: get ebays api to get the price of the item
   // get single item from the database
-  const supabase = createClient();
+  const supabase = await createClient();
   // get single item from cisco table
   const { data: single, error } = await supabase
     .from("cisco")
