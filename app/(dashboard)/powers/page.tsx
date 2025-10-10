@@ -5,11 +5,10 @@ import Datalist from "@/app/components/datalist";
 // shadcn
 import { Button } from "@/components/ui/button";
 
-export default async function powers({
-  searchParams,
-}: {
-  searchParams: { [key: string]: string | string[] | undefined };
+export default async function powers(props: {
+  searchParams: Promise<{ [key: string]: string | string[] | undefined }>
 }) {
+  const searchParams = await props.searchParams
   const page =
     typeof searchParams.page === "string" ? Number(searchParams.page) : 1;
   const limit =
