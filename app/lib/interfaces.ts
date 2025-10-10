@@ -42,6 +42,7 @@ export interface Profiles {
   created_at: string;
   email: string;
   avatar: string;
+  about: string;
   team_id: number;
   company_id: number;
   company?: {

@@ -18,7 +18,6 @@ export default async function Switches({
     typeof searchParams.search === "string" ? searchParams.search : undefined;
 
   const switches = await getSwitches({ page, limit, query: search });
-  console.log(switches.map((switchItem) => switchItem.images));
   const mainpath: string = "/switches";
 
   return (

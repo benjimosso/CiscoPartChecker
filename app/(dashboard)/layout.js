@@ -32,7 +32,7 @@ async function FetchData() {
 export default async function DashboardLayout({ children }) {
   const {data, profile, userSession} = await FetchData();
   
-
+  console.log('++++ Here is the userSession ++++', userSession)
  
   return (
     <div className="flex flex-col h-screen bg-slate-150 overflow-auto">

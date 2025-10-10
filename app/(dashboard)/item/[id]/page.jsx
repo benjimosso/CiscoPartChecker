@@ -1,3 +1,5 @@
+// react
+import { Suspense } from "react";
 // supabase
 import { createClient } from "@/utils/supabase/server";
 import Link from "next/link";
@@ -8,6 +10,7 @@ import Images from "../../../components/Images";
 import EditButton from "../../../components/EditButton";
 import Comments from "@/app/components/comments";
 import AddComment from "@/app/components/addcomment";
+import SkeletonHover from "@/app/components/skeletonHover";
 
 // shadcn components
 import {
@@ -15,7 +18,7 @@ import {
   HoverCardContent,
   HoverCardTrigger,
 } from "@/components/ui/hover-card";
-import { Skeleton } from "@/components/ui/skeleton";
+
 
 export const dynamicParams = true;
 
@@ -101,7 +104,7 @@ export default async function SingleItemShow({ params }) {
                     {single.rackmounts.rackpn}
                   </p>
                 </HoverCardTrigger>
-
+                <Suspense fallback={<p>Loading...</p>}>
                 <HoverCardContent className="bg-slate-100 p-3">
                   <a
                     className="text-blue-500"
@@ -121,6 +124,7 @@ export default async function SingleItemShow({ params }) {
                     />
                   )}
                 </HoverCardContent>
+                </Suspense>
               </HoverCard>
             </div>
           )}

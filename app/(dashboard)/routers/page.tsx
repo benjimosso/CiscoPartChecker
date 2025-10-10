@@ -18,7 +18,6 @@ export default async function Routers({
     typeof searchParams.search === "string" ? searchParams.search : undefined;
 
   const routers = await getRouters({ page, limit, query: search });
-  console.log(routers.map((routerItem) => routerItem));
   const mainpath: string = "/routers";
 
   return (
