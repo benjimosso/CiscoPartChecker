@@ -22,7 +22,7 @@ import {
 
 export const dynamicParams = true;
 
-async function getSingleItem(id) {
+async function getSingleItem({id} : {id:string}) {
   // idea: get ebays api to get the price of the item
   // get single item from the database
   const supabase = await createClient();
@@ -60,8 +60,9 @@ async function getSingleItem(id) {
   return { single, error, profile, notes };
 }
 
-export default async function SingleItemShow({ params }) {
-  const { single, error, profile, notes } = await getSingleItem(params.id);
+export default async function SingleItemShow({ params }: {params: Promise<{id: string}>}) {
+  const {id} = await params
+  const { single, error, profile, notes } = await getSingleItem({id});
 
   return (
     <div className="flex flex-1 flex-col items-center pb-8 ">

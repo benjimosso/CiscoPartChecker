@@ -63,6 +63,9 @@ export function LoginShadCn({ handleSubmit }) {
           <Button className="w-full ">Sign in</Button>
         </CardFooter>
       </form>
+      <CardContent className="flex justify-center items-center">
+        <Link className="text-center font-extrabold" href={"/resetpassword"}>Forgot password?</Link>
+      </CardContent>
     </Card>
   );
 }
