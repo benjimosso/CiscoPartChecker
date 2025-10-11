@@ -11,6 +11,7 @@ async function FetchData() {
   // I may have to still check the session here, for now we won't use it.
   
   const { data: userSession } = await supabase.auth.getUser();
+  
   // get all the cisco data
   const { data, error } = await supabase
   .from("cisco")
@@ -32,8 +33,7 @@ async function FetchData() {
 export default async function DashboardLayout({ children }) {
   const {data, profile, userSession} = await FetchData();
   
-  console.log('++++ Here is the userSession ++++', userSession)
- 
+  
   return (
     <div className="flex flex-col h-screen bg-slate-150 overflow-auto">
       {/* if a user is logged in, send credentials, otherwhise do not. */}
