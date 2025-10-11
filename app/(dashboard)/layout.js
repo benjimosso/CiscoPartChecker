@@ -11,6 +11,7 @@ async function FetchData() {
   // I may have to still check the session here, for now we won't use it.
   
   const { data: userSession } = await supabase.auth.getUser();
+  
   // get all the cisco data
   const { data, error } = await supabase
   .from("cisco")

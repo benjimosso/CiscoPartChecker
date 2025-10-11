@@ -26,8 +26,6 @@ export default function UpdatePassword() {
         }
 
         if (data) {
-            console.log(data)
-
             redirect('/')
         }
 
