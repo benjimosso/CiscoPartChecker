@@ -5,6 +5,8 @@ import { createClient } from "@/utils/supabase/server";
 import Navbar from "../components/NavBar";
 import Footer from "../components/Footer";
 import LowerNav from "../components/LowerNav";
+import {Profiles} from "../lib/interfaces"
+
 
 async function FetchData() {
   const supabase = await createClient();

@@ -15,12 +15,17 @@ import {
   DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
+import {Cisco, Profiles} from "../lib/interfaces"
 // import {ModeToggle} from "@/components/ui/darkmode";
 
-export default function NavBar({ profile, ciscoData }) {
+export default function NavBar({ profile, ciscoData } : {profile: Profiles, ciscoData: Cisco}) {
   // console.log('='.repeat(50))
   // console.log("here:",profile)
   // console.log('='.repeat(50))
+
+  console.log("+".repeat(50))
+  console.log(profile)
+  console.log("+".repeat(50))
   return (
     <>
       <nav className="bg-white text-black p-4 flex justify-between items-baseline border-solid">
@@ -57,7 +62,7 @@ export default function NavBar({ profile, ciscoData }) {
                    <AvatarImage src={profile.avatar} alt="avatar" />
                   ) : (
                     <AvatarFallback>
-                    {/* {Array.from(profile.first_name)[0] + Array.from(profile.last_name)[0]} */}
+                    {profile.first_name && profile.last_name ? (Array.from(profile.first_name)[0] + Array.from(profile.last_name)[0]):("NN")}
                   </AvatarFallback>
                   )} 
                 </Avatar>

@@ -6,7 +6,7 @@ import { redirect } from "next/navigation";
 export const dynamicParams = true;
 // not sure if this is the right way to do it!!!
 async function checkUser() {
-  const supabase = createClient();
+  const supabase = await createClient();
   const { data } = await supabase.auth.getUser();
   if (data.user === null) {
     redirect("/login");
@@ -15,7 +15,7 @@ async function checkUser() {
 }
 
 async function getItem(id) {
-  const supabase = createClient();
+  const supabase = await createClient();
   const { data } = await supabase
     .from("cisco")
     .select("*, rackmounts(rackpn), ciscofans(fans(*)), ciscopowers(powers(*))")
