@@ -23,9 +23,9 @@ export default function NavBar({ profile, ciscoData } : {profile: Profiles, cisc
   // console.log("here:",profile)
   // console.log('='.repeat(50))
 
-  console.log("+".repeat(50))
-  console.log(profile)
-  console.log("+".repeat(50))
+  // console.log("+".repeat(50))
+  // console.log(profile)
+  // console.log("+".repeat(50))
   return (
     <>
       <nav className="bg-white text-black p-4 flex justify-between items-baseline border-solid">

@@ -15,15 +15,23 @@ import {
 } from "@/components/ui/card";
 import { Avatar, AvatarImage, AvatarFallback } from "@/components/ui/avatar";
 
-async function getProfile() {
-  const supabase = await createClient();
+async function getProfile(): Promise<Profiles | null> {
+  try {
+      const supabase = await createClient();
   const { data: profile, error } = await supabase
     .from("profiles")
     .select("*, company(company_name), teams(team_name)")
     .single();
 
-  if (error) console.log("error", error);
+  if (error) throw new Error(error.message);
+  
   return (profile as Profiles) || null;
+  } catch (err) {
+    // Return null on errors so callers always receive Profiles | null
+    console.log("error loading the profile " + err)
+    return null;
+  } 
+ 
 }
 
 export default async function Profile() {
