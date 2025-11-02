@@ -12,6 +12,9 @@ import Comments from "@/app/components/comments";
 import AddComment from "@/app/components/addcomment";
 import SkeletonHover from "@/app/components/skeletonHover";
 
+// interfaces.
+import {PowerSupplies, Fans} from "@/app/lib/interfaces"
+
 // shadcn components
 import {
   HoverCard,
@@ -135,7 +138,7 @@ export default async function SingleItemShow({ params }: { params: Promise<{ id:
           {Object.keys(single?.ciscopowers).length > 0 && (
             <div className="">
               <h1 className="font-bold">Power: </h1>
-              {single.ciscopowers.map((item, index) => (
+              {single.ciscopowers.map((item: {powers : PowerSupplies}, index: number) => (
                 <HoverCard key={index}>
                   <HoverCardTrigger>
                     <p className="ml-3 cursor-pointer">
@@ -177,7 +180,7 @@ export default async function SingleItemShow({ params }: { params: Promise<{ id:
           {Object.keys(single?.ciscofans).length > 0 && (
             <div className="">
               <h1 className="font-bold">Fans: </h1>
-              {single.ciscofans.map((f, index) => (
+              {single.ciscofans.map((f: {fans: Fans}, index: number) => (
                 <HoverCard key={index}>
                   <HoverCardTrigger>
                     <p className="ml-3 cursor-pointer">{f.fans.fan_pn}</p>
@@ -214,10 +217,10 @@ export default async function SingleItemShow({ params }: { params: Promise<{ id:
           {Object.keys(single.ciscoblanks).length > 0 && (
             <div className="flex ">
               <h1 className="font-bold">Blanks: </h1>
-              {single.ciscoblanks.map((item, index) => 
-               <p key={index} className="ml-3 ">{item.blanks.blank_pn}</p>
-              )}
-              </div>
+              {single.ciscoblanks.map((item: {blanks: {blank_pn: string}}, index: number) => (
+                <p key={index} className="ml-3 ">{item.blanks.blank_pn}</p>
+              ))}
+            </div>
           )}
 
               {/* {single.blanks && (
