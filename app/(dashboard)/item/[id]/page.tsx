@@ -22,7 +22,7 @@ import {
 
 export const dynamicParams = true;
 
-async function getSingleItem({id} : {id:string}) {
+async function getSingleItem({ id }: { id: string }) {
   // idea: get ebays api to get the price of the item
   // get single item from the database
   const supabase = await createClient();
@@ -30,7 +30,7 @@ async function getSingleItem({id} : {id:string}) {
   const { data: single, error } = await supabase
     .from("cisco")
     .select(
-      "*, rackmounts(rackpn, image, id), ciscofans(fans(*)), ciscopowers(powers(*))"
+      "*, rackmounts(rackpn, image, id), ciscofans(fans(*)), ciscopowers(powers(*)), ciscoblanks(blanks(*))"
     )
     .eq("id", id)
     .single();
@@ -60,10 +60,12 @@ async function getSingleItem({id} : {id:string}) {
   return { single, error, profile, notes };
 }
 
-export default async function SingleItemShow({ params }: {params: Promise<{id: string}>}) {
-  const {id} = await params
-  const { single, error, profile, notes } = await getSingleItem({id});
-
+export default async function SingleItemShow({ params }: { params: Promise<{ id: string }> }) {
+  const { id } = await params
+  const { single, error, profile, notes } = await getSingleItem({ id });
+  console.log("=".repeat(30))
+  console.log(single.ciscoblanks.map((item) => item.blanks.blank_pn))
+  console.log("=".repeat(30))
   return (
     <div className="flex flex-1 flex-col items-center pb-8 ">
       <div className="flex justify-normal  bg-white w-3/4 p-6 m-6 rounded-md overflow-auto">
@@ -78,25 +80,25 @@ export default async function SingleItemShow({ params }: {params: Promise<{id: s
               </p>
             </div>
           )}
-          {single.description && (
+          {single?.description && (
             <div className="flex pt-4">
               <h1 className="font-bold">Description: </h1>
               <p className="pl-2">{single.description}</p>
             </div>
           )}
-          {single.devicetype && (
+          {single?.devicetype && (
             <div className="flex">
               <h1 className="font-bold">Device Type: </h1>
               <p className="pl-2">{single.devicetype}</p>
             </div>
           )}
-          {single.fixedmodular && (
+          {single?.fixedmodular && (
             <div className="flex">
               <h1 className="font-bold">Fixed/Modular: </h1>
               <p className="pl-2">{single.fixedmodular}</p>
             </div>
           )}
-          {single.rackmounts && (
+          {single?.rackmounts && (
             <div className="flex">
               <h1 className="font-bold">Rackmount: </h1>
               <HoverCard>
@@ -106,31 +108,31 @@ export default async function SingleItemShow({ params }: {params: Promise<{id: s
                   </p>
                 </HoverCardTrigger>
                 <Suspense fallback={<p>Loading...</p>}>
-                <HoverCardContent className="bg-slate-100 p-3">
-                  <a
-                    className="text-blue-500"
-                    href={`/rackmounts/${single.rackmounts.id}`}
-                  >
-                    {single.rackmounts.rackpn}
-                  </a>
-                  {single.rackmounts.image && (
-                    <Image
-                      src={single.rackmounts.image}
-                      width={200}
-                      height={200}
-                      alt="rackmount Image"
-                      priority={true}
-                      style={{ width: "auto", height: "auto" }}
-                      className="rounded-md, mt-4"
-                    />
-                  )}
-                </HoverCardContent>
+                  <HoverCardContent className="bg-slate-100 p-3">
+                    <a
+                      className="text-blue-500"
+                      href={`/rackmounts/${single.rackmounts.id}`}
+                    >
+                      {single.rackmounts.rackpn}
+                    </a>
+                    {single.rackmounts.image && (
+                      <Image
+                        src={single.rackmounts.image}
+                        width={200}
+                        height={200}
+                        alt="rackmount Image"
+                        priority={true}
+                        style={{ width: "auto", height: "auto" }}
+                        className="rounded-md, mt-4"
+                      />
+                    )}
+                  </HoverCardContent>
                 </Suspense>
               </HoverCard>
             </div>
           )}
 
-          {Object.keys(single.ciscopowers).length > 0 && (
+          {Object.keys(single?.ciscopowers).length > 0 && (
             <div className="">
               <h1 className="font-bold">Power: </h1>
               {single.ciscopowers.map((item, index) => (
@@ -172,7 +174,7 @@ export default async function SingleItemShow({ params }: {params: Promise<{id: s
             </div>
           )} */}
 
-          {Object.keys(single.ciscofans).length > 0 && (
+          {Object.keys(single?.ciscofans).length > 0 && (
             <div className="">
               <h1 className="font-bold">Fans: </h1>
               {single.ciscofans.map((f, index) => (
@@ -209,7 +211,16 @@ export default async function SingleItemShow({ params }: {params: Promise<{id: s
             </div>
           )}
 
-          {single.blanks && (
+          {Object.keys(single.ciscoblanks).length > 0 && (
+            <div className="flex ">
+              <h1 className="font-bold">Blanks: </h1>
+              {single.ciscoblanks.map((item, index) => 
+               <p key={index} className="ml-3 ">{item.blanks.blank_pn}</p>
+              )}
+              </div>
+          )}
+
+              {/* {single.blanks && (
             <div className="flex ">
               <h1 className="font-bold">Blanks: </h1>
               <p className="pr-2 pl-1">{single.blanks}</p>
@@ -220,56 +231,56 @@ export default async function SingleItemShow({ params }: {params: Promise<{id: s
                   </p>
                 ))}
             </div>
-          )}
+          )} */}
 
-          {single.console && (
-            <div className="flex">
-              <h1 className="font-bold">Console: </h1>
-              <p className="pl-2">{single.console}</p>
-            </div>
-          )}
+              {single?.console && (
+                <div className="flex">
+                  <h1 className="font-bold">Console: </h1>
+                  <p className="pl-2">{single.console}</p>
+                </div>
+              )}
 
-          {single.dims && (
-            <div className="flex">
-              <h1 className="font-bold">DIMS: </h1>
-              <p className="pl-2">{single.dims}</p>
-            </div>
-          )}
+              {single?.dims && (
+                <div className="flex">
+                  <h1 className="font-bold">DIMS: </h1>
+                  <p className="pl-2">{single.dims}</p>
+                </div>
+              )}
 
-          {single.weight && (
-            <div className="flex">
-              <h1 className="font-bold">Weight: </h1>
-              <p className="justify-end pl-2">{single.weight} LBS</p>
+              {single?.weight && (
+                <div className="flex">
+                  <h1 className="font-bold">Weight: </h1>
+                  <p className="justify-end pl-2">{single.weight} LBS</p>
+                </div>
+              )}
             </div>
+      </div>
+
+        <p className="pt-1 flex justify-center text-sm font-sans font-bold">
+          ***some part numbers may not be correct ***
+        </p>
+        {profile && <EditButton id={single.id} />}
+        <div className="m-10">
+          {profile && (
+            <Comments
+              id={single.id}
+              profile_id={profile.id}
+              Servernotes={notes}
+            />
+          )}
+        </div>
+        <div>
+          {profile && (
+            <AddComment
+              profile_id={profile.id}
+              // profile_name={profile.first_name + " " + profile.last_name}
+              first_name={profile.first_name}
+              last_name={profile.last_name}
+              team_id={profile.team_id}
+              id={single.id}
+            />
           )}
         </div>
       </div>
-
-      <p className="pt-1 flex justify-center text-sm font-sans font-bold">
-        ***some part numbers may not be correct ***
-      </p>
-      {profile && <EditButton id={single.id} />}
-      <div className="m-10">
-        {profile && (
-          <Comments
-            id={single.id}
-            profile_id={profile.id}
-            Servernotes={notes}
-          />
-        )}
-      </div>
-      <div>
-        {profile && (
-          <AddComment
-            profile_id={profile.id}
-            // profile_name={profile.first_name + " " + profile.last_name}
-            first_name={profile.first_name}
-            last_name={profile.last_name}
-            team_id={profile.team_id}
-            id={single.id}
-          />
-        )}
-      </div>
-    </div>
-  );
+      );
 }
